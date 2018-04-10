@@ -17,6 +17,7 @@ public class SensumUdred {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Group 17 is awesome");
+        System.out.println("Look at me i'm mr missis");
     }
     
 }
