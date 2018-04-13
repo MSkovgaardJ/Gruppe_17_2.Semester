@@ -5,6 +5,8 @@
  */
 package sensumudred;
 
+import layer_logic.DBConnect;
+
 /**
  *
  * @author Stephanie

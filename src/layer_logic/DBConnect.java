@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sensumudred;
+package layer_logic;
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -18,8 +18,8 @@ import java.util.Scanner;
 public class DBConnect {
     
     // Variables related to user credentials
-    private String username;
-    private String password;
+    private String username; // tuuvvgaa
+    private String password; // 9cl0hEPLwN9cQOpdu-d9o1OpO3V3m9xr
     private String userPrompt;
     private static Scanner userInput = new Scanner(System.in);
     
