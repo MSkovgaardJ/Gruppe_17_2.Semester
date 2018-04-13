@@ -19,6 +19,9 @@ public class SensumUdred {
         System.out.println("Group 17 is awesome");
         System.out.println("Look at me i'm mr missis");
         User u = new User();
+        DBConnect dbc = new DBConnect();
+        
+        dbc.dbConnection();
     }
     
 }
