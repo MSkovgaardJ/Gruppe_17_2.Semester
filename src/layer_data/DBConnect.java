@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package layer_logic;
+package layer_data;
 
 import java.sql.Connection;
 import java.sql.Driver;

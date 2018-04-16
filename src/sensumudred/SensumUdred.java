@@ -5,7 +5,7 @@
  */
 package sensumudred;
 
-import layer_logic.DBConnect;
+import layer_data.DBConnect;
 
 /**
  *
