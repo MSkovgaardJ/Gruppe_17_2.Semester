@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package layer_data;
 
 import java.sql.Connection;
@@ -18,8 +13,8 @@ import java.util.Scanner;
 public class DBConnect {
     
     // Variables related to user credentials
-    private String username; // tuuvvgaa
-    private String password; // 9cl0hEPLwN9cQOpdu-d9o1OpO3V3m9xr
+    private String username; // tuuvvgaa (change to username from the group)
+    private String password; // 9cl0hEPLwN9cQOpdu-d9o1OpO3V3m9xr (change to password from the group)
     private String userPrompt;
     private static Scanner userInput = new Scanner(System.in);
     
@@ -48,11 +43,11 @@ public class DBConnect {
         */ 
         userPrompt = "Enter Username: ";
         
-        System.out.println("Enter Username: ");
-        username = userInput.nextLine();
+//        System.out.println("Enter Username: ");
+        username = "tuuvvgaa";
         
-        System.out.println("Enter password: ");
-        password = userInput.nextLine();
+//        System.out.println("Enter password: ");
+        password = "9cl0hEPLwN9cQOpdu-d9o1OpO3V3m9xr";
         
         
         
@@ -64,5 +59,11 @@ public class DBConnect {
             
             System.out.println(sqlEx.getMessage());
         }
+    }
+    
+    public void dbQuery() {
+        // Utilizes queries from the DBQueries class to send queries to the SQL database.
+        
+        
     }
 }
