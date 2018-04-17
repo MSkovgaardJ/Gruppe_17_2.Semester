@@ -3,7 +3,9 @@ package layer_data;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
 
 /**
@@ -23,6 +25,8 @@ public class DBConnect {
     private static final String DB_DRIVER = "org.postgresql.Driver";
     private Connection conn;
     
+    DBQueries dbQ = new DBQueries();
+    
     public void dbConnection()
     {
         /* Attempts to locate a driver to allow for establishing a connection to the SQL server.
@@ -31,8 +35,8 @@ public class DBConnect {
         try
         {
             Class.forName(DB_DRIVER);
-        } catch(ClassNotFoundException cEx) {
-            System.out.println(cEx);
+        } catch(ClassNotFoundException classEx) {
+            System.out.println(classEx);
         }
         
         /* Prompts the user to login with username and password before gaining access to the database.
@@ -64,6 +68,24 @@ public class DBConnect {
     public void dbQuery() {
         // Utilizes queries from the DBQueries class to send queries to the SQL database.
         
+        Statement statement;
+        ResultSet resultSet;
         
+        try {
+            statement = conn.createStatement();
+            
+            resultSet = statement.executeQuery(""); // Replace "" with query to be used.
+            
+            while(resultSet.next()) {
+                
+                System.out.println(""); // Output result of query here.
+            }
+            
+            resultSet.close();
+            statement.close();
+        } catch(SQLException sqlqEx) {
+            
+            System.out.println(sqlqEx.getMessage());
+        }
     }
 }
