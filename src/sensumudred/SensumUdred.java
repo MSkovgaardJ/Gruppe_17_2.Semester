@@ -1,9 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sensumudred;
+
+import layer_presentation.ConsoleUI;
 
 /**
  *
@@ -19,6 +16,7 @@ public class SensumUdred {
         System.out.println("Group 17 is awesome");
         System.out.println("Look at me i'm mr missis");
         User u = new User();
+        ConsoleUI cUI = new ConsoleUI();
+        cUI.menuUI();
     }
-    
 }
