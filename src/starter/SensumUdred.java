@@ -5,6 +5,7 @@
  */
 package starter;
 
+import data.SQLHandler;
 import data.postgreSQLCom;
 
 /**
@@ -20,9 +21,9 @@ public class SensumUdred {
         // TODO code application logic here
         System.out.println("Group 17 is awesome");
         System.out.println("Look at me i'm mr missis");
-        postgreSQLCom dbc = new postgreSQLCom();
+        SQLHandler sqlhandler = new SQLHandler();
+        System.out.println(sqlhandler.checkLogin("bo12345", "guest"));
         
-        dbc.dbConnection();
     }
     
 }

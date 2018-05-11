@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package data;
-
-import java.sql.Connection;
+package common;
 
 /**
  *
  * @author magnusm
  */
-public interface IDBCom {
+public interface IJournal {
     
-    public Connection Connect();
 }

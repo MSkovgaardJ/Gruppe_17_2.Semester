@@ -9,7 +9,14 @@ package common;
  *
  * @author magnusm
  */
-public interface ILoginToken <T> {
+public interface ILoginToken {
 
-public <T> getObject()    
+public boolean isAdmin();
+
+public boolean isUser();
+
+public boolean isCaseHandler();
+
+public void setClearance(boolean isAdmin, boolean isUser, boolean isCaseHandler);
+
 }
