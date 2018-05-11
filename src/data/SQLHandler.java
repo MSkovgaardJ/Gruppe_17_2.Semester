@@ -31,7 +31,7 @@ public class SQLHandler {
             Connection db = comhandler.Connect();
             
             Statement st = db.createStatement();
-            ResultSet rs = st.executeQuery("select * from systemuser where username = '" + username + "' and password = '" + password + "'");
+            ResultSet rs = st.executeQuery(SQLGet.checklogin(username, password));
             if (rs.next()) {
               
               fund= true;  
