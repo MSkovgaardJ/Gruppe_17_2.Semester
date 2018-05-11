@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sensumudred;
+package starter;
 
-import layer_data.DBConnect;
+import data.postgreSQLCom;
 
 /**
  *
@@ -20,8 +20,7 @@ public class SensumUdred {
         // TODO code application logic here
         System.out.println("Group 17 is awesome");
         System.out.println("Look at me i'm mr missis");
-        User u = new User();
-        DBConnect dbc = new DBConnect();
+        postgreSQLCom dbc = new postgreSQLCom();
         
         dbc.dbConnection();
     }

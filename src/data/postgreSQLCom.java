@@ -1,4 +1,4 @@
-package layer_data;
+package data;
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -12,13 +12,11 @@ import java.util.Scanner;
  *
  * @author nikol
  */
-public class DBConnect {
+public class postgreSQLCom implements IDBCom {
     
     // Variables related to user credentials
-    private String username; // tuuvvgaa (change to username from the group)
-    private String password; // 9cl0hEPLwN9cQOpdu-d9o1OpO3V3m9xr (change to password from the group)
-    private String userPrompt;
-    private static Scanner userInput = new Scanner(System.in);
+    private final String username = "vlqzyoul"; // tuuvvgaa (change to username from the group)
+    private final String password ="FmS71g9K6CXR8V1duPNYSNP5FqH2IIDc"; // 9cl0hEPLwN9cQOpdu-d9o1OpO3V3m9xr (change to password from the group)
     
     // Variables related to database connection
     private static final String DB_CONNECTION = "jdbc:postgresql://horton.elephantsql.com:5432/tuuvvgaa";
@@ -64,28 +62,33 @@ public class DBConnect {
             System.out.println(sqlEx.getMessage());
         }
     }
-    
-    public void dbQuery() {
-        // Utilizes queries from the DBQueries class to send queries to the SQL database.
+//    
+//    public void dbQuery() {
+//        // Utilizes queries from the DBQueries class to send queries to the SQL database.
+//        
+//        Statement statement;
+//        ResultSet resultSet;
+//        
+//        try {
+//            statement = conn.createStatement();
+//            
+//            resultSet = statement.executeQuery(""); // Replace "" with query to be used.
+//            
+//            while(resultSet.next()) {
+//                
+//                System.out.println(""); // Output result of query here.
+//            }
+//            
+//            resultSet.close();
+//            statement.close();
+//        } catch(SQLException sqlqEx) {
+//            
+//            System.out.println(sqlqEx.getMessage());
+//        }
+//    }
+
+    @Override
+    public Connection Connect() {
         
-        Statement statement;
-        ResultSet resultSet;
-        
-        try {
-            statement = conn.createStatement();
-            
-            resultSet = statement.executeQuery(""); // Replace "" with query to be used.
-            
-            while(resultSet.next()) {
-                
-                System.out.println(""); // Output result of query here.
-            }
-            
-            resultSet.close();
-            statement.close();
-        } catch(SQLException sqlqEx) {
-            
-            System.out.println(sqlqEx.getMessage());
-        }
     }
 }

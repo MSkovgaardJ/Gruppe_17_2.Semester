@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sensumudred;
+package common;
 
 /**
  *
- * @author Stephanie
+ * @author magnusm
  */
-public class User {
-    public User()
-    {
-        System.out.println("Im a user");
-    }
+public interface ICase {
+    
 }
