@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logik;
 
 import java.io.File;
@@ -11,39 +6,44 @@ import java.io.File;
  *
  * @author Morten Skovgaard
  */
+
 public class Journal
 {
     private int journalNo;
     private Citizen citizen;
     private String workerName;
-    private File journalDescribsion;
+    private File journalDescription;
 
-    public Journal(int journalNo, Citizen citizen, String workerName, File journalDescribsion)
+    public Journal(int journalNo, Citizen citizen, String workerName, File journalDescription)
     {
         this.journalNo = journalNo;
         this.citizen = citizen;
         this.workerName = workerName;
-        this.journalDescribsion = journalDescribsion;
+        this.journalDescription = journalDescription;
     }
 
     public int getJournalNo()
     {
+        
         return journalNo;
     }
 
     public Citizen getCitizen()
     {
+        
         return citizen;
     }
 
     public String getWorkerName()
     {
+        
         return workerName;
     }
 
-    public File getJournalDescribsion()
+    public File getJournalDescription()
     {
-        return journalDescribsion;
+        
+        return journalDescription;
     }
 
     public void setJournalNo(int journalNo)
@@ -61,9 +61,9 @@ public class Journal
         this.workerName = workerName;
     }
 
-    public void setJournalDescribsion(File journalDescribsion)
+    public void setJournalDescribsion(File journalDescription)
     {
-        this.journalDescribsion = journalDescribsion;
+        this.journalDescription = journalDescription;
     }
     
     

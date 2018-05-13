@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package data;
 
 import common.ICitizen;
@@ -18,49 +13,56 @@ import java.sql.Statement;
  *
  * @author magnusm
  */
-public class SQLHandler {
-    IDBCom comhandler;
+
+public class SQLHandler
+{
+    IDBCom comHandler;
     
-    public SQLHandler() {
-        comhandler = new postgreSQLCom();
+    public SQLHandler()
+    {
+        comHandler = new postgreSQLCom();
     }
     
-    public boolean checkLogin(String username, String password) {
+    public boolean checkLogin(String username, String password)
+    {
         boolean fund = false; 
+        
         try {
-            Connection db = comhandler.Connect();
-            
+            Connection db = comHandler.Connect();
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.checklogin(username, password));
-            if (rs.next()) {
+            
+            if(rs.next()) {
               
-              fund= true;  
-                
-               
+              fund = true;
             }
+            
             rs.close();
             st.close();
             db.close();
-
-        } catch (Exception e) {
+            
+        } catch(Exception e) {
+            
             System.out.println(e);
+            
+        } finally {
+            
+            return fund;
         }
-         finally {
-              return fund;
-         }
-        
     }
    
-    public void getCredentials(String username, String password, ILoginToken login) {
-    
+    public void getCredentials(String username, String password, ILoginToken login)
+    {
+        
     } 
     
-    public void getJournal(IJournal journal) {
-     
+    public void getJournal(IJournal journal)
+    {
+        
     }
     
-    public void getCitizen(ICitizen citizen) {
-    
+    public void getCitizen(ICitizen citizen)
+    {
+        
     }
-    
 }

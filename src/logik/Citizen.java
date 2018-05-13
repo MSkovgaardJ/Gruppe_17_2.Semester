@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logik;
 
 /**
  *
  * @author Morten Skovgaard
  */
+
 public class Citizen
 {
+    
    private Citizen contactPerson;
    private String phoneNumber;
    private String firstName;
@@ -22,41 +19,49 @@ public class Citizen
 
     public Citizen getContactPerson()
     {
+        
         return contactPerson;
     }
 
     public String getPhoneNumber()
     {
+        
         return phoneNumber;
     }
 
     public String getFirstName()
     {
+        
         return firstName;
     }
 
     public String getLastName()
     {
+        
         return lastName;
     }
 
     public int getSSN()
     {
+        
         return SSN;
     }
 
     public String getAddress()
     {
+        
         return address;
     }
 
     public String getCity()
     {
+        
         return city;
     }
 
     public int getPostalNumber()
     {
+        
         return postalNumber;
     }
 
@@ -99,10 +104,4 @@ public class Citizen
     {
         this.postalNumber = postalNumber;
     }
-    
-    
-   
-   
-   
-   
 }

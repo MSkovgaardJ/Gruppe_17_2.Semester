@@ -9,7 +9,8 @@ import java.sql.SQLException;
  *
  * @author nikol
  */
-public class postgreSQLCom implements IDBCom {
+public class postgreSQLCom implements IDBCom
+{
     
     // Variables related to user credentials
     private final String username = "vlqzyoul"; // tuuvvgaa (change to username from the group)
@@ -21,20 +22,21 @@ public class postgreSQLCom implements IDBCom {
     
   
     @Override
-    public Connection Connect() {
+    public Connection Connect()
+    {
         Connection conn = null;
         /* Attempts to locate a driver to allow for establishing a connection to the SQL server.
         Requires the PostgreSQL driver to be added to the project as a compile-time library.
         */
-        try
-        {
+        try {
             Class.forName(DB_DRIVER);
+            
         } catch(ClassNotFoundException classEx) {
+            
             System.out.println(classEx);
         }
         
-        try
-        {
+        try {
             conn = DriverManager.getConnection(DB_CONNECTION, username, password);
             System.out.println("connection succesfull");
             
@@ -42,8 +44,8 @@ public class postgreSQLCom implements IDBCom {
             
             System.out.println(sqlEx.getMessage());
         }
+        
         return conn;
     }
-    
 }
 

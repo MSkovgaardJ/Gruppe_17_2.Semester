@@ -6,7 +6,8 @@ package data;
  */
 
 // This class is for storing the various SQL queries. It is supposed to be static, but not sure how to make it without compiler errors.
-public class DBQueries {
+public class DBQueries
+{
     private static final String FROM = "FROM";
     private static final String WHERE = "WHERE";
     private static final String SELECT = "SELECT";

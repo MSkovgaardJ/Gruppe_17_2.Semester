@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package logik;
 
 /**
  *
  * @author Morten Skovgaard
  */
+
 public class LoginToken
 {
    private boolean admin;
@@ -25,16 +21,19 @@ public class LoginToken
    
    public boolean isAdmin()
    {
-    return admin;
+       
+       return admin;
    }
    
    public boolean isUser()
    {
+       
        return user;
    }
    
    public boolean isCaseHandler()
    {
+       
        return caseHandler;
    }
    
