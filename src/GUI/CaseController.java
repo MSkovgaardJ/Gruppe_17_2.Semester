@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
 import javax.security.auth.kerberos.ServicePermission;
 
 /**
@@ -13,6 +16,11 @@ import javax.security.auth.kerberos.ServicePermission;
  */
 public class CaseController
 {
+
+    @FXML
+    private PasswordField SSNField;
+    @FXML
+    private PasswordField CaseNoField;
     
     
     public findCitizen(SSN)
@@ -31,5 +39,13 @@ public class CaseController
     public saveJornal()
     {
         
+    }
+
+    @FXML
+    private void SSNBtn(ActionEvent event) {
+    }
+
+    @FXML
+    private void CaseNoBtn(ActionEvent event) {
     }
 }
