@@ -35,7 +35,7 @@ public class ConsoleUI implements IUI{
         
         switch(intInput) {
             case 1:
-                                
+                tryLogin();
                 break;
                 
             case 2:
@@ -113,8 +113,11 @@ public class ConsoleUI implements IUI{
         }
     }
     public boolean tryLogin(){
+        System.out.println("Enter username og type back to "
+                         + "go back to previus menu\n");
         System.out.println("Enter Username:");
         this.username = input.next();
+        if(username.equalsIgnoreCase("back")){return false;}
         System.out.println("Enter password");
         this.password = input.next();   
 

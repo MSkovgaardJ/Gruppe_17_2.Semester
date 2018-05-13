@@ -20,26 +20,21 @@ public class LoginToken
         this.admin = admin;
         this.user = user;
         this.caseHandler = caseHandler;
-    }
-   
-   
-   public boolean isAdmin()
-   {
+    }   
+    public boolean isAdmin()
+    {
     return admin;
    }
-   
-   public boolean isUser()
-   {
+    public boolean isUser()
+    {
        return user;
-   }
-   
-   public boolean isCaseHandler()
-   {
+   }   
+    public boolean isCaseHandler()
+    {
        return caseHandler;
-   }
-   
-   public void setCrendentials(isAdmin, isUser, isCaseHandler)
-   {
+   }   
+    public void setCrendentials(isAdmin, isUser, isCaseHandler)
+    {
        
-   }
+    }
 }

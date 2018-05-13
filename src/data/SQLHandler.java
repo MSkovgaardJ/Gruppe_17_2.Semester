@@ -42,8 +42,7 @@ public class SQLHandler implements IDataHandler{
         }
          finally {
               return fund;
-         }
-        
+         }       
     }   
     @Override
     public void getCredentials(String username, String password, ILoginToken login) {
