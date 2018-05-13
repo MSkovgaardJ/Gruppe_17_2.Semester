@@ -9,11 +9,13 @@ import java.util.Scanner;
 
 public class ConsoleUI {
     
-    public Scanner input = new Scanner(System.in);
-    public int intInput;
-    public String textInput;
-    public final String USERNAME = "asd";
-    public final String HELP = "\n" + "Press 1 to login." + "\n" + "Press 2 to get help." + "\n" + "Press 3 to quit." + "\n";
+    private Scanner input = new Scanner(System.in);
+    private int intInput;
+    private String textInput;
+    private String username = "test";
+    private String password = "test";
+    
+    public String HELP = "\n" + "Press 1 to login." + "\n" + "Press 2 to get help." + "\n" + "Press 3 to quit." + "\n";
     
     public void menuUI() {
         System.out.println("1. Login");
@@ -26,8 +28,10 @@ public class ConsoleUI {
             case 1:
                 System.out.println("Enter Username:");
                 textInput = input.next();
+                System.out.println("Enter password");
+                textInput = input.next();
                 
-                if(textInput.equals(USERNAME)) {
+                if(textInput.equals(username) && textInput.equals(password)) {
                     System.out.println("Successfully logged in.");
                     // Make call to the next part of the system.
                     

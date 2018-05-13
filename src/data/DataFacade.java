@@ -12,5 +12,8 @@ import common.IData;
  */
 public class DataFacade implements IData
 {
-    
+    public DataFacade()
+    {
+        
+    }
 }

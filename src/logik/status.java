@@ -11,5 +11,13 @@ package logik;
  */
 public enum status
 {
+   OPEN("Open"), CLOSED("Closed"), INPROGRESS("In progress"), WAITING("Waiting");
+   
+   private String statusString;
     
+   
+   status(String statusString)
+    {
+        this.statusString = statusString;
+    }
 }
