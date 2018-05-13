@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package data;
-import common.IData;
+package logik;
 
 /**
  *
- * @author magnusm
+ * @author Morten Skovgaard
  */
-public class DataFacade implements IData
+public class LogikFacade
 {
     
 }

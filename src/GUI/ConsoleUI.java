@@ -1,4 +1,4 @@
-package layer_presentation;
+package GUI;
 
 import java.util.Scanner;
 
