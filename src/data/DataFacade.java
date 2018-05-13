@@ -4,16 +4,41 @@
  * and open the template in the editor.
  */
 package data;
-import common.IData;
+import common.ICitizen;
+import common.IDataHandler;
+import common.IDataFaceda;
+import common.IJournal;
+import common.ILoginToken;
 
 /**
  *
  * @author magnusm
  */
-public class DataFacade implements IData
+public class DataFacade implements IDataFaceda
 {
-    public DataFacade()
-    {
-        
+    IDataHandler dataHandler;
+    public DataFacade(){
+        this.dataHandler = new SQLHandler();
     }
+    @Override
+    public boolean checkLogin(String username, String password) {
+        dataHandler.checkLogin(username, password);
+    }
+
+    @Override
+    public void getCredentials(String username, String password, ILoginToken login) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void getJournal(IJournal journal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void getCitizen(ICitizen citizen) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }

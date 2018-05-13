@@ -7,9 +7,8 @@ package common;
 
 /**
  *
- * @author magnusm
+ * @author Stephanie
  */
-public interface IData {
-    
+public interface ISystemUser {
     
 }
