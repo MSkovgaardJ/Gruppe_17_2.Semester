@@ -22,7 +22,7 @@ public class DataFacade implements IDataFaceda
     }
     @Override
     public boolean checkLogin(String username, String password) {
-        dataHandler.checkLogin(username, password);
+       return dataHandler.checkLogin(username, password);
     }
 
     @Override
