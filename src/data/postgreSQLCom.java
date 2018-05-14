@@ -36,8 +36,7 @@ public class postgreSQLCom implements IDBCom {
         try
         {
             conn = DriverManager.getConnection(DB_CONNECTION, username, password);
-            System.out.println("connection succesfull");
-            
+            System.out.println("connection succesfull");            
         } catch(SQLException sqlEx) {
             
             System.out.println(sqlEx.getMessage());

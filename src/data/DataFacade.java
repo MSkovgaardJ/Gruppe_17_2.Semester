@@ -5,18 +5,16 @@
  */
 package data;
 import common.ICitizen;
-import common.IDataHandler;
-import common.IDataFaceda;
 import common.IJournal;
 import common.ILoginToken;
+import common.IDataFacede;
 
 /**
  *
  * @author magnusm
  */
-public class DataFacade implements IDataFaceda
-{
-    IDataHandler dataHandler;
+public class DataFacade implements IDataFacede{
+    SQLHandler dataHandler;
     public DataFacade(){
         this.dataHandler = new SQLHandler();
     }
@@ -26,8 +24,8 @@ public class DataFacade implements IDataFaceda
     }
 
     @Override
-    public void getCredentials(String username, String password, ILoginToken login) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void getCredentials(String username, String password, ILoginToken token) {
+        dataHandler.getCredentials(username, password, token);
     }
 
     @Override

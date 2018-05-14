@@ -24,18 +24,14 @@ public class Aid implements IDBCom
  private int aidID;
  private String aidName;
  private String aidDescribsion;
-  IDBCom comhandler;  
+ IDBCom comhandler;  
   
   
-  public Aid(int aInt, String string, String string1)
-  {
-      comhandler = new postgreSQLCom();
-  }
-  
-   @Override
-    public Connection Connect()
-    {
-
+    public Aid(int aInt, String string, String string1){
+        comhandler = new postgreSQLCom();
+    }  
+    @Override
+    public Connection Connect(){
         try {
             Connection db = comhandler.Connect();            
             db.close();
@@ -44,35 +40,25 @@ public class Aid implements IDBCom
         } 
      return null;
     }
-    public List<Aid>aids() throws ClassNotFoundException, SQLException
- {
-    Statement stm;
-    stm = Connect().createStatement();
-    String sql = "Select * From Aid";
-    ResultSet rst;
-    rst = stm.executeQuery(sql);
-    List<Aid> aids = new ArrayList<>();
-    while (rst.next()) {
-        Aid aid = new Aid(rst.getInt("id"), rst.getString("name"), rst.getString("describsion"));
-        aids.add(aid);
+    public List<Aid>aids() throws ClassNotFoundException, SQLException{
+        Statement stm;
+        stm = Connect().createStatement();
+        String sql = "Select * From Aid";
+        ResultSet rst;
+        rst = stm.executeQuery(sql);
+        List<Aid> aids = new ArrayList<>();
+        while (rst.next()) {
+            Aid aid = new Aid(rst.getInt("id"), rst.getString("name"), rst.getString("describsion"));
+            aids.add(aid);
+        }    
+        aids.toString();
+        return aids;
+    }
+    public String getAidName(){        
+        return aidName;
     }
     
-    aids.toString();
-    return aids;
- }
-    public String getAidName(aidID)
-    {
-       
-        
-     return aidName;
-    }
-    
-    public String getAidDescribsion(aidID)
-    {
+    public String getAidDescribsion(){
         return aidDescribsion;
     }
-
-   
-
-   
 }

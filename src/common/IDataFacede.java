@@ -5,13 +5,17 @@
  */
 package common;
 
+import common.ICitizen;
+import common.IJournal;
+import common.ILoginToken;
+
 /**
  *
  * @author magnusm
  */
-public interface IDataFaceda {
+public interface IDataFacede {
     public boolean checkLogin(String username, String password);   
-    public void getCredentials(String username, String password, ILoginToken login);
+    public void getCredentials(String username, String password, ILoginToken token);
     public void getJournal(IJournal journal);
     public void getCitizen(ICitizen citizen);   
    

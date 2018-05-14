@@ -5,11 +5,13 @@
  */
 package logik;
 
+import common.ILoginToken;
+
 /**
  *
  * @author Morten Skovgaard
  */
-public class LoginToken
+public class LoginToken implements ILoginToken
 {
    private boolean admin;
    private boolean user;
@@ -21,20 +23,24 @@ public class LoginToken
         this.user = user;
         this.caseHandler = caseHandler;
     }   
+    @Override
     public boolean isAdmin()
     {
-    return admin;
-   }
+        return admin;
+    }
+    @Override
     public boolean isUser()
     {
        return user;
-   }   
+    }   
+    @Override
     public boolean isCaseHandler()
     {
        return caseHandler;
-   }   
-    public void setCrendentials(isAdmin, isUser, isCaseHandler)
-    {
-       
+    } 
+    @Override
+    public void setClearance(boolean isAdmin, boolean isCaseHandler) {
+        this.admin = isAdmin;
+        this.caseHandler = isCaseHandler;
     }
 }

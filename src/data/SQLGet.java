@@ -9,25 +9,25 @@ package data;
  *
  * @author Stephanie
  */
-public class SQLGet 
-  {
-  
-    public final String getCitizent()
-      {
+public class SQLGet         
+  {  
+    public static String getAllCitizens = "select * from Citizen";
+    public static String getAllJournals = "select * from Journal";
+    public static String getAllAids = "select * from Aid";
+    public static String getCitizen(int ssn){
         return null;
-      }
-   
-    public final String getJournal()
-      {
+    }   
+    public static String getJournal(int jno){
         return null;
-      }
-    
-    public final String getAid()
-      {
+    }    
+    public static String getAid(int aidno){
         return null;
-      }    
+    }    
     public static String checklogin(String username,String password){
-        return "select * from systemuser where username = '" + username + "' and password = '" + password + "'";
+        return "select Username, Password from systemuser where username = '" + username + "' and password = '" + password + "'";
+    }
+    public static String getlogincredentials(String username,String password){
+        return "select isAdmin, isCaseHandler from systemuser where username = '" + username + "' and password = '" + password + "'";
     }
     
 }

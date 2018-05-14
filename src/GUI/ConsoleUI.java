@@ -7,7 +7,8 @@ import common.ISystemUser;
 import common.IUI;
 import java.util.Collection;
 import java.util.Scanner;
-import common.IDataFaceda;
+import common.ILogicFacade;
+import common.IDataFacede;
 
 /**
  *
@@ -15,52 +16,46 @@ import common.IDataFaceda;
  */
 
 public class ConsoleUI implements IUI{
-    private IDataFaceda dataHandler;
+    private ILogicFacade logicHandler;
     private Scanner input = new Scanner(System.in);
     private int intInput;
     private String textInput;
     private String username = "";
     private String password = "";
     
-    public String HELP = "\n" + "Press 1 to login. you have to have a valid username and password" 
-                       + "\n" + "Press 2 to get help. it basicly just means this message" 
-                       + "\n" + "Press 3 to quit. closes the application" + "\n";    
-    private void LoginMenu() {
-        System.out.println("type a nummer to :");
-        System.out.println("1. Login");
-        System.out.println("2. Help");
-        System.out.println("3. Quit");
+    
+    private final String HELP_START = "\nType 1 to login. you have to have a valid username and password"  
+                       + "\n" + "Type 3 to quit. closes the application" + "\n";   
+    private final String HELP_LOGIN = "\nEnter username og type back to "
+                                + "go back to previus menu\n";
+    private final String HELP_SYSTEM = "\nwelcome to Sensum Udred";
+    public ConsoleUI(){
+    }
+    private void LoginMenu() {     
         
-        intInput = input.nextInt();
-        
-        switch(intInput) {
-            case 1:
-                tryLogin();
-                break;
-                
-            case 2:
-                System.out.println(HELP);                
-                LoginMenu();
-                break;
-                
-            case 3:
-                System.out.println("Quitting application.");
-                System.exit(1);
-                break;
-                
-            default:
-                System.out.println("Entered selection invalid. Select an option by entering a number 1-3.");
-                LoginMenu();
-                break;
+        intInput = -1;
+        while (intInput!= 3) {   // while user imput is not 3 continue loop
+            System.out.println(HELP_START);                                              
+            intInput = input.nextInt();
+            switch(intInput) {
+                case 1:
+                    if(tryLogin()){
+                        SystemMenu();
+                    }
+                    break;                
+                case 3:                                                         
+                    System.out.println("Quitting application.");
+                    //System.exit(1);
+                    break;                
+                default:
+                    System.out.println("Entered selection invalid. Select an option by entering a number 1 or 3.");
+                    break;
+            }
         }
     }
     private void SystemMenu(){
-        System.out.println("type a nummer to :");
-        System.out.println("1. Login");
-        System.out.println("2. Help");
-        System.out.println("3. Quit");
-        
-        intInput = input.nextInt();
+              System.out.println(HELP_SYSTEM); 
+              intInput = input.nextInt();
         
         switch(intInput) {
             case 1:
@@ -68,7 +63,7 @@ public class ConsoleUI implements IUI{
                 break;
                 
             case 2:
-                System.out.println(HELP);                
+                System.out.println(HELP_START);                
                 LoginMenu();
                 break;
                 
@@ -97,7 +92,7 @@ public class ConsoleUI implements IUI{
                 break;
                 
             case 2:
-                System.out.println(HELP);                
+                System.out.println(HELP_START);                
                 LoginMenu();
                 break;
                 
@@ -112,48 +107,48 @@ public class ConsoleUI implements IUI{
                 break;
         }
     }
-    public boolean tryLogin(){
-        System.out.println("Enter username og type back to "
-                         + "go back to previus menu\n");
+    private boolean tryLogin(){       
+        boolean correctUser;
+        
+        System.out.println(HELP_LOGIN);
         System.out.println("Enter Username:");
-        this.username = input.next();
+        username = input.next();
         if(username.equalsIgnoreCase("back")){return false;}
         System.out.println("Enter password");
-        this.password = input.next();   
-
-        if(textInput.equals(username) && textInput.equals(password)) {
-            System.out.println("Successfully logged in.");
-            // Make call to the next part of the system.
-        } 
-        else {                    
-            System.out.println("Incorrect username. Returning to menu.");
-            LoginMenu();
-        }
-                    
+        password = input.next();           
+        if(logicHandler.login(username, password))
+        {
+            return true;
+        }        
+        System.out.println("Incorrect username. Returning to menu.");
+        return false;                                
     }
-    public ICitizen getCitizen(int ssn){
-        
+    private ICitizen getCitizen(int ssn){
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.    
     }
-    public IJournal getJournal(int journalno){
-        
+    private IJournal getJournal(int journalno){
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.   
+    } 
+    private IAid getAid(int aidno){
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.   
     }
-    public void setDataHandler(IDataFaceda dataHandler){
-        this.dataHandler = dataHandler;
-    }  
-    public IAid getAid(int aidno){
-        
+    private Collection<ICitizen> getCitizens(){
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.   
     }
-    public Collection<ICitizen> getCitizens(){
-        
+    private Collection<IJournal> getJournals(){
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.   
     }
-    public Collection<IJournal> getJournals(){
-        
+    private Collection<IAid> getAids(){
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.   
     }
-    public Collection<IAid> getAids(){
-        
+    private boolean changeSystemUser(ISystemUser isu){        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    public boolean changeSystemUser(ISystemUser isu){
-        
+    @Override
+    public void addLogic(ILogicFacade logic){
+        this.logicHandler=logic;
     }
+    @Override
+    public void Start() {this.LoginMenu(); }
     
 }
