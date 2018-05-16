@@ -5,104 +5,113 @@
  */
 package logik;
 
+import common.ICitizen;
+
 /**
  *
  * @author Morten Skovgaard
  */
-public class Citizen
-{
-   private Citizen contactPerson;
-   private String phoneNumber;
-   private String firstName;
-   private String lastName;
-   private int SSN;
-   private String address;
-   private String city;
-   private int postalNumber;
+public class Citizen implements ICitizen {
 
-    public Citizen getContactPerson()
-    {
+    private ICitizen contactPerson;
+    private String phoneNumber;
+    private String firstName;
+    private String lastName;
+    private int SSN;
+    private String address;
+    private String city;
+    private int postalNumber;
+
+    @Override
+    public ICitizen getContactPerson() {
         return contactPerson;
     }
 
-    public String getPhoneNumber()
-    {
+    @Override
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public String getFirstName()
-    {
+    @Override
+    public String getFirstName() {
         return firstName;
     }
 
-    public String getLastName()
-    {
+    @Override
+    public String getLastName() {
         return lastName;
     }
 
-    public int getSSN()
-    {
+    @Override
+    public int getSSN() {
         return SSN;
     }
 
-    public String getAddress()
-    {
+    @Override
+    public String getAddress() {
         return address;
     }
 
-    public String getCity()
-    {
+    @Override
+    public String getCity() {
         return city;
     }
 
-    public int getPostalNumber()
-    {
+    @Override
+    public int getPostalNumber() {
         return postalNumber;
     }
 
-    public void setContactPerson(Citizen contactPerson)
-    {
+    @Override
+    public void setContactPerson(ICitizen contactPerson) {
         this.contactPerson = contactPerson;
     }
 
-    public void setPhoneNumber(String phoneNumber)
-    {
+    @Override
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setFirstName(String firstName)
-    {
+    @Override
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public void setLastName(String lastName)
-    {
+    @Override
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    public void setSSN(int SSN)
-    {
+    @Override
+    public void setSSN(int SSN) {
         this.SSN = SSN;
     }
 
-    public void setAddress(String address)
-    {
+    @Override
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public void setCity(String city)
-    {
+    public void setCity(String city) {
         this.city = city;
     }
 
-    public void setPostalNumber(int postalNumber)
-    {
+    @Override
+    public void setPostalNumber(int postalNumber) {
         this.postalNumber = postalNumber;
     }
-    
-    
-   
-   
-   
-   
+
+    @Override
+    public ICitizen clone() {
+        ICitizen clone = new Citizen();
+        clone.setAddress(address);
+        clone.setCity(city);
+        clone.setContactPerson(contactPerson);
+        clone.setFirstName(firstName);
+        clone.setLastName(lastName);
+        clone.setPhoneNumber(phoneNumber);
+        clone.setPostalNumber(postalNumber);
+        clone.setSSN(SSN);
+        return clone;
+    }
 }

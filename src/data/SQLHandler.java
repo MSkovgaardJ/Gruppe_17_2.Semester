@@ -13,6 +13,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -37,8 +39,7 @@ public class SQLHandler{
                 }
             }
             rs.close();
-            st.close();
-            
+            st.close();            
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -60,14 +61,74 @@ public class SQLHandler{
         } 
         catch (SQLException e) {
         System.out.println(e);
-        }            
-        
+        }              
     }     
     public void getJournal(IJournal journal) {
      
     }    
     public void getCitizen(ICitizen citizen) {
-    
+        try (Connection db = comhandler.Connect()) {
+            Statement st = db.createStatement();
+            ResultSet rs = st.executeQuery(SQLGet.getCitizen(citizen.getSSN()));
+            if (rs.next()) {
+                String fname = rs.getString(1);
+                String lname = rs.getString(2);
+                String phonenumber = rs.getString(2);
+                int ssn = rs.getInt(0);
+                String address = rs.getString(0);
+                String city = rs.getString(0);
+                int postalNumber = rs.getInt(0);
+                
+                citizen.setAddress(address);
+                citizen.setCity(city);
+                citizen.setFirstName(fname);
+                citizen.setLastName(lname);
+                citizen.setSSN(ssn);
+                citizen.setPhoneNumber(phonenumber);
+                citizen.setPostalNumber(postalNumber);                
+                System.out.println("got citizen");
+            }
+            rs.close();
+            st.close();
+        } 
+        catch (SQLException e) {
+        System.out.println(e);
+        }     
+    }    
+    public Collection<ICitizen> getCitizens(ICitizen base)
+    {
+        Collection<ICitizen> list = new ArrayList<>();
+        try (Connection db = comhandler.Connect()) {
+            Statement st = db.createStatement();
+            ResultSet rs = st.executeQuery(SQLGet.getAllCitizens);
+            while (rs.next()) {
+                ICitizen citizen= base.clone();                
+                String fname = rs.getString(2);
+                String lname = rs.getString(3);
+                String phonenumber = rs.getString(7);
+                int ssn = rs.getInt(1);
+                String address = rs.getString(4);
+                String city = rs.getString(6);
+                int postalNumber = rs.getInt(5);
+                
+                citizen.setAddress(address);
+                citizen.setCity(city);
+                citizen.setFirstName(fname);
+                citizen.setLastName(lname);
+                citizen.setSSN(ssn);
+                citizen.setPhoneNumber(phonenumber);
+                citizen.setPostalNumber(postalNumber);   
+           
+                list.add(citizen);
+                //System.out.println("is Admin "+ isAdmin +"\nis Casehandler "+ isCaseHandler);
+            }
+            System.out.println("got credentials");
+            rs.close();
+            st.close();
+        } 
+        catch (SQLException e) {
+        System.out.println(e);
+        } 
+        return list;
     }
-    
 }

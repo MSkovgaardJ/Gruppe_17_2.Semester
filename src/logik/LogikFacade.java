@@ -29,7 +29,10 @@ public class LogikFacade implements ILogicFacade
     }  
     @Override
     public ICitizen getCitizen(int ssn) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ICitizen citizen = new Citizen();
+        citizen.setSSN(ssn);
+        dataHandler.getCitizen(citizen);
+        return citizen;
     }
     @Override
     public IJournal getJournal(int journalno) {
@@ -45,7 +48,7 @@ public class LogikFacade implements ILogicFacade
     }
     @Override
     public Collection<ICitizen> getCitizens() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return dataHandler.getCitizens(new Citizen());
     }
     @Override
     public Collection<IJournal> getJournals() {
@@ -80,5 +83,10 @@ public class LogikFacade implements ILogicFacade
     @Override
     public void getCitizen(ICitizen citizen) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void logout() {
+        this.User = null;
     }
 }

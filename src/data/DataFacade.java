@@ -8,6 +8,7 @@ import common.ICitizen;
 import common.IJournal;
 import common.ILoginToken;
 import common.IDataFacede;
+import java.util.Collection;
 
 /**
  *
@@ -35,8 +36,11 @@ public class DataFacade implements IDataFacede{
 
     @Override
     public void getCitizen(ICitizen citizen) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dataHandler.getCitizen(citizen);
     }
-    
-    
+
+    @Override
+    public Collection<ICitizen> getCitizens(ICitizen base) {
+        return dataHandler.getCitizens(base);        
+    }    
 }

@@ -21,7 +21,8 @@ public interface ILogicFacade {
     public Collection<IJournal> getJournals();
     public Collection<IAid> getAids();
     public boolean changeSystemUser(ISystemUser isu);
-    public boolean login(String username, String password);   
+    public boolean login(String username, String password);  
+    public void logout();
     public void getCredentials(String username, String password, ILoginToken login);
     public void getJournal(IJournal journal);
     public void getCitizen(ICitizen citizen);   
