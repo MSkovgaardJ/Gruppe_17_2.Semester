@@ -16,29 +16,6 @@ import java.util.Collection;
  *
  * @author magnusm
  */
-
-public class SQLHandler
-{
-    IDBCom comHandler;
-    
-    public SQLHandler()
-    {
-        comHandler = new postgreSQLCom();
-    }
-    
-    public boolean checkLogin(String username, String password)
-    {
-        boolean fund = false; 
-        
-        try {
-            Connection db = comHandler.Connect();
-            Statement st = db.createStatement();
-            ResultSet rs = st.executeQuery(SQLGet.checklogin(username, password));
-            
-            if(rs.next()) {
-              
-              fund = true;
-
 public class SQLHandler{
     IDBCom comhandler;    
     public SQLHandler() {
@@ -57,41 +34,15 @@ public class SQLHandler{
                     fund= true;                
                 }
  
-            }
-            
+            }            
             rs.close();
-            st.close();
-            db.close();
-            
-        } catch(Exception e) {
-            
-
-            st.close();            
+            st.close();                        
         } catch (SQLException e) {
-            System.out.println(e);
-            
-        } finally {
-            
+            System.out.println(e);            
+        } finally {            
             return fund;
         }
-    }
-   
-    public void getCredentials(String username, String password, ILoginToken login)
-    {
-        
-    } 
-    
-    public void getJournal(IJournal journal)
-    {
-        
-    }
-    
-    public void getCitizen(ICitizen citizen)
-    {
-        
-
-        return fund;               
-    }   
+    }  
     public void getCredentials(String username, String password, ILoginToken login) {   
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();

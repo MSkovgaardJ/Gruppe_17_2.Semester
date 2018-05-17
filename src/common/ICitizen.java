@@ -1,6 +1,6 @@
 package common;
 
-import logik.Citizen;
+import logic.Citizen;
 
 /**
  *
@@ -9,9 +9,6 @@ import logik.Citizen;
 
 public interface ICitizen
 {
-
-public interface ICitizen {
-
     public ICitizen getContactPerson();
 
     public String getPhoneNumber();

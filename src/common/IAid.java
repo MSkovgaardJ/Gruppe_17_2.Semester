@@ -7,7 +7,7 @@ package common;
 
 import java.sql.SQLException;
 import java.util.List;
-import logik.Aid;
+import logic.Aid;
 
 /**
  *
@@ -16,7 +16,7 @@ import logik.Aid;
 public interface IAid
 {
 
-    List<Aid> aids() throws ClassNotFoundException, SQLException;
+    List<Aid> aids();
 
     String getAidDescribsion();
 

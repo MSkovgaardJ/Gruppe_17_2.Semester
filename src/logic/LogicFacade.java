@@ -1,4 +1,4 @@
-package logik;
+package logic;
 
 import common.IAid;
 import common.ICitizen;
@@ -13,13 +13,7 @@ import java.util.Collection;
  *
  * @author Morten Skovgaard
  */
-public class LogikFacade
-{
-    private User loginUser = User;
-    private JournalHandler JH;
-    
-    public makeUser(userID);
-public class LogikFacade implements ILogicFacade
+public class LogicFacade implements ILogicFacade
 {
     private IDataFacede dataHandler;
     private SystemUser User;
@@ -45,9 +39,7 @@ public class LogikFacade implements ILogicFacade
     }
     @Override
     public IAid getAid(int aidno) 
-
-    {
-       
+    {       
         return null;
     }
     @Override
@@ -93,6 +85,5 @@ public class LogikFacade implements ILogicFacade
     public void logout() {
         this.User = null;
     }
+}
 
-}
-}

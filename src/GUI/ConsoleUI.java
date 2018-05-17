@@ -3,12 +3,12 @@ package GUI;
 import common.IAid;
 import common.ICitizen;
 import common.IJournal;
-import common.IData.ISystemUser;
 import common.IUI;
 import java.util.Collection;
 import java.util.Scanner;
 import common.ILogicFacade;
 import common.IDataFacede;
+import common.ISystemUser;
 
 /**
  *
@@ -16,70 +16,12 @@ import common.IDataFacede;
  */
 public class ConsoleUI implements IUI {
 
-
-public class ConsoleUI
-{
     private Scanner input = new Scanner(System.in);
     private int intInput;
     private String textInput;
     private String username = "test";
     private String password = "test";
-
-    public String HELP = "\n" + "Press 1 to login." + "\n" + "Press 2 to get help." + "\n" + "Press 3 to quit." + "\n";
-    
-    public void menuUI()
-    {
-        System.out.println("1. Login");
-        System.out.println("2. Help");
-        System.out.println("3. Quit");
-        
-        intInput = input.nextInt();
-        
-        switch(intInput)
-        {
-            case 1:
-                System.out.println("Enter Username:");
-                textInput = input.next();
-                System.out.println("Enter password");
-                textInput = input.next();
-                
-                if(textInput.equals(username) && textInput.equals(password)) {
-                    System.out.println("Successfully logged in.");
-                    // Make call to the next part of the system.
-                    
-                } else {
-                    
-                    System.out.println("Incorrect username. Returning to menu.");
-                    menuUI();
-                }
-                
-                break;
-                
-            case 2:
-                System.out.println(HELP);
-                
-                menuUI();
-                
-                break;
-                
-            case 3:
-                System.out.println("Quitting application.");
-                System.exit(1);
-                
-                break;
-                
-            default:
-                System.out.println("Entered selection invalid. Select an option by entering a number 1-3.");
-                menuUI();
-                
-                break;
-
     private ILogicFacade logicHandler;
-    private Scanner input = new Scanner(System.in);
-    private int intInput;
-    private String textInput;
-    private String username = "";
-    private String password = "";
     private final String HELP_START = "\nType 1 to login. you have to have a valid username and password"
             + "\n" + "Type 3 to quit. closes the application" + "\n";
     private final String HELP_LOGIN = "\nEnter username and password to login";
@@ -92,7 +34,40 @@ public class ConsoleUI
             + "Type 9 to log out";
     private final String HELP_JOURNAL = "\nJOURNALS\n";
 
-    public ConsoleUI() {
+    public void menuUI() {
+        System.out.println(HELP_START);
+        intInput = input.nextInt();
+
+        switch (intInput) {
+            case 1:
+                System.out.println("Enter Username:");
+                textInput = input.next();
+                System.out.println("Enter password");
+                textInput = input.next();
+
+                if (textInput.equals(username) && textInput.equals(password)) {
+                    System.out.println("Successfully logged in.");
+                    // Make call to the next part of the system.
+
+                } else {
+
+                    System.out.println("Incorrect username. Returning to menu.");
+                    menuUI();
+                }
+
+                break;
+            case 3:
+                System.out.println("Quitting application.");
+                System.exit(1);
+
+                break;
+
+            default:
+                System.out.println("Entered selection invalid. Select an option by entering a number 1-3.");
+                menuUI();
+
+                break;
+        }
     }
 
     private void startMenu() {
@@ -127,9 +102,8 @@ public class ConsoleUI
                     journalMenu();
                     break;
                 case 2:
-                    for(ICitizen c : getCitizens())
-                    {
-                        System.out.println(c.getFirstName()+ " : SSN "+ c.getSSN());
+                    for (ICitizen c : getCitizens()) {
+                        System.out.println(c.getFirstName() + " : SSN " + c.getSSN());
                     }
                     break;
                 case 3:
@@ -151,12 +125,10 @@ public class ConsoleUI
         System.out.println("Type SSN of Citizen");
         intInput = input.nextInt();
         ICitizen citizen = getCitizen(intInput);
-        if(citizen != null){
-            
-        }
-        else 
-        {
-            
+        if (citizen != null) {
+
+        } else {
+
         }
     }
 
@@ -177,9 +149,9 @@ public class ConsoleUI
     private ICitizen getCitizen(int ssn) {
         return logicHandler.getCitizen(ssn);
     }
-    private void addCitizen()
-    {
-        
+
+    private void addCitizen() {
+
     }
 
     private IJournal getJournal(int journalno) {
@@ -190,7 +162,9 @@ public class ConsoleUI
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.   
     }
 
-    private Collection<ICitizen> getCitizens() {return logicHandler.getCitizens();}
+    private Collection<ICitizen> getCitizens() {
+        return logicHandler.getCitizens();
+    }
 
     private Collection<IJournal> getJournals() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.   

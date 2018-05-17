@@ -9,12 +9,7 @@ import java.util.Collection;
  *
  * @author magnusm
  */
-
-
-public class DataFacade implements IData
-
 public class DataFacade implements IDataFacede
-
 {
     SQLHandler dataHandler;
     public DataFacade(){

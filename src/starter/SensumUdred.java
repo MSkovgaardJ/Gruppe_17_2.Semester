@@ -8,7 +8,7 @@ import common.IDataFacede;
 import common.ILogicFacade;
 import common.IUI;
 import data.DataFacade;
-import logik.LogikFacade;
+import logic.LogicFacade;
 
 /**
  *
@@ -30,7 +30,7 @@ public class SensumUdred {
         System.out.println("Group 17");
         
         IUI ui = new ConsoleUI();
-        ILogicFacade logic = new LogikFacade();
+        ILogicFacade logic = new LogicFacade();
         IDataFacede data = new DataFacade();
         logic.addData(data);
         ui.addLogic(logic);  

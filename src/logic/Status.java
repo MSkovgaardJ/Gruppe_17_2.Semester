@@ -1,4 +1,4 @@
-package logik;
+package logic;
 
 /**
  *

@@ -1,4 +1,4 @@
-package logik;
+package logic;
 
 /**
  *
@@ -7,32 +7,6 @@ package logik;
 
 public class JournalHandler
 {
-    
-   private Journal activeJournal;
-   
-   public Journal newJournal()
-   {
-       
-       return Journal;
-   }
-   
-   public Citizen newCitizen()
-   {
-       
-       return Citizen;
-   }
-    
-   public boolean saveJournal()
-   {
-       
-       return true;
-   }
-   
-   public Journal findJournal()
-   {
-       
-       return Journal;
-
     private Journal activeJournal;   
     public Journal newJournal(){
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -1,4 +1,4 @@
-package logik;
+package logic;
 
 import common.ICitizen;
 
@@ -6,67 +6,7 @@ import common.ICitizen;
  *
  * @author Morten Skovgaard
  */
-
-public class Citizen
-{
-    
-   private Citizen contactPerson;
-   private String phoneNumber;
-   private String firstName;
-   private String lastName;
-   private int SSN;
-   private String address;
-   private String city;
-   private int postalNumber;
-
-    public Citizen getContactPerson()
-    {
-        
-        return contactPerson;
-    }
-
-    public String getPhoneNumber()
-    {
-        
-        return phoneNumber;
-    }
-
-    public String getFirstName()
-    {
-        
-        return firstName;
-    }
-
-    public String getLastName()
-    {
-        
-        return lastName;
-    }
-
-    public int getSSN()
-    {
-        
-        return SSN;
-    }
-
-    public String getAddress()
-    {
-        
-        return address;
-    }
-
-    public String getCity()
-    {
-        
-        return city;
-    }
-
-    public int getPostalNumber()
-    {
-        
-
 public class Citizen implements ICitizen {
-
     private ICitizen contactPerson;
     private String phoneNumber;
     private String firstName;
