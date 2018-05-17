@@ -9,6 +9,6 @@ package common;
  *
  * @author Stephanie
  */
-public class IAid {
+public interface IAid {
     
 }
