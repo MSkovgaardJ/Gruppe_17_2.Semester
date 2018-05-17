@@ -16,7 +16,6 @@ import java.util.Collection;
  *
  * @author magnusm
  */
-<<<<<<< HEAD
 
 public class SQLHandler
 {
@@ -39,7 +38,7 @@ public class SQLHandler
             if(rs.next()) {
               
               fund = true;
-=======
+
 public class SQLHandler{
     IDBCom comhandler;    
     public SQLHandler() {
@@ -57,27 +56,24 @@ public class SQLHandler{
                     System.out.println("found user");
                     fund= true;                
                 }
->>>>>>> UI
+ 
             }
             
             rs.close();
-<<<<<<< HEAD
             st.close();
             db.close();
             
         } catch(Exception e) {
             
-=======
+
             st.close();            
         } catch (SQLException e) {
->>>>>>> UI
             System.out.println(e);
             
         } finally {
             
             return fund;
         }
-<<<<<<< HEAD
     }
    
     public void getCredentials(String username, String password, ILoginToken login)
@@ -93,7 +89,7 @@ public class SQLHandler{
     public void getCitizen(ICitizen citizen)
     {
         
-=======
+
         return fund;               
     }   
     public void getCredentials(String username, String password, ILoginToken login) {   
@@ -185,6 +181,5 @@ public class SQLHandler{
         System.out.println(e);
         } 
         return list;
->>>>>>> UI
     }
 }

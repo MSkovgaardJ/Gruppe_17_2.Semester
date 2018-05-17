@@ -4,7 +4,7 @@ package data;
  *
  * @author Stephanie
  */
-<<<<<<< HEAD
+
 
 public class SQLGet 
 {
@@ -30,7 +30,7 @@ public class SQLGet
     {
         
         return "select * from systemuser where username = '" + username + "' and password = '" + password + "'";
-=======
+
 public class SQLGet         
   {  
     public static String getAllCitizens = "select * from Citizen";
@@ -54,6 +54,5 @@ public class SQLGet
     }
     public static String getlogincredentials(String username,String password){
         return "select isAdmin, isCaseHandler from systemuser where username = '" + username + "' and password = '" + password + "'";
->>>>>>> UI
     }
 }

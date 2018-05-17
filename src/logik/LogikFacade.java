@@ -13,15 +13,12 @@ import java.util.Collection;
  *
  * @author Morten Skovgaard
  */
-<<<<<<< HEAD
-
 public class LogikFacade
 {
     private User loginUser = User;
     private JournalHandler JH;
     
-    public makeUser(userID)
-=======
+    public makeUser(userID);
 public class LogikFacade implements ILogicFacade
 {
     private IDataFacede dataHandler;
@@ -48,7 +45,7 @@ public class LogikFacade implements ILogicFacade
     }
     @Override
     public IAid getAid(int aidno) 
->>>>>>> UI
+
     {
        
         return null;
@@ -96,4 +93,6 @@ public class LogikFacade implements ILogicFacade
     public void logout() {
         this.User = null;
     }
+
+}
 }

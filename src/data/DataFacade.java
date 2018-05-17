@@ -9,12 +9,12 @@ import java.util.Collection;
  *
  * @author magnusm
  */
-<<<<<<< HEAD
+
 
 public class DataFacade implements IData
-=======
+
 public class DataFacade implements IDataFacede
->>>>>>> UI
+
 {
     SQLHandler dataHandler;
     public DataFacade(){

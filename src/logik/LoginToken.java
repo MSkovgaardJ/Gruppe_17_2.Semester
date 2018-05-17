@@ -6,12 +6,11 @@ import common.ILoginToken;
  *
  * @author Morten Skovgaard
  */
-<<<<<<< HEAD
 
 public class LoginToken
-=======
+
 public class LoginToken implements ILoginToken
->>>>>>> UI
+ 
 {
    private boolean admin;
    private boolean user;
@@ -28,7 +27,6 @@ public class LoginToken implements ILoginToken
     {
         return admin;
     }
-<<<<<<< HEAD
    
    
    public boolean isAdmin()
@@ -46,7 +44,7 @@ public class LoginToken implements ILoginToken
    public boolean isCaseHandler()
    {
        
-=======
+
     @Override
     public boolean isUser()
     {
@@ -55,7 +53,6 @@ public class LoginToken implements ILoginToken
     @Override
     public boolean isCaseHandler()
     {
->>>>>>> UI
        return caseHandler;
     } 
     @Override

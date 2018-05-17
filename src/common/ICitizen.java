@@ -6,11 +6,10 @@ import logik.Citizen;
  *
  * @author magnusm
  */
-<<<<<<< HEAD
 
 public interface ICitizen
 {
-=======
+
 public interface ICitizen {
 
     public ICitizen getContactPerson();
@@ -44,7 +43,6 @@ public interface ICitizen {
     public void setCity(String city);
 
     public void setPostalNumber(int postalNumber);
->>>>>>> UI
     
     public ICitizen clone();
 

@@ -3,7 +3,7 @@ package GUI;
 import common.IAid;
 import common.ICitizen;
 import common.IJournal;
-import common.ISystemUser;
+import common.IData.ISystemUser;
 import common.IUI;
 import java.util.Collection;
 import java.util.Scanner;
@@ -16,7 +16,7 @@ import common.IDataFacede;
  */
 public class ConsoleUI implements IUI {
 
-<<<<<<< HEAD
+
 public class ConsoleUI
 {
     private Scanner input = new Scanner(System.in);
@@ -73,7 +73,7 @@ public class ConsoleUI
                 menuUI();
                 
                 break;
-=======
+
     private ILogicFacade logicHandler;
     private Scanner input = new Scanner(System.in);
     private int intInput;
@@ -141,7 +141,7 @@ public class ConsoleUI
                     System.out.println("Entered selection invalid. Select an option by entering a number");
                     break;
             }
->>>>>>> UI
+
         }
     }
 

@@ -15,7 +15,6 @@ import java.util.List;
  *
  * @author Morten Skovgaard
  */
-<<<<<<< HEAD
 
 public class Aid
 {
@@ -45,7 +44,7 @@ public class Aid
     {
         
         return aidDescription;
-=======
+
 public class Aid implements IDBCom, IAid
 {
  private int aidID;
@@ -90,6 +89,5 @@ public class Aid implements IDBCom, IAid
     @Override
     public String getAidDescribsion(){
         return aidDescribsion;
->>>>>>> UI
     }
 }

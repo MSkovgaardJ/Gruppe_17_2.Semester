@@ -6,7 +6,6 @@ import common.ICitizen;
  *
  * @author Morten Skovgaard
  */
-<<<<<<< HEAD
 
 public class Citizen
 {
@@ -65,7 +64,7 @@ public class Citizen
     public int getPostalNumber()
     {
         
-=======
+
 public class Citizen implements ICitizen {
 
     private ICitizen contactPerson;
@@ -114,7 +113,6 @@ public class Citizen implements ICitizen {
 
     @Override
     public int getPostalNumber() {
->>>>>>> UI
         return postalNumber;
     }
 
@@ -156,8 +154,7 @@ public class Citizen implements ICitizen {
     public void setPostalNumber(int postalNumber) {
         this.postalNumber = postalNumber;
     }
-<<<<<<< HEAD
-=======
+
 
     @Override
     public ICitizen clone() {
@@ -172,5 +169,4 @@ public class Citizen implements ICitizen {
         clone.setSSN(SSN);
         return clone;
     }
->>>>>>> UI
 }
