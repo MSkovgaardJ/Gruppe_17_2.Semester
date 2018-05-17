@@ -6,6 +6,7 @@ import common.IDBCom;
 import common.ILoginToken;
 import common.IJournal;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,6 +19,7 @@ import java.util.Collection;
  */
 public class SQLHandler{
     IDBCom comhandler;    
+   
     public SQLHandler() {
         comhandler = new postgreSQLCom();
     }   
@@ -61,16 +63,38 @@ public class SQLHandler{
         System.out.println(e);
         }              
     }     
+    
+    
     public void getJournal(IJournal journal) 
     {
-        try (Connection db = comhandler.Connect())
+        try (Connection db = comhandler.Connect())  
         {
-           Statement st = db.createStatement();
-           ResultSet rs = st.executeQuery(SQLGet.getJournal(journal.getJournalNo()));
-        } catch (Exception e)
-        {
+            Statement st = db.createStatement();
+            ResultSet rs = st.executeQuery(SQLGet.getJournal(journal.getjournalnumber()));
+                
+                if (rs.next())
+                {
+                    int journalnumber = rs.getInt(0);
+                    boolean status = rs.getBoolean(1);
+                    String journallocation = rs.getNString(2);
+                    Date date = rs.getDate(3);
+                    
+                    journal.setjournalnumber(journalnumber);
+                    journal.setdate(date);
+                    journal.setjournallocation(journallocation);
+                    journal.setstatus(status);
+                    System.out.println("found journal");
+                }
+            rs.close();
+            st.close();
+        }
+        catch (SQLException e) {
+            System.out.println(e);
+
         }
     }    
+    
+    
     public void getCitizen(ICitizen citizen) 
     {
         try (Connection db = comhandler.Connect()) 
