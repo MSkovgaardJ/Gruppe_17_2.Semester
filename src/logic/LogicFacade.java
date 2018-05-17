@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package logik;
+package logic;
 
 import common.IAid;
 import common.ICitizen;
@@ -18,7 +13,7 @@ import java.util.Collection;
  *
  * @author Morten Skovgaard
  */
-public class LogikFacade implements ILogicFacade
+public class LogicFacade implements ILogicFacade
 {
     private IDataFacede dataHandler;
     private SystemUser User;
@@ -44,8 +39,7 @@ public class LogikFacade implements ILogicFacade
     }
     @Override
     public IAid getAid(int aidno) 
-    {
-       
+    {       
         return null;
     }
     @Override
@@ -92,3 +86,4 @@ public class LogikFacade implements ILogicFacade
         this.User = null;
     }
 }
+

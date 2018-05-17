@@ -3,12 +3,12 @@ package GUI;
 import common.IAid;
 import common.ICitizen;
 import common.IJournal;
-import common.ISystemUser;
 import common.IUI;
 import java.util.Collection;
 import java.util.Scanner;
 import common.ILogicFacade;
 import common.IDataFacede;
+import common.ISystemUser;
 
 /**
  *
@@ -16,12 +16,12 @@ import common.IDataFacede;
  */
 public class ConsoleUI implements IUI {
 
-    private ILogicFacade logicHandler;
     private Scanner input = new Scanner(System.in);
     private int intInput;
     private String textInput;
-    private String username = "";
-    private String password = "";
+    private String username = "test";
+    private String password = "test";
+    private ILogicFacade logicHandler;
     private final String HELP_START = "\nType 1 to login. you have to have a valid username and password"
             + "\n" + "Type 3 to quit. closes the application" + "\n";
     private final String HELP_LOGIN = "\nEnter username and password to login";
@@ -33,12 +33,7 @@ public class ConsoleUI implements IUI {
             + "Type 8 to edit a System User\n"
             + "Type 9 to log out";
     private final String HELP_JOURNAL = "\nJOURNALS\n";
-
-    public ConsoleUI() {
-    }
-
     private void startMenu() {
-
         intInput = -1;
         while (intInput != 3) {   // while user imput is not 3 continue loop
             System.out.println(HELP_START);
@@ -59,7 +54,6 @@ public class ConsoleUI implements IUI {
             }
         }
     }
-
     private void systemMenu() {
         System.out.println(HELP_SYSTEM);
         intInput = input.nextInt();
@@ -69,9 +63,8 @@ public class ConsoleUI implements IUI {
                     journalMenu();
                     break;
                 case 2:
-                    for(ICitizen c : getCitizens())
-                    {
-                        System.out.println(c.getFirstName()+ " : SSN "+ c.getSSN());
+                    for (ICitizen c : getCitizens()) {
+                        System.out.println(c.getFirstName() + " : SSN " + c.getSSN());
                     }
                     break;
                 case 3:
@@ -83,6 +76,7 @@ public class ConsoleUI implements IUI {
                     System.out.println("Entered selection invalid. Select an option by entering a number");
                     break;
             }
+
         }
     }
 
@@ -92,12 +86,10 @@ public class ConsoleUI implements IUI {
         System.out.println("Type SSN of Citizen");
         intInput = input.nextInt();
         ICitizen citizen = getCitizen(intInput);
-        if(citizen != null){
-            
-        }
-        else 
-        {
-            
+        if (citizen != null) {
+
+        } else {
+
         }
     }
 
@@ -118,9 +110,9 @@ public class ConsoleUI implements IUI {
     private ICitizen getCitizen(int ssn) {
         return logicHandler.getCitizen(ssn);
     }
-    private void addCitizen()
-    {
-        
+
+    private void addCitizen() {
+
     }
 
     private IJournal getJournal(int journalno) {
@@ -131,7 +123,9 @@ public class ConsoleUI implements IUI {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.   
     }
 
-    private Collection<ICitizen> getCitizens() {return logicHandler.getCitizens();}
+    private Collection<ICitizen> getCitizens() {
+        return logicHandler.getCitizens();
+    }
 
     private Collection<IJournal> getJournals() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.   

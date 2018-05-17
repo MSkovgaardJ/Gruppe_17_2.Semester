@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package data;
 
 import common.IAid;
@@ -38,14 +33,16 @@ public class SQLHandler{
                     System.out.println("found user");
                     fund= true;                
                 }
-            }
+ 
+            }            
             rs.close();
-            st.close();            
+            st.close();                        
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println(e);            
+        } finally {            
+            return fund;
         }
-        return fund;               
-    }   
+    }  
     public void getCredentials(String username, String password, ILoginToken login) {   
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
@@ -136,5 +133,4 @@ public class SQLHandler{
         } 
         return list;
     }
-    
 }

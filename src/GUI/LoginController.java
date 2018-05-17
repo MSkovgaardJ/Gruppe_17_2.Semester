@@ -1,19 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 /**
  *
  * @author Morten Skovgaard
  */
-public class LoginController
-{
+public class LoginController {
+
     private String username;
-    private String password;    
-    public LoginController(String username,String password){        
-        
-    }    
+
+    private String password;
+
+    public boolean Login(String username,String password) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.   
+
+    }
+    public LoginController(String username, String password) {
+
+    }
+
 }

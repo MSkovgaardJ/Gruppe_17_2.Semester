@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package logik;
+package logic;
 
 import common.ICitizen;
 
@@ -12,7 +7,6 @@ import common.ICitizen;
  * @author Morten Skovgaard
  */
 public class Citizen implements ICitizen {
-
     private ICitizen contactPerson;
     private String phoneNumber;
     private String firstName;
@@ -100,6 +94,7 @@ public class Citizen implements ICitizen {
     public void setPostalNumber(int postalNumber) {
         this.postalNumber = postalNumber;
     }
+
 
     @Override
     public ICitizen clone() {

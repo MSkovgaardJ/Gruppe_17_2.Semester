@@ -5,8 +5,6 @@
  */
 package common;
 
-import java.util.Collection;
-
 /**
  *
  * @author Stephanie

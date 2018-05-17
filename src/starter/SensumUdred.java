@@ -1,21 +1,14 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package starter;
 
 import data.SQLHandler;
 import data.postgreSQLCom;
-
 
 import GUI.ConsoleUI;
 import common.IDataFacede;
 import common.ILogicFacade;
 import common.IUI;
 import data.DataFacade;
-import logik.LogikFacade;
+import logic.LogicFacade;
 
 /**
  *
@@ -27,11 +20,10 @@ public class SensumUdred {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("Group 17");
-        
+        // TODO code application logic here 
+        System.out.println("Gruppe 17");
         IUI ui = new ConsoleUI();
-        ILogicFacade logic = new LogikFacade();
+        ILogicFacade logic = new LogicFacade();
         IDataFacede data = new DataFacade();
         logic.addData(data);
         ui.addLogic(logic);  
