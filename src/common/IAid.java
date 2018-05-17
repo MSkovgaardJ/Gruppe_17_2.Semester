@@ -15,13 +15,17 @@ import logic.Aid;
  */
 public interface IAid
 {
-
-    List<Aid> aids();
     
     int getAidNo();
 
     String getAidDescribsion();
 
     String getAidName();
+
+    public void setAidNo(int aidNo);
+
+    public void setAidName(String aname);
+
+    public void setAidDescribsion(String describsion);
     
 }

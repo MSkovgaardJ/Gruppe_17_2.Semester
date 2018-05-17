@@ -17,14 +17,14 @@ public class LogicFacade implements ILogicFacade
 {
     private IDataFacede dataHandler;
     private SystemUser User;
-    private JournalHandler JH;     
+    private JournalHandler JH;  
+    
     @Override
     public void addData(IDataFacede data) {
         this.dataHandler = data;
     }  
     @Override
     public ICitizen getCitizen(int ssn) {
-        ICitizen gCitizen = new Citizen();
         ICitizen citizen = new Citizen();
         citizen.setSSN(ssn);
         dataHandler.getCitizen(citizen);
@@ -42,6 +42,7 @@ public class LogicFacade implements ILogicFacade
     public IAid getAid(int aidNo) 
     {       
        IAid gAid = new Aid();
+       gAid.setAidNo(aidNo);
        dataHandler.getAid(gAid);
        return gAid;
     }

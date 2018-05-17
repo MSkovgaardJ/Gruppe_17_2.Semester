@@ -16,14 +16,6 @@ public class Aid implements IAid
     private String aidDescription;
     
     @Override
-    public List<Aid> aids()
-    {
-        List<Aid> aids = new ArrayList<>();
-        
-        return aids;
-    }
-    
-    @Override
     public int getAidNo()
     {
         return aidNo;
@@ -39,6 +31,24 @@ public class Aid implements IAid
     public String getAidName()
     {
         return aidName;
+    }
+
+    @Override
+    public void setAidNo(int aidNo)
+    {
+     this.aidNo = aidNo;
+    }
+
+    @Override
+    public void setAidName(String aname)
+    {
+        this.aidName = aidName;
+    }
+
+    @Override
+    public void setAidDescribsion(String describsion)
+    {
+        this.aidDescription = describsion;
     }
 
 }

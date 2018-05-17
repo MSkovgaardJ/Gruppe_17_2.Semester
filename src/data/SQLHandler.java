@@ -148,12 +148,14 @@ public class SQLHandler{
             ResultSet rs = st.executeQuery(SQLGet.getAid(aid.getAidNo()));
             if (rs.next()) 
             {
-                int aidNo = rs.getInt(0);
-                String aname = rs.getNString(1);
-                String discribsion = rs.getNString(2);
+                int aidNo = rs.getInt(1);
+                String aname = rs.getNString(2);
+                String describsion = rs.getNString(3);
+   
+                aid.setAidNo(aidNo);
+                aid.setAidName(aname);
+                aid.setAidDescribsion(describsion);
                 
-                
-                   
                 System.out.println("got aid");
             }
             rs.close();
@@ -162,5 +164,6 @@ public class SQLHandler{
         catch (SQLException e) {
         System.out.println(e);
         }     
-    }    
+    }   
+    
 }
