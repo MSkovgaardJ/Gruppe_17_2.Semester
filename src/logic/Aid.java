@@ -1,5 +1,6 @@
 package logic;
 
+import common.IAid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +9,13 @@ import java.util.List;
  * @author Morten Skovgaard
  */
 
-public class Aid
+public class Aid implements IAid
 {
     private int aidNo;
     private String aidName;
     private String aidDescription;
     
+    @Override
     public List<Aid> aids()
     {
         List<Aid> aids = new ArrayList<>();
@@ -21,21 +23,22 @@ public class Aid
         return aids;
     }
     
+    @Override
     public int getAidNo()
     {
         return aidNo;
     }
     
-    public String getAidName(int aidNo)
+    @Override
+    public String getAidDescribsion()
     {
-        
-        return aidName;
-    }
-    
-    public String getAidDescription(int aidNo)
-    {
-        
         return aidDescription;
+    }
+
+    @Override
+    public String getAidName()
+    {
+        return aidName;
     }
 
 }

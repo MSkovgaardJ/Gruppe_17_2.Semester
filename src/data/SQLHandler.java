@@ -66,7 +66,7 @@ public class SQLHandler{
         try (Connection db = comhandler.Connect())
         {
            Statement st = db.createStatement();
-           ResultSet rs = st.executeQuery(SQLGet.getJournal(journal.getJournalNo()));
+          // ResultSet rs = st.executeQuery(SQLGet.getJournal(journal.;
         } catch (Exception e)
         {
         }

@@ -24,6 +24,7 @@ public class LogicFacade implements ILogicFacade
     }  
     @Override
     public ICitizen getCitizen(int ssn) {
+        ICitizen gCitizen = new Citizen();
         ICitizen citizen = new Citizen();
         citizen.setSSN(ssn);
         dataHandler.getCitizen(citizen);
@@ -40,10 +41,9 @@ public class LogicFacade implements ILogicFacade
     @Override
     public IAid getAid(int aidNo) 
     {       
-        //IAid gAid = new Aid();
-        //dataHandler.getAid(gAid);
-        //return gAid;
-     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       IAid gAid = new Aid();
+       dataHandler.getAid(gAid);
+       return gAid;
     }
     @Override
     public Collection<ICitizen> getCitizens() {

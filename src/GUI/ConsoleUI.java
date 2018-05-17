@@ -119,8 +119,8 @@ public class ConsoleUI implements IUI {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.   
     }
 
-    private IAid getAid(int aidno) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.   
+    private IAid getAid(int aidNo) {
+        return logicHandler.getAid(aidNo);
     }
 
     private Collection<ICitizen> getCitizens() {
