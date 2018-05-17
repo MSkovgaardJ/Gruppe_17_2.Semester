@@ -5,6 +5,7 @@
  */
 package data;
 
+import java.sql.Date;
 /**
  *
  * @author Morten Skovgaard
@@ -18,16 +19,19 @@ public class SQLset
                 + "values('"+ssn+"','"+firstname+"','"+lastname+"','"+address+"','"+postalnumber+"','"+city+"','"+phonenumber+"','"+contactperson+"');";
       }
     
-    public final String addJournal()
+    public final String addJournal(int journalnumber, boolean status, String journallocation, Date date)
       {
         
-        return null;
+        return  "Insert into journal \n"
+                + "values('"+journalnumber+"','"+status+"','"+journallocation+"','"+date+"');";
       }
     
-    public final String addAid()
+    public final String addAid(int aidnumber, String name, String description)
+
       {
         
-        return null;
+        return "Insert into aid \n"
+                + "values('"+aidnumber+"','"+name+"','"+description+"');";
       }  
  
   
