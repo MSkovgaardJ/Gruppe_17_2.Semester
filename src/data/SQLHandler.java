@@ -63,7 +63,13 @@ public class SQLHandler{
     }     
     public void getJournal(IJournal journal) 
     {
-     
+        try (Connection db = comhandler.Connect())
+        {
+           Statement st = db.createStatement();
+           ResultSet rs = st.executeQuery(SQLGet.getJournal(journal.getJournalNo()));
+        } catch (Exception e)
+        {
+        }
     }    
     public void getCitizen(ICitizen citizen) 
     {
@@ -133,4 +139,28 @@ public class SQLHandler{
         } 
         return list;
     }
+    
+    public void getAid(IAid aid) 
+    {
+        try (Connection db = comhandler.Connect()) 
+        {
+            Statement st = db.createStatement();
+            ResultSet rs = st.executeQuery(SQLGet.getAid(aid.getAidNo()));
+            if (rs.next()) 
+            {
+                int aidNo = rs.getInt(0);
+                String aname = rs.getNString(1);
+                String discribsion = rs.getNString(2);
+                
+                
+                   
+                System.out.println("got aid");
+            }
+            rs.close();
+            st.close();
+        } 
+        catch (SQLException e) {
+        System.out.println(e);
+        }     
+    }    
 }

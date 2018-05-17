@@ -19,5 +19,6 @@ public interface IDataFacede {
     public void getCredentials(String username, String password, ILoginToken token);
     public void getJournal(IJournal journal);
     public void getCitizen(ICitizen citizen); 
+    public void getAid(IAid aidNo);
     public Collection<ICitizen> getCitizens(ICitizen base);    
 }

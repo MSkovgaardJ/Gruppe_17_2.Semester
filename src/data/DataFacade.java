@@ -1,4 +1,5 @@
 package data;
+import common.IAid;
 import common.ICitizen;
 import common.IJournal;
 import common.ILoginToken;
@@ -32,7 +33,6 @@ public class DataFacade implements IDataFacede
     {
         dataHandler.getJournal(journal);
     }
-    
 
     @Override
     public void getCitizen(ICitizen citizen) 
@@ -45,4 +45,10 @@ public class DataFacade implements IDataFacede
     {
         return dataHandler.getCitizens(base);        
     }    
+
+    @Override
+    public void getAid(IAid aid)
+    {
+        dataHandler.getAid(aid);
+    }
 }

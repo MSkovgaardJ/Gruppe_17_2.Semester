@@ -1,5 +1,7 @@
 package data;
 
+import common.IAid;
+
 /**
  *
  * @author Stephanie
@@ -28,4 +30,6 @@ public class SQLGet
     public static String getlogincredentials(String username,String password){
         return "select isAdmin, isCaseHandler from systemuser where username = '" + username + "' and password = '" + password + "'";
     }
+
+
 }

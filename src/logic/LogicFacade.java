@@ -38,9 +38,12 @@ public class LogicFacade implements ILogicFacade
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     @Override
-    public IAid getAid(int aidno) 
+    public IAid getAid(int aidNo) 
     {       
-        return null;
+        //IAid gAid = new Aid();
+        //dataHandler.getAid(gAid);
+        //return gAid;
+     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     @Override
     public Collection<ICitizen> getCitizens() {

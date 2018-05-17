@@ -1,13 +1,5 @@
 package logic;
 
-import common.IAid;
-import common.IDBCom;
-import data.SQLGet;
-import data.postgreSQLCom;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +10,9 @@ import java.util.List;
 
 public class Aid
 {
-    private int aidID;
+    private int aidNo;
     private String aidName;
     private String aidDescription;
-    
-    public Aid()
-    {
-        
-    }
     
     public List<Aid> aids()
     {
@@ -34,13 +21,18 @@ public class Aid
         return aids;
     }
     
-    public String getAidName(int aidID)
+    public int getAidNo()
+    {
+        return aidNo;
+    }
+    
+    public String getAidName(int aidNo)
     {
         
         return aidName;
     }
     
-    public String getAidDescription(int aidID)
+    public String getAidDescription(int aidNo)
     {
         
         return aidDescription;

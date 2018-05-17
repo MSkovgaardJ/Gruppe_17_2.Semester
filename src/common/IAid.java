@@ -17,6 +17,8 @@ public interface IAid
 {
 
     List<Aid> aids();
+    
+    int getAidNo();
 
     String getAidDescribsion();
 
