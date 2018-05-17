@@ -5,10 +5,21 @@
  */
 package common;
 
+import java.sql.SQLException;
+import java.util.List;
+import logik.Aid;
+
 /**
  *
- * @author Stephanie
+ * @author mortenskovgaard
  */
-public interface IAid {
+public interface IAid
+{
+
+    List<Aid> aids() throws ClassNotFoundException, SQLException;
+
+    String getAidDescribsion();
+
+    String getAidName();
     
 }
