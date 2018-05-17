@@ -8,6 +8,7 @@ import javax.security.auth.kerberos.ServicePermission;
  */
 
 public class CaseController
+<<<<<<< HEAD
 {
     public findCitizen(SSN)
     {
@@ -17,10 +18,18 @@ public class CaseController
     public hasJournal(SSN)
     {
         
+=======
+{    
+    public void findCitizen(int SSN){
+        
     }
     
-    public saveJornal()
-    {
+    public void hasJournal(int SSN){        
+       
+>>>>>>> UI
+    }
+    
+    public void saveJornal(){
         
     }
 }
