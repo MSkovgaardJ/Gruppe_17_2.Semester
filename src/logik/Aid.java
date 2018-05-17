@@ -5,6 +5,7 @@
  */
 package logik;
 
+import common.IAid;
 import common.IDBCom;
 import data.SQLGet;
 import data.postgreSQLCom;
@@ -19,7 +20,7 @@ import java.util.List;
  *
  * @author Morten Skovgaard
  */
-public class Aid implements IDBCom
+public class Aid implements IDBCom, IAid
 {
  private int aidID;
  private String aidName;
@@ -40,6 +41,7 @@ public class Aid implements IDBCom
         } 
      return null;
     }
+    @Override
     public List<Aid>aids() throws ClassNotFoundException, SQLException{
         Statement stm;
         stm = Connect().createStatement();
@@ -54,10 +56,12 @@ public class Aid implements IDBCom
         aids.toString();
         return aids;
     }
+    @Override
     public String getAidName(){        
         return aidName;
     }
     
+    @Override
     public String getAidDescribsion(){
         return aidDescribsion;
     }
