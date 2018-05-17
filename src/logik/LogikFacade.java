@@ -45,9 +45,8 @@ public class LogikFacade implements ILogicFacade
     @Override
     public IAid getAid(int aidno) 
     {
-        IAid aid = new Aid();
-        aid
-        return Aid;
+       
+        return null;
     }
     @Override
     public Collection<ICitizen> getCitizens() {

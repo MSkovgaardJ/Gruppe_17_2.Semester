@@ -5,6 +5,7 @@
  */
 package data;
 
+import common.IAid;
 import common.ICitizen;
 import common.IDBCom;
 import common.ILoginToken;
@@ -63,14 +64,18 @@ public class SQLHandler{
         System.out.println(e);
         }              
     }     
-    public void getJournal(IJournal journal) {
+    public void getJournal(IJournal journal) 
+    {
      
     }    
-    public void getCitizen(ICitizen citizen) {
-        try (Connection db = comhandler.Connect()) {
+    public void getCitizen(ICitizen citizen) 
+    {
+        try (Connection db = comhandler.Connect()) 
+        {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.getCitizen(citizen.getSSN()));
-            if (rs.next()) {
+            if (rs.next()) 
+            {
                 String fname = rs.getString(1);
                 String lname = rs.getString(2);
                 String phonenumber = rs.getString(2);
@@ -131,4 +136,5 @@ public class SQLHandler{
         } 
         return list;
     }
+    
 }
