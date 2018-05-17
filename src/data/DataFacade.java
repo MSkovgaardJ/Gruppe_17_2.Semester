@@ -14,33 +14,40 @@ import java.util.Collection;
  *
  * @author magnusm
  */
-public class DataFacade implements IDataFacede{
+public class DataFacade implements IDataFacede
+{
     SQLHandler dataHandler;
     public DataFacade(){
         this.dataHandler = new SQLHandler();
     }
     @Override
-    public boolean checkLogin(String username, String password) {
+    public boolean checkLogin(String username, String password) 
+    {
        return dataHandler.checkLogin(username, password);
     }
 
     @Override
-    public void getCredentials(String username, String password, ILoginToken token) {
+    public void getCredentials(String username, String password, ILoginToken token) 
+    {
         dataHandler.getCredentials(username, password, token);
     }
 
     @Override
-    public void getJournal(IJournal journal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void getJournal(IJournal journal) 
+    {
+        dataHandler.getJournal(journal);
     }
+    
 
     @Override
-    public void getCitizen(ICitizen citizen) {
+    public void getCitizen(ICitizen citizen) 
+    {
         dataHandler.getCitizen(citizen);
     }
 
     @Override
-    public Collection<ICitizen> getCitizens(ICitizen base) {
+    public Collection<ICitizen> getCitizens(ICitizen base) 
+    {
         return dataHandler.getCitizens(base);        
     }    
 }

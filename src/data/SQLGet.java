@@ -14,6 +14,8 @@ public class SQLGet
     public static String getAllCitizens = "select * from Citizen";
     public static String getAllJournals = "select * from Journal";
     public static String getAllAids = "select * from Aid";
+    
+    
     public static String getCitizen(int ssn)
     {
        return "select * from Citizen where SSN="+ssn;
