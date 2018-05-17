@@ -33,45 +33,7 @@ public class ConsoleUI implements IUI {
             + "Type 8 to edit a System User\n"
             + "Type 9 to log out";
     private final String HELP_JOURNAL = "\nJOURNALS\n";
-
-    public void menuUI() {
-        System.out.println(HELP_START);
-        intInput = input.nextInt();
-
-        switch (intInput) {
-            case 1:
-                System.out.println("Enter Username:");
-                textInput = input.next();
-                System.out.println("Enter password");
-                textInput = input.next();
-
-                if (textInput.equals(username) && textInput.equals(password)) {
-                    System.out.println("Successfully logged in.");
-                    // Make call to the next part of the system.
-
-                } else {
-
-                    System.out.println("Incorrect username. Returning to menu.");
-                    menuUI();
-                }
-
-                break;
-            case 3:
-                System.out.println("Quitting application.");
-                System.exit(1);
-
-                break;
-
-            default:
-                System.out.println("Entered selection invalid. Select an option by entering a number 1-3.");
-                menuUI();
-
-                break;
-        }
-    }
-
     private void startMenu() {
-
         intInput = -1;
         while (intInput != 3) {   // while user imput is not 3 continue loop
             System.out.println(HELP_START);
@@ -92,7 +54,6 @@ public class ConsoleUI implements IUI {
             }
         }
     }
-
     private void systemMenu() {
         System.out.println(HELP_SYSTEM);
         intInput = input.nextInt();

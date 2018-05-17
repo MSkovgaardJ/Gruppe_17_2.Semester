@@ -21,14 +21,7 @@ public class SensumUdred {
      */
     public static void main(String[] args) {
         // TODO code application logic here 
-        SQLHandler sqlhandler = new SQLHandler();
-        System.out.println(sqlhandler.checkLogin("bo12345", "guest"));
-        
-        ConsoleUI cUI = new ConsoleUI();
-        cUI.menuUI();
-
-        System.out.println("Group 17");
-        
+        System.out.println("Gruppe 17");
         IUI ui = new ConsoleUI();
         ILogicFacade logic = new LogicFacade();
         IDataFacede data = new DataFacade();
