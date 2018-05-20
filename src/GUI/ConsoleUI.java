@@ -9,6 +9,7 @@ import java.util.Scanner;
 import common.ILogicFacade;
 import common.IDataFacede;
 import common.ISystemUser;
+import java.util.InputMismatchException;
 
 /**
  *
@@ -16,9 +17,7 @@ import common.ISystemUser;
  */
 public class ConsoleUI implements IUI {
 
-    private Scanner input = new Scanner(System.in);
-    private int intInput;
-    private String textInput;
+    private Scanner input = new Scanner(System.in);    
     private String username = "test";
     private String password = "test";
     private ILogicFacade logicHandler;
@@ -33,12 +32,32 @@ public class ConsoleUI implements IUI {
             + "Type 8 to edit a System User\n"
             + "Type 9 to log out";
     private final String HELP_JOURNAL = "\nJOURNALS\n";
+    /*--------------------------------------------------------------------------
+    UI Related
+    --------------------------------------------------------------------------*/
+    /**
+     * added to make sure input is allways correctly formattet
+     * @return -1 if faulty number.
+     */
+    private int getNumberInput()
+    {
+        int i = -1;
+        try{            
+          
+             i = input.nextInt();
+        }
+        catch(InputMismatchException e)
+        {
+             input.next(); // cleares the scanner for wrongfull input / prevents loop
+        }
+        return i;
+    }
     private void startMenu() {
-        intInput = -1;
-        while (intInput != 3) {   // while user imput is not 3 continue loop
+        int i = -1;
+        while (i != 3) {   // while user imput is not 3 continue loop
             System.out.println(HELP_START);
-            intInput = input.nextInt();
-            switch (intInput) {
+            i = getNumberInput();
+            switch (i) {
                 case 1:
                     if (tryLogin()) {
                         systemMenu();
@@ -52,18 +71,21 @@ public class ConsoleUI implements IUI {
                     System.out.println("Entered selection invalid. Select an option by entering a number 1 or 3.");
                     break;
             }
+            
         }
     }
-    private void systemMenu() {
-        System.out.println(HELP_SYSTEM);
-        intInput = input.nextInt();
-        while (intInput != 9) {
-            switch (intInput) {
+    private void systemMenu() {        
+        int i = -1;
+        while (i != 9) {
+            System.out.println(HELP_SYSTEM);
+            i= getNumberInput();
+            switch (i) {
                 case 1:
                     journalMenu();
                     break;
                 case 2:
-                    for (ICitizen c : getCitizens()) {
+                    Collection<ICitizen> listCitizens = getCitizens();
+                    for (ICitizen c :listCitizens ) {
                         System.out.println(c.getFirstName() + " : SSN " + c.getSSN());
                     }
                     break;
@@ -76,15 +98,13 @@ public class ConsoleUI implements IUI {
                     System.out.println("Entered selection invalid. Select an option by entering a number");
                     break;
             }
-
         }
     }
 
     private void journalMenu() {
         System.out.println(HELP_JOURNAL);
-
         System.out.println("Type SSN of Citizen");
-        intInput = input.nextInt();
+        int intInput = input.nextInt();
         ICitizen citizen = getCitizen(intInput);
         if (citizen != null) {
 
@@ -148,4 +168,5 @@ public class ConsoleUI implements IUI {
     public void Start() {
         this.startMenu();
     }
+    
 }

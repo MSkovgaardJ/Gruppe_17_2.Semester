@@ -67,7 +67,7 @@ public class LogicFacade implements ILogicFacade
         if(dataHandler.checkLogin(username, password))
         {
             this.User=new SystemUser(username,password);
-            dataHandler.getCredentials(username, password, this.User.getClearance());
+            dataHandler.getCredentials(this.User);
             return true;
         }
         return false;

@@ -6,12 +6,13 @@
 package logic;
 
 import common.ILoginToken;
+import common.ISystemUser;
 
 /**
  *
  * @author Morten Skovgaard
  */
-public class SystemUser
+public class SystemUser implements ISystemUser
 {
     private String userName;
     private String password;    
@@ -19,18 +20,22 @@ public class SystemUser
     public SystemUser(String userName, String password) {
         this.userName = userName;
         this.password = password;
-        this.clearanceLevel = new LoginToken(false, true,false);
+        this.clearanceLevel = new LoginToken(false,false);
     }    
+    @Override
     public ILoginToken getClearance()
     {        
         return clearanceLevel;
     }
+    @Override
     public String getUserName() {
         return userName;
     }
+    @Override
     public void setUserName(String userName) {
         this.userName = userName;
     }
+    @Override
     public String getPassword() {
         return password;
     }

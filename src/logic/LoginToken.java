@@ -12,10 +12,11 @@ public class LoginToken implements ILoginToken {
     private boolean user;
     private boolean caseHandler;
 
-    public LoginToken(boolean admin, boolean user, boolean caseHandler) {
-        this.admin = admin;
-        this.user = user;
+    public LoginToken(boolean admin, boolean caseHandler) {
+        this.admin = admin;  
         this.caseHandler = caseHandler;
+        this.user = true;
+     
     }
 
     @Override

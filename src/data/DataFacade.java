@@ -4,6 +4,7 @@ import common.ICitizen;
 import common.IJournal;
 import common.ILoginToken;
 import common.IDataFacede;
+import common.ISystemUser;
 import java.util.Collection;
 
 /**
@@ -23,9 +24,9 @@ public class DataFacade implements IDataFacede
     }
 
     @Override
-    public void getCredentials(String username, String password, ILoginToken token) 
+    public void getCredentials(ISystemUser user) 
     {
-        dataHandler.getCredentials(username, password, token);
+        dataHandler.getCredentials(user);
     }
 
     @Override

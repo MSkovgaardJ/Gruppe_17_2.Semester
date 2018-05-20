@@ -5,6 +5,7 @@ import common.ICitizen;
 import common.IDBCom;
 import common.ILoginToken;
 import common.IJournal;
+import common.ISystemUser;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -43,14 +44,14 @@ public class SQLHandler{
             return fund;
         }
     }  
-    public void getCredentials(String username, String password, ILoginToken login) {   
+    public void getCredentials(ISystemUser user) {   
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
-            ResultSet rs = st.executeQuery(SQLGet.getlogincredentials(username, password));
+            ResultSet rs = st.executeQuery(SQLGet.getlogincredentials(user.getUserName(), user.getPassword()));
             if (rs.next()) {
                 boolean isAdmin = rs.getBoolean(1);
                 boolean isCaseHandler = rs.getBoolean(2);
-                login.setClearance(isAdmin, isCaseHandler); 
+                user.getClearance().setClearance(isAdmin, isCaseHandler); 
                 System.out.println("got credentials");
                 //System.out.println("is Admin "+ isAdmin +"\nis Casehandler "+ isCaseHandler);
             }
@@ -130,7 +131,7 @@ public class SQLHandler{
                 list.add(citizen);
                 //System.out.println("is Admin "+ isAdmin +"\nis Casehandler "+ isCaseHandler);
             }
-            System.out.println("got credentials");
+            System.out.println("got Citizens");
             rs.close();
             st.close();
         } 

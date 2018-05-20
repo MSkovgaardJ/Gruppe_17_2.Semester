@@ -16,7 +16,7 @@ import java.util.Collection;
  */
 public interface IDataFacede {
     public boolean checkLogin(String username, String password);   
-    public void getCredentials(String username, String password, ILoginToken token);
+    public void getCredentials(ISystemUser user);
     public void getJournal(IJournal journal);
     public void getCitizen(ICitizen citizen); 
     public void getAid(IAid aidNo);
