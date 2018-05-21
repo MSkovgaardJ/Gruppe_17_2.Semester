@@ -3,10 +3,10 @@ package data;
 import common.IAid;
 import common.ICitizen;
 import common.IDBCom;
-import common.ILoginToken;
 import common.IJournal;
 import common.ISystemUser;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,10 +20,6 @@ import java.util.Collection;
 public class SQLHandler {
 
     IDBCom comhandler;
-
-    public SQLHandler() {
-        comhandler = new postgreSQLCom();
-    }
 
     public boolean checkLogin(String username, String password) {
         boolean fund = false;
@@ -65,37 +61,33 @@ public class SQLHandler {
         }
     }
 
+    public Collection<IJournal> getAllJournalsFor(IJournal base, int ssn) {
+        return null;
+    }
+
     public void getJournal(IJournal journal) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
-            // ResultSet rs = st.executeQuery(SQLGet.getJournal(journal.;
-        } catch (Exception e) {
-        }
-    }
-    public Collection<IJournal> getAllJournalsFor(IJournal base, int ssn)
-    {
-         Collection<IJournal> list = new ArrayList();
-           try (Connection db = comhandler.Connect()) {
-            Statement st = db.createStatement();
-            ResultSet rs = st.executeQuery(SQLGet.getAllJournalsFor(ssn));
-            while (rs.next()) {
-                IJournal journal = base.clone();
-                int id = rs.getInt(1);
-                String jName = rs.getNString(2);
-                String description = rs.getNString(3);
+            ResultSet rs = st.executeQuery(SQLGet.getJournal(journal.getjournalnumber()));
 
-                journal.setID(id);
-                journal.setJournalName(jName);
-                journal.setJournalDescription(description);
-                list.add(base);
+            if (rs.next()) {
+                int journalnumber = rs.getInt(0);
+                boolean status = rs.getBoolean(1);
+                String journallocation = rs.getNString(2);
+                Date date = rs.getDate(3);
+
+                journal.setjournalnumber(journalnumber);
+                journal.setdate(date);
+                journal.setjournallocation(journallocation);
+                journal.setstatus(status);
+                System.out.println("found journal");
             }
-            System.out.println("got journals for "+ssn);
             rs.close();
             st.close();
         } catch (SQLException e) {
             System.out.println(e);
+
         }
-        return list;
     }
 
     public void getCitizen(ICitizen citizen) {
@@ -185,10 +177,10 @@ public class SQLHandler {
             System.out.println(e);
         }
     }
-    
+
     public Collection<IJournal> getJournals(IJournal base) {
         Collection<IJournal> list = new ArrayList();
-           try (Connection db = comhandler.Connect()) {
+        try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.getAllJournals);
             while (rs.next()) {
@@ -210,10 +202,10 @@ public class SQLHandler {
         }
         return list;
     }
-    
+
     public Collection<IAid> getAids(IAid base) {
         Collection<IAid> list = new ArrayList();
-           try (Connection db = comhandler.Connect()) {
+        try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.getAllAids);
             while (rs.next()) {
@@ -235,9 +227,9 @@ public class SQLHandler {
         }
         return list;
     }
-    
+
     public boolean changeSystemUser(ISystemUser isu) {
-        
+
         return false;
     }
 

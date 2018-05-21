@@ -197,7 +197,7 @@ public class ConsoleUI implements IUI {
     }
 
     private IJournal getJournal(int journalno) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.   
+        return logicHandler.getJournal(journalno);
     }
 
     private IAid getAid(int aidNo) {
