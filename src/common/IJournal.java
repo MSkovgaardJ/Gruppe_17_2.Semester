@@ -10,18 +10,14 @@ import java.sql.Date;
 public interface IJournal 
 {
     public IJournal clone();
+
     public void setID(int ID);
-    public void setJournalName(String jName);
-    public void setJournalDescription(String description);
+    public void setStatus(String status);
+    public void setDate(Date date);
+    public void setJournalLocation(String Location);
+
     public int getID();
-    public String getJournalName();
-    public String getJournalDescription();
-    public int getjournalnumber();    
-    public void setjournalnumber(int journalNumber);    
-    public void setdate(Date date);
-    public void setjournallocation(String journalLocation);
-    public void setstatus(boolean status);
-    public Date getdate();
-    public String getjournallocation();  
-    public boolean getstatus();
+    public String getStatus();
+    public Date getDate();
+    public String getJournalLocation();
 }

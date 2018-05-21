@@ -10,6 +10,7 @@ import common.ILogicFacade;
 import common.IDataFacede;
 import common.ISystemUser;
 import java.util.InputMismatchException;
+import logic.Journal;
 
 /**
  *
@@ -17,25 +18,30 @@ import java.util.InputMismatchException;
  */
 public class ConsoleUI implements IUI {
 
-    private Scanner input = new Scanner(System.in);
-    private String username = "test";
-    private String password = "test";
+    private final Scanner input = new Scanner(System.in);
     private ILogicFacade logicHandler;
-    private final String HELP_START = "\nType 1 to login. you have to have a valid username and password"
-            + "\n" + "Type 3 to quit. closes the application" + "\n";
-    private final String HELP_LOGIN = "\nEnter username and password to login";
-    private final String HELP_SYSTEM = "\nwelcome to Sensum Udred\n"
-            + "Type 1 to start a journal    NOT DONE\n"
-            + "type 2 to list all journal   NOT DONE\n"
-            + "Type 3 to edit a journal     NOT DONE\n"
+    private final String HELP_START = "\nSENSUM UDRED\n"
+            + "----------------------------------------------\n"
+            + "Type 1 to login. you have to have a valid username and password\n"
+            + "Type 0 to quit. closes the application" + "\n";
+    private final String HELP_LOGIN = "\nSENSUM UDRED LOGIN\n"
+            + "----------------------------------------------";
+    private final String HELP_SYSTEM = "\nSENSUM UDRED SYSTEM MENU\n"
+            + "----------------------------------------------\n"
+            + "Type 1 to enter a journal menu   NOT DONE\n"
             + "\n"
-            + "Type 4 to list Aids          NOT DONE\n"
-            + "Type 5 to add Aid            NOT DONE\n"
-            + "Type 6 to edit Aid           NOT DONE\n"
+            + "type 2 to list all citizens          DONE\n"
+            + "Type 3 to list all journals          DONE\n"
             + "\n"
-            + "Type 8 to edit a System User NOT DONE\n"
-            + "Type 9 to log out            NOT DONE";
-    private final String HELP_JOURNAL = "\nJOURNALS MENU\n";
+            + "Type 4 to list Aids              NOT DONE\n"
+            + "Type 5 to add Aid                NOT DONE\n"
+            + "Type 6 to edit Aid               NOT DONE\n"
+            + "\n"
+            + "Type 7 to add a new System User  NOT DONE\n"
+            + "Type 8 to edit a System User     NOT DONE\n"
+            + "Type 0 to logout                 NOT DONE\n";
+    private final String HELP_JOURNAL = "\nJOURNALS MENU\n"
+            + "Type 0 to return to system       NOT DONE\n";
 
     /*--------------------------------------------------------------------------
     UI Related
@@ -47,6 +53,7 @@ public class ConsoleUI implements IUI {
      */
     private int getNumberInput() {
         int i = -1;
+        System.out.print("input: ");
         try {
 
             i = input.nextInt();
@@ -55,9 +62,9 @@ public class ConsoleUI implements IUI {
         }
         return i;
     }
-
     private String getStringInput() {
         String s = "";
+        System.out.print("input: ");
         try {
             s = input.nextLine();
         } catch (Exception e) {
@@ -66,10 +73,9 @@ public class ConsoleUI implements IUI {
         return s;
 
     }
-
     private void startMenu() {
         int i = -1;
-        while (i != 3) {   // while user imput is not 3 continue loop
+        while (i != 0) {   // while user imput is not 3 continue loop
             System.out.println(HELP_START);
             i = getNumberInput();
             switch (i) {
@@ -78,7 +84,7 @@ public class ConsoleUI implements IUI {
                         systemMenu();
                     }
                     break;
-                case 3:
+                case 0:
                     System.out.println("Quitting application.");
                     //System.exit(1);
                     break;
@@ -88,8 +94,8 @@ public class ConsoleUI implements IUI {
             }
 
         }
+        System.out.println("Return line."); //Tron Ref.
     }
-
     private void systemMenu() {
         int i = -1;
         while (i != 9) {
@@ -97,16 +103,16 @@ public class ConsoleUI implements IUI {
             i = getNumberInput();
             switch (i) {
                 case 1:
+                    // Journals menu
                     journalMenu();
                     break;
                 case 2:
-                    Collection<ICitizen> listCitizens = getCitizens();
-                    for (ICitizen c : listCitizens) {
-                        System.out.println(c.getFirstName() + " : SSN " + c.getSSN());
-                    }
+                    // List citizen's
+                    listCitizens();
                     break;
                 case 3:
-                    // Edit journal
+                    // List journal's
+                    listJournals();
                     break;
                 case 4:
                     // list Aid
@@ -123,22 +129,23 @@ public class ConsoleUI implements IUI {
                 case 8:
                     // System user menu
                     break;
-                case 9:
+                case 0:
+                    logicHandler.logout();
                     System.out.println("loging out");
                     break;
                 default:
                     System.out.println("Entered selection invalid. Select an option by entering a number");
                     break;
             }
+            System.out.println("Return line.");
         }
     }
-
     private void journalMenu() {
         System.out.println(HELP_JOURNAL);
         System.out.println("Type SSN of Citizen");
         int ssn = getNumberInput();
         ICitizen citizen = getCitizen(ssn);
-        if (citizen.getSSN() ==-1) {
+        if (citizen.getSSN() == -1) {
             System.out.println("no citizen found, adding a new on now");
             System.out.println("Type first name");
             String fname = getStringInput();
@@ -152,7 +159,7 @@ public class ConsoleUI implements IUI {
             String city = getStringInput();
             System.out.println("Type postal address");
             int postalNumber = getNumberInput();
-            
+
             citizen.setAddress(address);
             citizen.setCity(city);
             citizen.setFirstName(fname);
@@ -160,29 +167,46 @@ public class ConsoleUI implements IUI {
             citizen.setSSN(ssn);
             citizen.setPhoneNumber(phonenumber);
             citizen.setPostalNumber(postalNumber);
-            
+
             addCitizen(citizen);
         }
         IJournal journal = logicHandler.newJournal();
         System.out.println("Listing journals:");
         Collection<IJournal> journals = logicHandler.getAllJournalsFor(ssn);
-        for(IJournal j : journals)
-        {
-            System.out.println("ID : "+ j.getID()+ " Decription : "+ j.getJournalDescription());
-        }        
-    }
+        for (IJournal j : journals) {
+            System.out.println("ID : " + j.getID());
+        }
 
+        System.out.println("Return line.");
+    }
     private boolean tryLogin() {
         System.out.println(HELP_LOGIN);
-        System.out.println("Enter Username:");
-        username = input.next();
-        System.out.println("Enter password");
-        password = input.next();
+        System.out.print("Enter Username: ");
+        String username = input.next();
+        System.out.print("Enter password: ");
+        String password = input.next();
+        System.out.println("");
         if (logicHandler.login(username, password)) {
             return true;
         }
         System.out.println("Incorrect username. Returning to menu.");
         return false;
+    }
+    private void listCitizens() {
+        Collection<ICitizen> listCitizens = getCitizens();
+        System.out.println("got : " + listCitizens.size() + " Citizen's");
+        System.out.println("-------------------------------------------");
+        for (ICitizen c : listCitizens) {
+            System.out.println(c.getFirstName() + " : SSN " + c.getSSN());
+        }
+    }
+    private void listJournals() {
+        Collection<IJournal> list = getJournals();
+        System.out.println("got : " + list.size() + " journals's");
+        System.out.println("-------------------------------------------");
+        for (IJournal c : list) {
+            System.out.println("ID :" + c.getID());
+        }
     }
 
     /*--------------------------------------------------------------------------
@@ -193,7 +217,7 @@ public class ConsoleUI implements IUI {
     }
 
     private void addCitizen(ICitizen citizen) {
-           logicHandler.addCitizen(citizen);
+        logicHandler.addCitizen(citizen);
     }
 
     private IJournal getJournal(int journalno) {
@@ -209,7 +233,7 @@ public class ConsoleUI implements IUI {
     }
 
     private Collection<IJournal> getJournals() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.   
+        return logicHandler.getJournals();
     }
 
     private Collection<IAid> getAids() {

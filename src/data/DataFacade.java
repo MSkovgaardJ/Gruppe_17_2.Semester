@@ -52,7 +52,6 @@ public class DataFacade implements IDataFacede {
 
     @Override
     public Collection<IJournal> getJournals(IJournal base) {
-
         return dataHandler.getJournals(base);
     }
 

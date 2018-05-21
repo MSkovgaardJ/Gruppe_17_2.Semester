@@ -19,8 +19,10 @@ import java.util.Collection;
  */
 public class SQLHandler {
 
-    IDBCom comhandler;
-
+    private IDBCom comhandler;
+    public SQLHandler() {
+        comhandler = new postgreSQLCom();
+    }
     public boolean checkLogin(String username, String password) {
         boolean fund = false;
         try (Connection db = comhandler.Connect()) {
@@ -42,7 +44,6 @@ public class SQLHandler {
             return fund;
         }
     }
-
     public void getCredentials(ISystemUser user) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
@@ -60,26 +61,23 @@ public class SQLHandler {
             System.out.println(e);
         }
     }
-
     public Collection<IJournal> getAllJournalsFor(IJournal base, int ssn) {
         return null;
     }
-
     public void getJournal(IJournal journal) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
-            ResultSet rs = st.executeQuery(SQLGet.getJournal(journal.getjournalnumber()));
-
+            ResultSet rs = st.executeQuery(SQLGet.getJournal(journal.getID()));
             if (rs.next()) {
-                int journalnumber = rs.getInt(0);
-                boolean status = rs.getBoolean(1);
+                int ID = rs.getInt(0);
+                //boolean status = rs.getBoolean(1);
                 String journallocation = rs.getNString(2);
                 Date date = rs.getDate(3);
 
-                journal.setjournalnumber(journalnumber);
-                journal.setdate(date);
-                journal.setjournallocation(journallocation);
-                journal.setstatus(status);
+                journal.setID(ID);
+                journal.setDate(date);
+                journal.setJournalLocation(journallocation);
+                //journal.setStatus(status);
                 System.out.println("found journal");
             }
             rs.close();
@@ -89,7 +87,6 @@ public class SQLHandler {
 
         }
     }
-
     public void getCitizen(ICitizen citizen) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
@@ -120,7 +117,6 @@ public class SQLHandler {
             System.out.println(e);
         }
     }
-
     public Collection<ICitizen> getCitizens(ICitizen base) {
         Collection<ICitizen> list = new ArrayList<>();
         try (Connection db = comhandler.Connect()) {
@@ -155,7 +151,6 @@ public class SQLHandler {
         }
         return list;
     }
-
     public void getAid(IAid aid) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
@@ -177,7 +172,6 @@ public class SQLHandler {
             System.out.println(e);
         }
     }
-
     public Collection<IJournal> getJournals(IJournal base) {
         Collection<IJournal> list = new ArrayList();
         try (Connection db = comhandler.Connect()) {
@@ -186,15 +180,17 @@ public class SQLHandler {
             while (rs.next()) {
                 IJournal journal = base.clone();
                 int id = rs.getInt(1);
-                String jName = rs.getNString(2);
-                String description = rs.getNString(3);
-
+                String Status = rs.getString(2);
+                String journallocation = rs.getString(3);
+                Date date = rs.getDate(4);                
+                
                 journal.setID(id);
-                journal.setJournalName(jName);
-                journal.setJournalDescription(description);
+                journal.setDate(date);
+                journal.setJournalLocation(journallocation);
+
                 list.add(base);
             }
-            System.out.println("got journal");
+            System.out.println("got journals");
             rs.close();
             st.close();
         } catch (SQLException e) {
@@ -202,7 +198,6 @@ public class SQLHandler {
         }
         return list;
     }
-
     public Collection<IAid> getAids(IAid base) {
         Collection<IAid> list = new ArrayList();
         try (Connection db = comhandler.Connect()) {
@@ -227,10 +222,8 @@ public class SQLHandler {
         }
         return list;
     }
-
     public boolean changeSystemUser(ISystemUser isu) {
 
         return false;
     }
-
 }

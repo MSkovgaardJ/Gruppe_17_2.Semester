@@ -44,7 +44,7 @@ public class LogicFacade implements ILogicFacade {
 
     @Override
     public Collection<IJournal> getJournals() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return dataHandler.getJournals(new Journal());
     }
 
     @Override
@@ -64,7 +64,8 @@ public class LogicFacade implements ILogicFacade {
             }
         });
         // get the id of the last journal
-        int jno = list.get(list.size() - 1).getID();
+        int jno =-1;
+        if(!list.isEmpty()) jno= list.get(list.size() - 1).getID();
         // add 1 to it
         jno++;
         // makes a new jouranl
