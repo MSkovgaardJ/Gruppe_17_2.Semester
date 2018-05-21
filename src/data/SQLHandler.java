@@ -78,13 +78,13 @@ public class SQLHandler {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.getCitizen(citizen.getSSN()));
             if (rs.next()) {
-                String fname = rs.getString(1);
-                String lname = rs.getString(2);
-                String phonenumber = rs.getString(2);
-                int ssn = rs.getInt(0);
-                String address = rs.getString(0);
-                String city = rs.getString(0);
-                int postalNumber = rs.getInt(0);
+                String fname = rs.getString(2);
+                String lname = rs.getString(3);
+                String phonenumber = rs.getString(7);
+                int ssn = rs.getInt(1);
+                String address = rs.getString(4);
+                String city = rs.getString(6);
+                int postalNumber = rs.getInt(5);
 
                 citizen.setAddress(address);
                 citizen.setCity(city);
@@ -159,6 +159,61 @@ public class SQLHandler {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+    
+    public Collection<IJournal> getJournals(IJournal base) {
+        Collection<IJournal> list = new ArrayList();
+           try (Connection db = comhandler.Connect()) {
+            Statement st = db.createStatement();
+            ResultSet rs = st.executeQuery(SQLGet.getAllJournals);
+            while (rs.next()) {
+                IJournal journal = base.clone();
+                int journalNo = rs.getInt(1);
+                String jName = rs.getNString(2);
+                String description = rs.getNString(3);
+
+                journal.setJournalNo(journalNo);
+                journal.setJournalName(jName);
+                journal.setJournalDescription(description);
+                list.add(base);
+            }
+            System.out.println("got journal");
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    public Collection<IAid> getAids(IAid base) {
+        Collection<IAid> list = new ArrayList();
+           try (Connection db = comhandler.Connect()) {
+            Statement st = db.createStatement();
+            ResultSet rs = st.executeQuery(SQLGet.getAllAids);
+            while (rs.next()) {
+                IAid aid = base.clone();
+                int aidNo = rs.getInt(1);
+                String aName = rs.getNString(2);
+                String description = rs.getNString(3);
+
+                aid.setAidNo(aidNo);
+                aid.setAidName(aName);
+                aid.setAidDescribsion(description);
+                list.add(base);
+            }
+            System.out.println("got journal");
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    
+    public boolean changeSystemUser(ISystemUser isu) {
+        
+        return false;
     }
 
 }

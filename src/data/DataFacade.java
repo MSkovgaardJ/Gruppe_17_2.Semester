@@ -52,4 +52,20 @@ public class DataFacade implements IDataFacede
     {
         dataHandler.getAid(aid);
     }
+
+    @Override
+    public Collection<IJournal> getJournals(IJournal base) {
+        
+        return dataHandler.getJournals(base);
+    }
+
+    @Override
+    public Collection<IAid> getAids(IAid base) {
+        return dataHandler.getAids(base);
+    }
+
+    @Override
+    public boolean changeSystemUser(ISystemUser isu) {
+        return dataHandler.changeSystemUser(isu);
+    }
 }

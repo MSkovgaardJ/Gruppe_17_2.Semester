@@ -1,6 +1,7 @@
 package logic;
 
 import common.IAid;
+import common.IJournal;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,7 +11,7 @@ import java.util.Collection;
  * @author Morten Skovgaard
  */
 
-public class Journal
+public class Journal implements IJournal
 {
     private int journalNo;
     private Citizen citizen;
@@ -25,6 +26,10 @@ public class Journal
         this.citizen = citizen;
         this.workerName = workerName;
         this.journalDescription = journalDescription;
+    }
+
+    private Journal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getJournalNo()
@@ -92,6 +97,21 @@ public class Journal
     public void removeAid(IAid aidNo)
     {
         aidsAppliedFor().remove(aidNo);
+    }
+    
+    public IJournal clone() {
+        IJournal journal = new Journal(journalNo, citizen, workerName, journalDescription);
+        return journal;
+    }
+
+    @Override
+    public void setJournalName(String jName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setJournalDescription(String description) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

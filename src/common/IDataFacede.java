@@ -20,5 +20,8 @@ public interface IDataFacede {
     public void getJournal(IJournal journal);
     public void getCitizen(ICitizen citizen); 
     public void getAid(IAid aidNo);
-    public Collection<ICitizen> getCitizens(ICitizen base);    
+    public Collection<ICitizen> getCitizens(ICitizen base);   
+    public Collection<IJournal> getJournals(IJournal base);
+    public Collection<IAid> getAids(IAid base);
+    public boolean changeSystemUser(ISystemUser isu);
 }

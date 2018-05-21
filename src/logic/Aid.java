@@ -50,5 +50,13 @@ public class Aid implements IAid
     {
         this.aidDescription = describsion;
     }
+    public IAid clone()
+    {
+        IAid aid = new Aid();
+        aid.setAidDescribsion(this.aidDescription);
+        aid.setAidName(this.aidName);
+        aid.setAidNo(this.aidNo);
+        return aid;
+    }
 
 }

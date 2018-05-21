@@ -28,4 +28,6 @@ public interface IAid
 
     public void setAidDescribsion(String describsion);
     
+    public IAid clone();
+    
 }
