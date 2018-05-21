@@ -25,7 +25,7 @@ public class SensumUdred {
         IUI ui = new ConsoleUI();
         ILogicFacade logic = new LogicFacade();
         IDataFacede data = new DataFacade();
-        logic.addData(data);
+        logic.setDataHandler(data);
         ui.addLogic(logic);  
         ui.Start();
         

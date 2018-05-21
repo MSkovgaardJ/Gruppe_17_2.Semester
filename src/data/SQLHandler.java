@@ -72,6 +72,31 @@ public class SQLHandler {
         } catch (Exception e) {
         }
     }
+    public Collection<IJournal> getAllJournalsFor(IJournal base, int ssn)
+    {
+         Collection<IJournal> list = new ArrayList();
+           try (Connection db = comhandler.Connect()) {
+            Statement st = db.createStatement();
+            ResultSet rs = st.executeQuery(SQLGet.getAllJournalsFor(ssn));
+            while (rs.next()) {
+                IJournal journal = base.clone();
+                int id = rs.getInt(1);
+                String jName = rs.getNString(2);
+                String description = rs.getNString(3);
+
+                journal.setID(id);
+                journal.setJournalName(jName);
+                journal.setJournalDescription(description);
+                list.add(base);
+            }
+            System.out.println("got journals for "+ssn);
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
 
     public void getCitizen(ICitizen citizen) {
         try (Connection db = comhandler.Connect()) {
@@ -168,11 +193,11 @@ public class SQLHandler {
             ResultSet rs = st.executeQuery(SQLGet.getAllJournals);
             while (rs.next()) {
                 IJournal journal = base.clone();
-                int journalNo = rs.getInt(1);
+                int id = rs.getInt(1);
                 String jName = rs.getNString(2);
                 String description = rs.getNString(3);
 
-                journal.setJournalNo(journalNo);
+                journal.setID(id);
                 journal.setJournalName(jName);
                 journal.setJournalDescription(description);
                 list.add(base);

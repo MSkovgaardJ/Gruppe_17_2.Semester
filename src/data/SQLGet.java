@@ -20,7 +20,11 @@ public class SQLGet
     public static String getJournal(int jno)
     {
         return "select * from Journal where JournalNumber=" + jno;
-    }    
+    }   
+    public static String getAllJournalsFor(int ssn)
+    {
+        return "select * from Journal, CitizenHas ";
+    }
     public static String getAid(int aidno){
         return "select * from Aid where AidNumber =" + aidno;
     }    

@@ -5,9 +5,6 @@
  */
 package common;
 
-import common.ICitizen;
-import common.IJournal;
-import common.ILoginToken;
 import java.util.Collection;
 
 /**
@@ -15,13 +12,18 @@ import java.util.Collection;
  * @author magnusm
  */
 public interface IDataFacede {
+    public void getJournal(IJournal journal);
+    public Collection<IJournal> getJournals(IJournal base);
+    public Collection<IJournal> getAllJournalsFor(IJournal base, int ssn);
+    
+    public void getCitizen(ICitizen citizen); 
+    public Collection<ICitizen> getCitizens(ICitizen base);   
+        
+    public void getAid(IAid aidNo);
+    public Collection<IAid> getAids(IAid base);
+    
+    public boolean changeSystemUser(ISystemUser isu);
     public boolean checkLogin(String username, String password);   
     public void getCredentials(ISystemUser user);
-    public void getJournal(IJournal journal);
-    public void getCitizen(ICitizen citizen); 
-    public void getAid(IAid aidNo);
-    public Collection<ICitizen> getCitizens(ICitizen base);   
-    public Collection<IJournal> getJournals(IJournal base);
-    public Collection<IAid> getAids(IAid base);
-    public boolean changeSystemUser(ISystemUser isu);
+    
 }
