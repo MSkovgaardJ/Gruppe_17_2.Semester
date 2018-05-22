@@ -99,7 +99,7 @@ public class ConsoleUI implements IUI {
     }
     private void systemMenu() {
         int i = -1;
-        while (i != 9) {
+        while (i != 0) {
             System.out.println(HELP_SYSTEM);
             i = getNumberInput();
             switch (i) {

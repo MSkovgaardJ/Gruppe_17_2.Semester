@@ -2,11 +2,8 @@ package logic;
 
 import common.IAid;
 import common.IJournal;
-import java.io.File;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Collection;
-
+import common.ICitizen;
 /**
  *
  * @author Morten Skovgaard
@@ -17,7 +14,10 @@ public class Journal implements IJournal, Comparable<Journal> {
     private Date date;
     private String status;
     private String JLocation;
+    private ICitizen citizen;
+    private IAid aid;
     //private Collection<IAid> Aids;
+    
 
     public Journal() {
     }       
@@ -29,6 +29,7 @@ public class Journal implements IJournal, Comparable<Journal> {
         j.setID(this.ID);
         j.setJournalLocation(this.JLocation);
         j.setStatus(this.status);
+        
         return j;
     }
 
@@ -55,6 +56,26 @@ public class Journal implements IJournal, Comparable<Journal> {
 
     @Override
     public String getJournalLocation() {return JLocation;}
+    
+    @Override
+    public ICitizen getCitizen() {return this.citizen;}
+    
+    @Override
+    public void setCitizen(ICitizen citizen) 
+    {
+        this.citizen = citizen;
+    }
+    
+    @Override
+    public void addAid(IAid aid) {this.aid = aid;}
+    
+    @Override
+    public void removeAid(IAid aid) 
+    {
+        this.removeAid(aid);
+    }
+    
+    
 
     @Override
     public int compareTo(Journal o) {
