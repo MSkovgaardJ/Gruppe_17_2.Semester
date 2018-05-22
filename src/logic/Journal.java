@@ -29,7 +29,8 @@ public class Journal implements IJournal, Comparable<Journal> {
         j.setID(this.ID);
         j.setJournalLocation(this.JLocation);
         j.setStatus(this.status);
-        
+        j.setCitizen(this.citizen);
+        j.addAid(this.aid);
         return j;
     }
 
