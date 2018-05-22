@@ -1,5 +1,6 @@
 package GUI;
 
+import com.sun.org.apache.bcel.internal.generic.IADD;
 import common.IAid;
 import common.ICitizen;
 import common.IJournal;
@@ -33,9 +34,9 @@ public class ConsoleUI implements IUI {
             + "type 2 to list all citizens          DONE\n"
             + "Type 3 to list all journals          DONE\n"
             + "\n"
-            + "Type 4 to list Aids              NOT DONE\n"
-            + "Type 5 to add Aid                NOT DONE\n"
-            + "Type 6 to edit Aid               NOT DONE\n"
+            + "Type 4 to list all Aid               DONE\n"
+            + "Type 5 to add a new Aid          NOT DONE\n"
+            + "Type 6 to edit a Aid             NOT DONE\n"
             + "\n"
             + "Type 7 to add a new System User  NOT DONE\n"
             + "Type 8 to edit a System User     NOT DONE\n"
@@ -116,6 +117,7 @@ public class ConsoleUI implements IUI {
                     break;
                 case 4:
                     // list Aid
+                    listAids();
                     break;
                 case 5:
                     // add aid
@@ -208,7 +210,15 @@ public class ConsoleUI implements IUI {
             System.out.println("ID :" + c.getID());
         }
     }
-
+    private void listAids()
+    {
+        Collection<IAid> list = getAids();
+        System.out.println("got : " + list.size() + " Aid's");
+        System.out.println("-------------------------------------------");
+        for (IAid c : list) {
+            System.out.println("Name: " + c.getAidName()+" Decription: "+c.getAidDescribsion());
+        }
+    }
     /*--------------------------------------------------------------------------
     Data Related
     --------------------------------------------------------------------------*/

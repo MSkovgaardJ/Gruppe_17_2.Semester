@@ -14,18 +14,27 @@ import java.util.Collection;
 public interface ILogicFacade {
 
     public void setDataHandler(IDataFacede dataHandler);
+    
     public void addCitizen(ICitizen citizen);
     public ICitizen getCitizen(int ssn);
     public Collection<ICitizen> getCitizens();
+    public void removeCitizen(ICitizen citizen);
     
 
+    public void getJournal(IJournal journal);
     public IJournal getJournal(int journalno);
     public Collection<IJournal> getJournals();
     public IJournal newJournal();
     public Collection<IJournal> getAllJournalsFor(int ssn);
+    public void removeJournal(IJournal journal);
     
     public IAid getAid(int aidno);
-        public Collection<IAid> getAids();
+    public Collection<IAid> getAids();
+    public void addAid(IAid aid);
+    public void removeAid(IAid aid);
+    
+    public void addSystemUser(ISystemUser isu);
+    public void removeSystemUser(ISystemUser isu);
     public boolean changeSystemUser(ISystemUser isu);
     public boolean login(String username, String password);
     public void logout();

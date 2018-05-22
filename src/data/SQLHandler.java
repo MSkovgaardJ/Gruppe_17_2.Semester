@@ -222,8 +222,7 @@ public class SQLHandler {
         }
         return list;
     }
-    public boolean changeSystemUser(ISystemUser isu) {
+    public void changeSystemUser(ISystemUser isu) {
 
-        return false;
     }
 }

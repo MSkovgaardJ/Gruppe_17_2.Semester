@@ -86,7 +86,7 @@ public class LogicFacade implements ILogicFacade {
 
     @Override
     public Collection<IAid> getAids() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return dataHandler.getAids(new Aid()); 
     }
 
     @Override
@@ -121,5 +121,40 @@ public class LogicFacade implements ILogicFacade {
 
     @Override
     public Collection<IJournal> getAllJournalsFor(int ssn) {return dataHandler.getAllJournalsFor(new Journal(), ssn);}
+
+    @Override
+    public void removeCitizen(ICitizen citizen) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void getJournal(IJournal journal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeJournal(IJournal journal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addAid(IAid aid) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeAid(IAid aid) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addSystemUser(ISystemUser isu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeSystemUser(ISystemUser isu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
