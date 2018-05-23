@@ -106,8 +106,8 @@ public class SQLHandler {
                 journal.setDate(date);
                 journal.setJournalLocation(journallocation);
                 
-                base = journal;
-                list.add(base);
+               
+                list.add(journal);
             }
             System.out.println("got journals");
             rs.close();
