@@ -50,7 +50,12 @@ public class DataFacade implements IDataFacede {
     @Override
     public Collection<IJournal> getAllJournalsFor(IJournal base, int ssn) {
         return dataHandler.getAllJournalsFor(base, ssn);
-    }      
+    }  
+    @Override
+    public Collection<IJournal> getJournalsForCiticen(IJournal base, int ssn)
+    {
+        return dataHandler.getJournalsForCitizen(base, ssn);
+    }    
     @Override
     public void getAid(IAid aid) {
         dataHandler.getAid(aid);
@@ -91,4 +96,6 @@ public class DataFacade implements IDataFacede {
     public void removeSystemUser(ISystemUser isu) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 }

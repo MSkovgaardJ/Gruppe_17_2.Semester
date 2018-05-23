@@ -25,7 +25,7 @@ public class LogicFacade implements ILogicFacade {
 
     @Override
     public void addCitizen(ICitizen citizen) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        addCitizen(citizen);
 
     }
 
@@ -155,6 +155,12 @@ public class LogicFacade implements ILogicFacade {
     @Override
     public void removeSystemUser(ISystemUser isu) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Collection<IJournal> getJournalsForCitizen(IJournal base, int ssn)
+    {
+        return dataHandler.getAllJournalsFor(base, ssn);
     }
 
 }

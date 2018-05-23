@@ -17,6 +17,7 @@ public interface IDataFacede {
     public Collection<IJournal> getAllJournalsFor(IJournal base, int ssn);
     public void addJournal(IJournal base);
     public void removeJournal(IJournal journal);
+    public Collection<IJournal>getJournalsForCiticen(IJournal base, int ssn);
     
     public void addCitizen(ICitizen citizen);
     public void removeCitizen(ICitizen citizen);

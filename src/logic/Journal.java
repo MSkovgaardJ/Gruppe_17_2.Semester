@@ -16,6 +16,7 @@ public class Journal implements IJournal, Comparable<Journal> {
     private String JLocation;
     private ICitizen citizen;
     private IAid aid;
+    private int ssn;
     //private Collection<IAid> Aids;
     
 
@@ -81,6 +82,12 @@ public class Journal implements IJournal, Comparable<Journal> {
     @Override
     public int compareTo(Journal o) {
         return Integer.compare(this.ID,o.ID);
+    }
+
+    @Override
+    public void setSSN(int ssn)
+    {
+        this.ssn = ssn;
     }
 }
  

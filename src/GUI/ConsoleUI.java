@@ -171,11 +171,16 @@ public class ConsoleUI implements IUI {
             citizen.setPostalNumber(postalNumber);
 
             addCitizen(citizen);
+        } else
+        {
+            System.out.println(getCitizen(ssn).getFirstName()+ getCitizen(ssn).getLastName());
         }
         IJournal journal = logicHandler.newJournal();
         System.out.println("Listing journals:");
-        Collection<IJournal> journals = logicHandler.getAllJournalsFor(ssn);
-        for (IJournal j : journals) {
+        Collection<IJournal> journals = logicHandler.getJournalsForCitizen(getJournal(ssn), ssn);
+        for (IJournal j : journals) 
+        {
+            journals.add(j);
             System.out.println("ID : " + j.getID());
         }
 
@@ -216,7 +221,7 @@ public class ConsoleUI implements IUI {
         System.out.println("got : " + list.size() + " Aid's");
         System.out.println("-------------------------------------------");
         for (IAid c : list) {
-            System.out.println("Name: " + c.getAidName()+" Decription: "+c.getAidDescribsion());
+            System.out.println("Name: \t" + c.getAidName()+"\t Decription: "+c.getAidDescribsion()+ "\t ID: "+c.getAidNo());
         }
     }
     /*--------------------------------------------------------------------------

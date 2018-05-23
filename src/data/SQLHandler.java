@@ -12,6 +12,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import sun.security.rsa.RSACore;
 
 /**
  *
@@ -232,15 +235,15 @@ public class SQLHandler {
             while (rs.next()) {
                 IAid aid = base.clone();
                 int aidNo = rs.getInt(1);
-                String aName = rs.getNString(2);
-                String description = rs.getNString(3);
+                String aName = rs.getString(2);
+                String description = rs.getString(3);
 
                 aid.setAidNo(aidNo);
                 aid.setAidName(aName);
                 aid.setAidDescribsion(description);
-                list.add(base);
+                list.add(aid);
             }
-            System.out.println("got journal");
+            System.out.println("got aids hæhæ");
             rs.close();
             st.close();
         } catch (SQLException e) {
@@ -248,5 +251,33 @@ public class SQLHandler {
         }
         return list;
     }
-
+public Collection<IJournal>getJournalsForCitizen(IJournal base, int ssn)
+{
+    
+    Collection<IJournal>list = new ArrayList<>();
+    try (Connection db = comhandler.Connect())
+    {
+        Statement st = db.createStatement();
+        ResultSet rs = st.executeQuery(SQLGet.getJournalsForCitizen(ssn));
+        while (rs.next())
+        {
+            IJournal journal = base.clone();
+            int journalNo = rs.getInt(2);
+            int SSN = rs.getInt(1);
+            
+            journal.setID(journalNo);
+            journal.setSSN(SSN);
+            
+            list.add(journal);
+            
+            System.out.println("Got citizen' journal's");
+            rs.close();
+            st.close();            
+        }
+    }   catch (SQLException e)
+        {
+            System.out.println(e);
+        }
+    return list;
+}
 }

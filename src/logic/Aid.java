@@ -42,7 +42,7 @@ public class Aid implements IAid
     @Override
     public void setAidName(String aname)
     {
-        this.aidName = aidName;
+        this.aidName = aname;
     }
 
     @Override
@@ -53,9 +53,9 @@ public class Aid implements IAid
     public IAid clone()
     {
         IAid aid = new Aid();
-        aid.setAidDescribsion(this.aidDescription);
-        aid.setAidName(this.aidName);
-        aid.setAidNo(this.aidNo);
+        aid.setAidDescribsion(aidDescription);
+        aid.setAidName(aidName);
+        aid.setAidNo(aidNo);
         return aid;
     }
 

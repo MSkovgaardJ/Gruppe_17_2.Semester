@@ -25,6 +25,11 @@ public class SQLGet
     {
         return "select * from Journal, CitizenHas ";
     }
+    
+    public static String getJournalsForCitizen(int ssn)
+    {
+        return "select * from citizenHas where SSN="+ssn;
+    }
     public static String getAid(int aidno){
         return "select * from Aid where AidNumber =" + aidno;
     }    

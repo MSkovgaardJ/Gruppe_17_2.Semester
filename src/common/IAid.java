@@ -24,7 +24,7 @@ public interface IAid
 
     public void setAidNo(int aidNo);
 
-    public void setAidName(String aname);
+    public void setAidName(String aName);
 
     public void setAidDescribsion(String describsion);
     

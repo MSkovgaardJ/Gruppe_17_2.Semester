@@ -16,6 +16,7 @@ public interface IJournal
     public void setDate(Date date);
     public void setJournalLocation(String Location);
     public void setCitizen(ICitizen citizen);
+    public void setSSN(int ssn);
     
     public int getID();
     public String getStatus();

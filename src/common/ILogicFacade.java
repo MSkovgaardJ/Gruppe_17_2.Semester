@@ -27,6 +27,7 @@ public interface ILogicFacade {
     public IJournal newJournal();
     public Collection<IJournal> getAllJournalsFor(int ssn);
     public void removeJournal(IJournal journal);
+    public Collection<IJournal>getJournalsForCitizen(IJournal base, int ssn);
     
     public IAid getAid(int aidno);
     public Collection<IAid> getAids();
