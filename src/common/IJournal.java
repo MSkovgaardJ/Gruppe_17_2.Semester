@@ -1,6 +1,7 @@
 package common;
 
 import java.sql.Date;
+import java.util.Collection;
 
 /**
  *
@@ -23,6 +24,7 @@ public interface IJournal
     public Date getDate();
     public String getJournalLocation();
     public ICitizen getCitizen();
+    public Collection<IAid>getAids(); 
     
     public void addAid(IAid aid);
     

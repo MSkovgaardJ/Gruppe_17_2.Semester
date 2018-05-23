@@ -35,11 +35,11 @@ public class ConsoleUI implements IUI {
             + "Type 3 to list all journals          DONE\n"
             + "\n"
             + "Type 4 to list all Aid               DONE\n"
-            + "Type 5 to add a new Aid          NOT DONE\n"
-            + "Type 6 to edit a Aid             NOT DONE\n"
+            + "Type 5 to add a new Aid          Not Implamentet\n"
+            + "Type 6 to edit a Aid             Not Implamentet\n"
             + "\n"
-            + "Type 7 to add a new System User  NOT DONE\n"
-            + "Type 8 to edit a System User     NOT DONE\n"
+            + "Type 7 to add a new System User  Not Implamentet\n"
+            + "Type 8 to edit a System User     Not Implamentet\n"
             + "Type 0 to logout                 NOT DONE\n";
     private final String HELP_JOURNAL = "\nJOURNALS MENU\n"
             + "Type 0 to return to system       NOT DONE\n";
@@ -176,11 +176,17 @@ public class ConsoleUI implements IUI {
             System.out.println(getCitizen(ssn).getFirstName()+ getCitizen(ssn).getLastName());
         }
         IJournal journal = logicHandler.newJournal();
+<<<<<<< HEAD
         System.out.println("Listing journals:");
         Collection<IJournal> journals = logicHandler.getJournalsForCitizen(getJournal(ssn), ssn);
         for (IJournal j : journals) 
         {
             journals.add(j);
+=======
+        System.out.println("Listing journals for: ");
+        Collection<IJournal> journals = logicHandler.getAllJournalsFor(ssn);
+        for (IJournal j : journals) {
+>>>>>>> Logic
             System.out.println("ID : " + j.getID());
         }
 
@@ -212,6 +218,7 @@ public class ConsoleUI implements IUI {
         System.out.println("got : " + list.size() + " journals's");
         System.out.println("-------------------------------------------");
         for (IJournal c : list) {
+            System.out.println(c.toString());
             System.out.println("ID :" + c.getID());
         }
     }
