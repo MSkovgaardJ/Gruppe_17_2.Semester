@@ -20,37 +20,51 @@ import sun.security.rsa.RSACore;
  *
  * @author magnusm
  */
-public class SQLHandler {
+public class SQLHandler
+{
 
     private IDBCom comhandler;
-    public SQLHandler() {
+
+    public SQLHandler()
+    {
         comhandler = new postgreSQLCom();
     }
-    public boolean checkLogin(String username, String password) {
+
+    public boolean checkLogin(String username, String password)
+    {
         boolean fund = false;
-        try (Connection db = comhandler.Connect()) {
+        try (Connection db = comhandler.Connect())
+        {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.checklogin(username, password));
-            if (rs.next()) {
+            if (rs.next())
+            {
                 if ((rs.getString(1).equalsIgnoreCase(username))
-                        && (rs.getString(2).equalsIgnoreCase(password))) {
+                        && (rs.getString(2).equalsIgnoreCase(password)))
+                {
                     System.out.println("found user");
                     fund = true;
                 }
             }
             rs.close();
             st.close();
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             System.out.println(e);
-        } finally {
+        } finally
+        {
             return fund;
         }
     }
-    public void getCredentials(ISystemUser user) {
-        try (Connection db = comhandler.Connect()) {
+
+    public void getCredentials(ISystemUser user)
+    {
+        try (Connection db = comhandler.Connect())
+        {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.getlogincredentials(user.getUserName(), user.getPassword()));
-            if (rs.next()) {
+            if (rs.next())
+            {
                 boolean isAdmin = rs.getBoolean(1);
                 boolean isCaseHandler = rs.getBoolean(2);
                 user.getClearance().setClearance(isAdmin, isCaseHandler);
@@ -59,21 +73,55 @@ public class SQLHandler {
             }
             rs.close();
             st.close();
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             System.out.println(e);
         }
-    }   
-    public void changeSystemUser(ISystemUser isu) {
-
-    }    
-    public Collection<IJournal> getAllJournalsFor(IJournal base, int ssn) {
-        return null;
     }
-    public void getJournal(IJournal journal) {
-        try (Connection db = comhandler.Connect()) {
+
+    public void changeSystemUser(ISystemUser isu)
+    {
+
+    }
+
+    public Collection<IJournal> getAllJournalsFor(IJournal base, int ssn)
+    {
+        Collection<IJournal> list = new ArrayList<>();
+        try (Connection db = comhandler.Connect())
+        {
+            Statement st = db.createStatement();
+            ResultSet rs = st.executeQuery(SQLGet.getJournalsForCitizen(ssn));
+            while (rs.next())
+            {
+                IJournal journal = base.clone();
+                int journalNo = rs.getInt(2);
+                int SSN = rs.getInt(1);
+
+                journal.setID(journalNo);
+                journal.setSSN(SSN);
+
+                list.add(journal);
+
+                System.out.println("Got citizen' journal's");
+                
+            }
+            rs.close();
+            st.close();
+        } catch (SQLException e)
+        {
+            System.out.println(e);
+        }
+        return list;
+    }
+
+    public void getJournal(IJournal journal)
+    {
+        try (Connection db = comhandler.Connect())
+        {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.getJournal(journal.getID()));
-            if (rs.next()) {
+            if (rs.next())
+            {
                 int ID = rs.getInt(0);
                 //boolean status = rs.getBoolean(1);
                 String journallocation = rs.getNString(2);
@@ -87,61 +135,72 @@ public class SQLHandler {
             }
             rs.close();
             st.close();
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             System.out.println(e);
 
         }
     }
-    public Collection<IJournal> getJournals(IJournal base) {
+
+    public Collection<IJournal> getJournals(IJournal base)
+    {
         Collection<IJournal> list = new ArrayList();
-        try (Connection db = comhandler.Connect()) {
+        try (Connection db = comhandler.Connect())
+        {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.getAllJournals);
-            while (rs.next()) {
+            while (rs.next())
+            {
                 IJournal journal = base.clone();
                 int id = rs.getInt(1);
                 String Status = rs.getString(2);
                 String journallocation = rs.getString(3);
-                Date date = rs.getDate(4);                
-                
+                Date date = rs.getDate(4);
+
                 journal.setStatus(Status);
                 journal.setID(id);
                 journal.setDate(date);
                 journal.setJournalLocation(journallocation);
-                
-               
+
                 list.add(journal);
             }
             System.out.println("got journals");
             rs.close();
             st.close();
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             System.out.println(e);
         }
         return list;
     }
+
     public void addJournal(IJournal j)
     {
-        try (Connection db = comhandler.Connect()) {
+        try (Connection db = comhandler.Connect())
+        {
             Statement st = db.createStatement();
-            st.executeQuery(SQLSet.addJournal(j.getID(), false, j.getJournalLocation(), j.getDate()));   
+            st.executeQuery(SQLSet.addJournal(j.getID(), false, j.getJournalLocation(), j.getDate()));
             System.out.println("added journal");
             ICitizen c = j.getCitizen();
-            st.executeQuery(SQLSet.addCitizen(c.getSSN(),c.getFirstName(),c.getLastName(),c.getAddress(),c.getPostalNumber(),c.getCity(),00700,"Paula"));
+            st.executeQuery(SQLSet.addCitizen(c.getSSN(), c.getFirstName(), c.getLastName(), c.getAddress(), c.getPostalNumber(), c.getCity(), 00700, "Paula"));
             System.out.println("added Citizen");
-            st.executeQuery(SQLSet.addCitizenJournalRelation(c.getSSN(),j.getID()));            
+            st.executeQuery(SQLSet.addCitizenJournalRelation(c.getSSN(), j.getID()));
             System.out.println("added relation.");
             st.close();
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             System.out.println(e);
         }
     }
-    
-    public void getCitizen(ICitizen citizen) {
-        try (Connection db = comhandler.Connect()) {
+
+    public void getCitizen(ICitizen citizen)
+    {
+        try (Connection db = comhandler.Connect())
+        {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.getCitizen(citizen.getSSN()));
-            if (rs.next()) {
+            if (rs.next())
+            {
                 String fname = rs.getString(2);
                 String lname = rs.getString(3);
                 String phonenumber = rs.getString(7);
@@ -158,21 +217,27 @@ public class SQLHandler {
                 citizen.setPhoneNumber(phonenumber);
                 citizen.setPostalNumber(postalNumber);
                 System.out.println("got citizen");
-            } else {
+            } else
+            {
                 citizen.setSSN(-1);
             }
             rs.close();
             st.close();
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             System.out.println(e);
         }
     }
-    public Collection<ICitizen> getCitizens(ICitizen base) {
+
+    public Collection<ICitizen> getCitizens(ICitizen base)
+    {
         Collection<ICitizen> list = new ArrayList<>();
-        try (Connection db = comhandler.Connect()) {
+        try (Connection db = comhandler.Connect())
+        {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.getAllCitizens);
-            while (rs.next()) {
+            while (rs.next())
+            {
                 ICitizen citizen = base.clone();
                 String fname = rs.getString(2);
                 String lname = rs.getString(3);
@@ -196,21 +261,26 @@ public class SQLHandler {
             System.out.println("got Citizens");
             rs.close();
             st.close();
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             System.out.println(e);
         }
         return list;
     }
+
     public void addCitizen(ICitizen citizen)
     {
-        
+
     }
-    
-    public void getAid(IAid aid) {
-        try (Connection db = comhandler.Connect()) {
+
+    public void getAid(IAid aid)
+    {
+        try (Connection db = comhandler.Connect())
+        {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.getAid(aid.getAidNo()));
-            if (rs.next()) {
+            if (rs.next())
+            {
                 int aidNo = rs.getInt(1);
                 String aname = rs.getNString(2);
                 String describsion = rs.getNString(3);
@@ -223,16 +293,21 @@ public class SQLHandler {
             }
             rs.close();
             st.close();
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             System.out.println(e);
         }
-    }    
-    public Collection<IAid> getAids(IAid base) {
+    }
+
+    public Collection<IAid> getAids(IAid base)
+    {
         Collection<IAid> list = new ArrayList();
-        try (Connection db = comhandler.Connect()) {
+        try (Connection db = comhandler.Connect())
+        {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.getAllAids);
-            while (rs.next()) {
+            while (rs.next())
+            {
                 IAid aid = base.clone();
                 int aidNo = rs.getInt(1);
                 String aName = rs.getString(2);
@@ -246,38 +321,11 @@ public class SQLHandler {
             System.out.println("got aids hæhæ");
             rs.close();
             st.close();
-        } catch (SQLException e) {
+        } catch (SQLException e)
+        {
             System.out.println(e);
         }
         return list;
     }
-public Collection<IJournal>getJournalsForCitizen(IJournal base, int ssn)
-{
-    
-    Collection<IJournal>list = new ArrayList<>();
-    try (Connection db = comhandler.Connect())
-    {
-        Statement st = db.createStatement();
-        ResultSet rs = st.executeQuery(SQLGet.getJournalsForCitizen(ssn));
-        while (rs.next())
-        {
-            IJournal journal = base.clone();
-            int journalNo = rs.getInt(2);
-            int SSN = rs.getInt(1);
-            
-            journal.setID(journalNo);
-            journal.setSSN(SSN);
-            
-            list.add(journal);
-            
-            System.out.println("Got citizen' journal's");
-            rs.close();
-            st.close();            
-        }
-    }   catch (SQLException e)
-        {
-            System.out.println(e);
-        }
-    return list;
-}
+
 }

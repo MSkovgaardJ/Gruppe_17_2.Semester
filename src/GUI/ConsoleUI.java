@@ -175,21 +175,34 @@ public class ConsoleUI implements IUI {
         {
             System.out.println(getCitizen(ssn).getFirstName()+ getCitizen(ssn).getLastName());
         }
-        IJournal journal = logicHandler.newJournal();
+        IJournal journal = null;
 
         System.out.println("Listing journals:");
-        Collection<IJournal> journals = logicHandler.getJournalsForCitizen(getJournal(ssn));
+        Collection<IJournal> journals = logicHandler.getAllJournalsFor(ssn);
         for (IJournal j : journals) 
         {
-            journals.add(j);
-
         System.out.println("Listing journals for: ");
-       
-        
 
             System.out.println("ID : " + j.getID());
         }
-
+        System.out.print("Do you want to make a new journal for the citizan ? y/n");
+        String respons = getStringInput();
+        if(respons.contains("y"))
+        {
+            
+        } else
+        {
+            System.out.print("Type ID of journal you want to work on: ");
+            int IDrespons = getNumberInput();
+            for (IJournal jj : journals)
+            {
+                if(jj.getID() == IDrespons)
+                    journal = jj;
+            }
+            if(journal != null)
+                System.out.println("Loaded journal" );
+            //Open journal word ark
+        }
         System.out.println("Return line.");
         
     }
