@@ -25,12 +25,12 @@ public class Journal implements IJournal, Comparable<Journal> {
     @Override
     public IJournal clone() {
         IJournal j = new Journal();
-        j.setDate(this.date);
-        j.setID(this.ID);
-        j.setJournalLocation(this.JLocation);
-        j.setStatus(this.status);
-        j.setCitizen(this.citizen);
-        j.addAid(this.aid);
+        j.setDate(date);
+        j.setID(ID);
+        j.setJournalLocation(JLocation);
+        j.setStatus(status);
+        j.setCitizen(citizen);
+        j.addAid(aid);
         return j;
     }
 

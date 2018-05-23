@@ -101,10 +101,12 @@ public class SQLHandler {
                 String journallocation = rs.getString(3);
                 Date date = rs.getDate(4);                
                 
+                journal.setStatus(Status);
                 journal.setID(id);
                 journal.setDate(date);
                 journal.setJournalLocation(journallocation);
-
+                
+                base = journal;
                 list.add(base);
             }
             System.out.println("got journals");
