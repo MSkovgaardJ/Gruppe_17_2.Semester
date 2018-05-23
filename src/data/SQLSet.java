@@ -30,4 +30,10 @@ public class SQLSet {
         return "Insert into Citizenhas \n"
                 + "values('" + ssn + "','" + jid +"');";
     }
+    
+    public static String addAidtoJournal(int aidnumber, int jid){
+        
+        return "insert into appliesFor \n" 
+                +"values(' " + aidnumber + "','" + jid + "');";
+    }
 }
