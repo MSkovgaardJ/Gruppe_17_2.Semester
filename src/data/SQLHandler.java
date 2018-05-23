@@ -34,7 +34,6 @@ public class SQLHandler {
                     System.out.println("found user");
                     fund = true;
                 }
-
             }
             rs.close();
             st.close();
@@ -60,7 +59,10 @@ public class SQLHandler {
         } catch (SQLException e) {
             System.out.println(e);
         }
-    }
+    }   
+    public void changeSystemUser(ISystemUser isu) {
+
+    }    
     public Collection<IJournal> getAllJournalsFor(IJournal base, int ssn) {
         return null;
     }
@@ -87,6 +89,49 @@ public class SQLHandler {
 
         }
     }
+    public Collection<IJournal> getJournals(IJournal base) {
+        Collection<IJournal> list = new ArrayList();
+        try (Connection db = comhandler.Connect()) {
+            Statement st = db.createStatement();
+            ResultSet rs = st.executeQuery(SQLGet.getAllJournals);
+            while (rs.next()) {
+                IJournal journal = base.clone();
+                int id = rs.getInt(1);
+                String Status = rs.getString(2);
+                String journallocation = rs.getString(3);
+                Date date = rs.getDate(4);                
+                
+                journal.setID(id);
+                journal.setDate(date);
+                journal.setJournalLocation(journallocation);
+
+                list.add(base);
+            }
+            System.out.println("got journals");
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return list;
+    }
+    public void addJournal(IJournal j)
+    {
+        try (Connection db = comhandler.Connect()) {
+            Statement st = db.createStatement();
+            st.executeQuery(SQLSet.addJournal(j.getID(), false, j.getJournalLocation(), j.getDate()));   
+            System.out.println("added journal");
+            ICitizen c = j.getCitizen();
+            st.executeQuery(SQLSet.addCitizen(c.getSSN(),c.getFirstName(),c.getLastName(),c.getAddress(),c.getPostalNumber(),c.getCity(),00700,"Paula"));
+            System.out.println("added Citizen");
+            st.executeQuery(SQLSet.addCitizenJournalRelation(c.getSSN(),j.getID()));            
+            System.out.println("added relation.");
+            st.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
     public void getCitizen(ICitizen citizen) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
@@ -151,6 +196,11 @@ public class SQLHandler {
         }
         return list;
     }
+    public void addCitizen(ICitizen citizen)
+    {
+        
+    }
+    
     public void getAid(IAid aid) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
@@ -171,33 +221,7 @@ public class SQLHandler {
         } catch (SQLException e) {
             System.out.println(e);
         }
-    }
-    public Collection<IJournal> getJournals(IJournal base) {
-        Collection<IJournal> list = new ArrayList();
-        try (Connection db = comhandler.Connect()) {
-            Statement st = db.createStatement();
-            ResultSet rs = st.executeQuery(SQLGet.getAllJournals);
-            while (rs.next()) {
-                IJournal journal = base.clone();
-                int id = rs.getInt(1);
-                String Status = rs.getString(2);
-                String journallocation = rs.getString(3);
-                Date date = rs.getDate(4);                
-                
-                journal.setID(id);
-                journal.setDate(date);
-                journal.setJournalLocation(journallocation);
-
-                list.add(base);
-            }
-            System.out.println("got journals");
-            rs.close();
-            st.close();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return list;
-    }
+    }    
     public Collection<IAid> getAids(IAid base) {
         Collection<IAid> list = new ArrayList();
         try (Connection db = comhandler.Connect()) {
@@ -222,7 +246,5 @@ public class SQLHandler {
         }
         return list;
     }
-    public void changeSystemUser(ISystemUser isu) {
 
-    }
 }

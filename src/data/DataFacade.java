@@ -60,8 +60,8 @@ public class DataFacade implements IDataFacede {
         return dataHandler.getAids(base);
     }
     @Override
-    public void addJournal(IJournal base) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addJournal(IJournal base) { 
+        dataHandler.addJournal(base);
     }
     @Override
     public void removeJournal(IJournal journal) {
