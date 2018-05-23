@@ -163,4 +163,10 @@ public class LogicFacade implements ILogicFacade {
         return dataHandler.getAllJournalsFor(base, ssn);
     }
 
+    @Override
+    public Collection<IJournal> getJournalsForCitizen(IJournal journal)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

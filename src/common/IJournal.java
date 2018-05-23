@@ -23,8 +23,7 @@ public interface IJournal
     public String getStatus();
     public Date getDate();
     public String getJournalLocation();
-    public ICitizen getCitizen();
-    public Collection<IAid>getAids(); 
+    public ICitizen getCitizen(); 
     
     public void addAid(IAid aid);
     

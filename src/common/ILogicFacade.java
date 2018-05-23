@@ -40,4 +40,6 @@ public interface ILogicFacade {
     public boolean login(String username, String password);
     public void logout();
     public void getCredentials(String username, String password, ILoginToken login);
+
+    public Collection<IJournal> getJournalsForCitizen(IJournal journal);
 }

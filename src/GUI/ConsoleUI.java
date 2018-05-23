@@ -176,23 +176,24 @@ public class ConsoleUI implements IUI {
             System.out.println(getCitizen(ssn).getFirstName()+ getCitizen(ssn).getLastName());
         }
         IJournal journal = logicHandler.newJournal();
-<<<<<<< HEAD
+
         System.out.println("Listing journals:");
-        Collection<IJournal> journals = logicHandler.getJournalsForCitizen(getJournal(ssn), ssn);
+        Collection<IJournal> journals = logicHandler.getJournalsForCitizen(getJournal(ssn));
         for (IJournal j : journals) 
         {
             journals.add(j);
-=======
+
         System.out.println("Listing journals for: ");
-        Collection<IJournal> journals = logicHandler.getAllJournalsFor(ssn);
-        for (IJournal j : journals) {
->>>>>>> Logic
+       
+        
+
             System.out.println("ID : " + j.getID());
         }
 
         System.out.println("Return line.");
+        
     }
-    private boolean tryLogin() {
+        private boolean tryLogin() {
         System.out.println(HELP_LOGIN);
         System.out.print("Enter Username: ");
         String username = input.next();
@@ -218,7 +219,6 @@ public class ConsoleUI implements IUI {
         System.out.println("got : " + list.size() + " journals's");
         System.out.println("-------------------------------------------");
         for (IJournal c : list) {
-            System.out.println(c.toString());
             System.out.println("ID :" + c.getID());
         }
     }

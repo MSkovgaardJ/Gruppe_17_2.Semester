@@ -78,15 +78,7 @@ public class Journal implements IJournal, Comparable<Journal> {
     {
         this.removeAid(aid);
     }
-    
-    @Override
-    public Collection<IAid>getAids() 
-    {
-        Collection<IAid>aid = new ArrayList<>();
-        aid = null;
-        aid.add(this.aid);
-        return aid;
-    }
+   
     
 
     @Override
