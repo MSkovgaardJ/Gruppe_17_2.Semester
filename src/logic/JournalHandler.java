@@ -1,25 +1,46 @@
 package logic;
 
+import common.ICitizen;
+import common.IJournal;
+
 /**
  *
  * @author Morten Skovgaard
  */
+public class JournalHandler {
 
-public class JournalHandler
-{
-    private Journal activeJournal;   
-    public Journal newJournal(){
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-   
-   }   
-    public Citizen newCitizen(){
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-   
-   }    
-    public boolean savaJournal(){
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-   }   
-    public Journal findJournal(){
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-   }
+    private IJournal activeJournal;
+    private ICitizen activeCitizen;
+
+    public IJournal newJournal() {
+        IJournal j = new Journal();
+        this.activeJournal = j;
+        return j;
+    }
+
+    public ICitizen newCitizen() {
+        ICitizen c = new Citizen();
+        this.activeCitizen = c;
+        return c;
+    }
+    public IJournal getActiveJournal()
+    {
+        return activeJournal;
+    }
+    public ICitizen getActiveCitizen()
+    {
+        return activeCitizen;
+    }
+
+    public void setActiveJournal(IJournal activeJournal) {
+        this.activeJournal = activeJournal;
+    }
+
+    public void setActiveCitizen(ICitizen activeCitizen) {
+        this.activeCitizen = activeCitizen;
+    }
+
+    public void openJournalDiscription() {
+
+    }
 }

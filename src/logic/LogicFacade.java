@@ -21,13 +21,16 @@ public class LogicFacade implements ILogicFacade {
 
     private IDataFacede dataHandler;
     private SystemUser User;
-    private JournalHandler JH;
-
+    private JournalHandler handlerOfJournals;
+    public LogicFacade()
+    {
+        handlerOfJournals = new JournalHandler();
+    }
     // -------------------- Citizen --------------------------------------------
     @Override
-    public void addCitizen(ICitizen citizen) {
-        addCitizen(citizen);
-
+    public void saveCitizen() {
+      ICitizen c = handlerOfJournals.getActiveCitizen();
+      dataHandler.addCitizen(c);
     }
     @Override
     public boolean findCitizen(int ssn) {
@@ -41,31 +44,31 @@ public class LogicFacade implements ILogicFacade {
         ICitizen citizen = new Citizen();
         citizen.setSSN(ssn);
         dataHandler.getCitizen(citizen);
+        handlerOfJournals.setActiveCitizen(citizen);
         return citizen;
     }
-
     @Override
     public Collection<ICitizen> getCitizens() {
         return dataHandler.getCitizens(new Citizen());
 
     }
-
     @Override
     public ICitizen newCitizen() {
-        return new Citizen();
+        return handlerOfJournals.newCitizen();
     }
-
     @Override
     public void removeCitizen(ICitizen citizen) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }  
+    @Override
+    public ICitizen getActiveCitizen() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     // -------------------- Journal --------------------------------------------
     @Override
-    public Collection<IJournal> getJournals() {
+    public Collection<IJournal> getJournals() {        
         return dataHandler.getJournals(new Journal());
     }
-
     @Override
     public IJournal newJournal() {
         // a list of all journals
@@ -85,28 +88,39 @@ public class LogicFacade implements ILogicFacade {
         // add 1 to it
         jno++;
         // makes a new jouranl
-        IJournal journal = new Journal();
+        IJournal journal = handlerOfJournals.newJournal();
         // sets new id 
         journal.setID(jno);
         // returns new journal.
         return journal;
     }
-
+    @Override
+    public void saveJournal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     @Override
     public Collection<IJournal> getAllJournalsFor(int ssn) {
         return dataHandler.getAllJournalsFor(new Journal(), ssn);
     }
-
     @Override
-    public void getJournal(IJournal journal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public IJournal getJournal(int jno) {
+        IJournal j = getJournal(jno);
+        handlerOfJournals.setActiveJournal(j);
+        handlerOfJournals.setActiveCitizen(j.getCitizen());
+        return j;        
     }
-
     @Override
     public void removeJournal(IJournal journal) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    @Override
+    public IJournal getActiveJournal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    @Override
+    public void openJournalDiscription() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     // -------------------- AID ------------------------------------------------
     @Override
     public IAid getAid(int aidNo) {
@@ -115,38 +129,31 @@ public class LogicFacade implements ILogicFacade {
         dataHandler.getAid(gAid);
         return gAid;
     }
-
     @Override
     public Collection<IAid> getAids() {
         return dataHandler.getAids(new Aid());
     }
-
     @Override
     public void addAid(IAid aid) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     @Override
     public void removeAid(IAid aid) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     @Override
     public void addSystemUser(ISystemUser isu) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     @Override
     public void removeSystemUser(ISystemUser isu) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     // -------------------- System ---------------------------------------------
     @Override
-    public boolean changeSystemUser(ISystemUser isu) {
+    public void changeSystemUser(ISystemUser isu) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     @Override
     public boolean login(String username, String password) {
         if (dataHandler.checkLogin(username, password)) {
@@ -156,22 +163,16 @@ public class LogicFacade implements ILogicFacade {
         }
         return false;
     }
-
     @Override
     public void getCredentials(String username, String password, ILoginToken login) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     @Override
     public void logout() {
         this.User = null;
     }
-
     @Override
     public void setDataHandler(IDataFacede dataHandler) {
         this.dataHandler = dataHandler;
-    }
-
-
-
+    }    
 }
