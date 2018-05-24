@@ -15,19 +15,18 @@ public interface ILogicFacade {
 
     public void setDataHandler(IDataFacede dataHandler);
     
+    public ICitizen newCitizen();
     public void addCitizen(ICitizen citizen);
     public ICitizen getCitizen(int ssn);
+    public boolean findCitizen(int ssn);
     public Collection<ICitizen> getCitizens();
-    public void removeCitizen(ICitizen citizen);
-    
+    public void removeCitizen(ICitizen citizen);    
 
     public void getJournal(IJournal journal);
-    public IJournal getJournal(int journalno);
     public Collection<IJournal> getJournals();
     public IJournal newJournal();
     public Collection<IJournal> getAllJournalsFor(int ssn);
     public void removeJournal(IJournal journal);
-    public Collection<IJournal>getJournalsForCitizen(IJournal base, int ssn);
     
     public IAid getAid(int aidno);
     public Collection<IAid> getAids();
@@ -41,5 +40,4 @@ public interface ILogicFacade {
     public void logout();
     public void getCredentials(String username, String password, ILoginToken login);
 
-    public Collection<IJournal> getJournalsForCitizen(IJournal journal);
 }

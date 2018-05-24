@@ -23,12 +23,19 @@ public class LogicFacade implements ILogicFacade {
     private SystemUser User;
     private JournalHandler JH;
 
+    // -------------------- Citizen --------------------------------------------
     @Override
     public void addCitizen(ICitizen citizen) {
         addCitizen(citizen);
 
     }
-
+    @Override
+    public boolean findCitizen(int ssn) {
+        ICitizen c = new Citizen();
+        c.setSSN(ssn);
+        dataHandler.getCitizen(c);
+        return c.getSSN() != -1; // found a citizen.    
+    }
     @Override
     public ICitizen getCitizen(int ssn) {
         ICitizen citizen = new Citizen();
@@ -40,16 +47,23 @@ public class LogicFacade implements ILogicFacade {
     @Override
     public Collection<ICitizen> getCitizens() {
         return dataHandler.getCitizens(new Citizen());
+
     }
 
+    @Override
+    public ICitizen newCitizen() {
+        return new Citizen();
+    }
+
+    @Override
+    public void removeCitizen(ICitizen citizen) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    // -------------------- Journal --------------------------------------------
     @Override
     public Collection<IJournal> getJournals() {
         return dataHandler.getJournals(new Journal());
-    }
-
-    @Override
-    public IJournal getJournal(int journalno) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -64,8 +78,10 @@ public class LogicFacade implements ILogicFacade {
             }
         });
         // get the id of the last journal
-        int jno =-1;
-        if(!list.isEmpty()) jno= list.get(list.size() - 1).getID();
+        int jno = -1;
+        if (!list.isEmpty()) {
+            jno = list.get(list.size() - 1).getID();
+        }
         // add 1 to it
         jno++;
         // makes a new jouranl
@@ -77,6 +93,22 @@ public class LogicFacade implements ILogicFacade {
     }
 
     @Override
+    public Collection<IJournal> getAllJournalsFor(int ssn) {
+        return dataHandler.getAllJournalsFor(new Journal(), ssn);
+    }
+
+    @Override
+    public void getJournal(IJournal journal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeJournal(IJournal journal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    // -------------------- AID ------------------------------------------------
+    @Override
     public IAid getAid(int aidNo) {
         IAid gAid = new Aid();
         gAid.setAidNo(aidNo);
@@ -86,9 +118,30 @@ public class LogicFacade implements ILogicFacade {
 
     @Override
     public Collection<IAid> getAids() {
-        return dataHandler.getAids(new Aid()); 
+        return dataHandler.getAids(new Aid());
     }
 
+    @Override
+    public void addAid(IAid aid) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeAid(IAid aid) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addSystemUser(ISystemUser isu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeSystemUser(ISystemUser isu) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    // -------------------- System ---------------------------------------------
     @Override
     public boolean changeSystemUser(ISystemUser isu) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -119,54 +172,6 @@ public class LogicFacade implements ILogicFacade {
         this.dataHandler = dataHandler;
     }
 
-    @Override
-    public Collection<IJournal> getAllJournalsFor(int ssn) {return dataHandler.getAllJournalsFor(new Journal(), ssn);}
 
-    @Override
-    public void removeCitizen(ICitizen citizen) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void getJournal(IJournal journal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeJournal(IJournal journal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void addAid(IAid aid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeAid(IAid aid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void addSystemUser(ISystemUser isu) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeSystemUser(ISystemUser isu) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Collection<IJournal> getJournalsForCitizen(IJournal base, int ssn)
-    {
-        return dataHandler.getAllJournalsFor(base, ssn);
-    }
-
-    @Override
-    public Collection<IJournal> getJournalsForCitizen(IJournal journal)
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }
