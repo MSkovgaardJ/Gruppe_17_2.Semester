@@ -12,10 +12,11 @@ import java.util.Collection;
  * @author magnusm
  */
 public interface IDataFacede {
-    public void getJournal(IJournal journal);
+    public void getJournal(IJournal journal, ICitizen citizen);
     public Collection<IJournal> getJournals(IJournal base);
     public Collection<IJournal> getAllJournalsFor(IJournal base, int ssn);
     public void addJournal(IJournal base);
+    public void saveJournal(IJournal journal);
     public void removeJournal(IJournal journal);
     
     public void addCitizen(ICitizen citizen);

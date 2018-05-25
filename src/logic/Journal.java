@@ -23,6 +23,7 @@ public class Journal implements IJournal, Comparable<Journal> {
     
 
     public Journal() {
+        this.citizen = new Citizen();
     }       
 
     @Override

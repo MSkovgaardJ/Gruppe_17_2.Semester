@@ -15,9 +15,15 @@ public class SQLSet {
                 + "values('" + ssn + "','" + firstname + "','" + lastname + "','" + address + "','" + postalnumber + "','" + city + "','" + phonenumber + "','" + contactperson + "');";
     }
 
-    public static  String addJournal(int journalnumber, boolean status, String journallocation, Date date) {
+    public static  String addJournal(int journalnumber, int status, String journallocation, Date date) {
         return "Insert into journal \n"
-                + "values('" + journalnumber + "','" + status + "','" + journallocation + "','" + date + "');";
+                + "values('" + journalnumber + "', '" + status + "', '" + journallocation + "', '" + date + "');";
+    }
+    public static  String saveJournal(int journalnumber, int status, String journallocation, Date date) {
+        return "update journal "
+                + "set Status = '"+status+"', Journallocation= '"+journallocation+"', "
+                + "Date= '"+date+"' "
+                + "WHERE JournalNumber = "+journalnumber; 
     }
 
     public static  String addAid(int aidnumber, String name, String description) {

@@ -40,8 +40,8 @@ public class DataFacade implements IDataFacede {
         return dataHandler.getCitizens(base);
     }    
     @Override
-    public void getJournal(IJournal journal) {
-        dataHandler.getJournal(journal);
+    public void getJournal(IJournal journal, ICitizen citizen) {
+        dataHandler.getJournal(journal,citizen);
     }
     @Override
     public Collection<IJournal> getJournals(IJournal base) {
@@ -61,8 +61,12 @@ public class DataFacade implements IDataFacede {
         return dataHandler.getAids(base);
     }
     @Override
-    public void addJournal(IJournal base) { 
+    public void addJournal(IJournal base) {
         dataHandler.addJournal(base);
+    }
+        @Override
+    public void saveJournal(IJournal journal) {
+        dataHandler.saveJournal(journal);
     }
     @Override
     public void removeJournal(IJournal journal) {
@@ -92,6 +96,8 @@ public class DataFacade implements IDataFacede {
     public void removeSystemUser(ISystemUser isu) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
 
     
 }

@@ -45,7 +45,8 @@ public class ConsoleUI implements IUI {
             + "----------------------------------------------\n"
             + "Type 1 to open a journal         NOT DONE\n"
             + "Type 2 to edit a journal         NOT DONE\n"
-            + "Type 0 to return to system       NOT DONE\n";
+            + "Type 3 to view a journals info       DONE\n"
+            + "Type 0 to return to system           DONE\n";
     /*--------------------------------------------------------------------------
     UI Related
     --------------------------------------------------------------------------*/
@@ -149,52 +150,66 @@ public class ConsoleUI implements IUI {
         }
     }
     private void journalMenu() {
-        System.out.println(HELP_JOURNAL);
-        System.out.print("input : ");
-        int i = getNumberInput();
-        while (i != 0) {
-            
-            ICitizen citizen = null;
-            IJournal journal = null;
-            cmdBreak();
-            System.out.print("please enter SSN of Citizen : ");
-            int ssn = getNumberInput();
-            if (!logicHandler.findCitizen(ssn)) {       
-                cmdBreak();
-                System.out.println("no citizen found, adding a new on now");
-                cmdBreak();
-                addCitizen(); 
-                cmdBreak();
-            }
-            citizen = getCitizen(ssn); 
-         
-            Collection<IJournal> journals = logicHandler.getAllJournalsFor(ssn);
-            cmdBreak();
-            System.out.println("Listing journals for: "+ ssn);
-                      
-            
-            for (IJournal j : journals) {
-   
-                System.out.println("ID : " + j.getID());
-            }
-            System.out.println("Do you want to make a new journal for the citizan ? y/n");
+        int i = -1;
+        while (i != 0) {        
+            System.out.println(HELP_JOURNAL);
             System.out.print("input : ");
-            String respons = getStringInput();
-            if (respons.contains("y")) {
-
-            } else {
-                System.out.print("Type ID of journal you want to work on: ");
-                int IDrespons = getNumberInput();
-                for (IJournal jj : journals) {
-                    if (jj.getID() == IDrespons) {
-                       journal = logicHandler.getJournal(IDrespons);
+            i = getNumberInput();            
+            switch (i)
+            {
+                case 1:
+                    ICitizen citizen = null;
+                    IJournal journal = null;
+                    cmdBreak();
+                    System.out.print("please enter SSN of Citizen : ");
+                    int ssn = getNumberInput();
+                    if (!logicHandler.findCitizen(ssn)) {       
+                        cmdBreak();
+                        System.out.println("no citizen found, adding a new on now");
+                        cmdBreak();
+                        addCitizen(); 
+                        cmdBreak();
                     }
-                }
-                if (journal != null) {
-                    System.out.println("Loaded journal");
-                    //Open journal word ark
-                }                
-            }
+                    citizen = getCitizen(ssn); 
+
+                    Collection<IJournal> journals = logicHandler.getAllJournalsFor(ssn);
+                    cmdBreak();
+                    System.out.println("Listing journals for: "+ ssn);
+
+
+                    for (IJournal j : journals) {
+
+                        System.out.println("ID : " + j.getID());
+                    }
+                    System.out.println("Do you want to make a new journal for the citizan ? y/n");
+                    System.out.print("input : ");
+                    String respons = getStringInput();
+                    if (respons.contains("y")) {
+
+                    } else {
+                        System.out.print("Type ID of journal you want to work on: ");
+                        int IDrespons = getNumberInput();
+                        for (IJournal jj : journals) {
+                            if (jj.getID() == IDrespons) {
+                               journal = logicHandler.getJournal(IDrespons);
+                            }
+                        }
+                        if (journal != null) {
+                            System.out.println("Loaded journal");
+                            logicHandler.openJournalDiscription();
+                        }                
+                    }
+                    break;
+                case 3:
+                    System.out.print("Type ID of journal you want to view: ");
+                    int id = getNumberInput();
+                    IJournal c = logicHandler.getJournal(id);
+                    System.out.println("Journal No           : " +c.getID());
+                    System.out.println("Journal Location     : " +c.getJournalLocation());
+                case 0:
+                    // does nothing.
+                    break;
+            }            
             System.out.println("Return line.");
         }
     }

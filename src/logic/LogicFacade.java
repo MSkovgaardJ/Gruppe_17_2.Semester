@@ -43,9 +43,12 @@ public class LogicFacade implements ILogicFacade {
     public ICitizen getCitizen(int ssn) {
         ICitizen citizen = new Citizen();
         citizen.setSSN(ssn);
+        if(citizen.getSSN() !=-1){
         dataHandler.getCitizen(citizen);
         handlerOfJournals.setActiveCitizen(citizen);
         return citizen;
+        }
+        return null;
     }
     @Override
     public Collection<ICitizen> getCitizens() {
@@ -96,7 +99,8 @@ public class LogicFacade implements ILogicFacade {
     }
     @Override
     public void saveJournal() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Saving journal ID : " +handlerOfJournals.getActiveJournal().getID());
+        dataHandler.saveJournal(handlerOfJournals.getActiveJournal());
     }
     @Override
     public Collection<IJournal> getAllJournalsFor(int ssn) {
@@ -104,10 +108,16 @@ public class LogicFacade implements ILogicFacade {
     }
     @Override
     public IJournal getJournal(int jno) {
-        IJournal j = getJournal(jno);
-        handlerOfJournals.setActiveJournal(j);
-        handlerOfJournals.setActiveCitizen(j.getCitizen());
-        return j;        
+        IJournal j = new Journal();
+        j.setID(jno);
+        dataHandler.getJournal(j,j.getCitizen());
+        if(j.getID()!=-1)
+        {
+            handlerOfJournals.setActiveJournal(j);
+            handlerOfJournals.setActiveCitizen(j.getCitizen());
+            return j;        
+        }
+        return null;
     }
     @Override
     public void removeJournal(IJournal journal) {
@@ -119,7 +129,8 @@ public class LogicFacade implements ILogicFacade {
     }
     @Override
     public void openJournalDiscription() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        handlerOfJournals.openJournalDiscription();
+        saveJournal();
     }
     // -------------------- AID ------------------------------------------------
     @Override
