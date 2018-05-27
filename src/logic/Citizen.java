@@ -8,7 +8,7 @@ import common.ICitizen;
  */
 public class Citizen implements ICitizen {
     private ICitizen contactPerson;
-    private String phoneNumber;
+    private int phoneNumber;
     private String firstName;
     private String lastName;
     private int SSN;
@@ -22,7 +22,7 @@ public class Citizen implements ICitizen {
     }
 
     @Override
-    public String getPhoneNumber() {
+    public int getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -62,7 +62,7 @@ public class Citizen implements ICitizen {
     }
 
     @Override
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

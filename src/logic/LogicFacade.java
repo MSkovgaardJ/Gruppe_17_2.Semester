@@ -30,7 +30,16 @@ public class LogicFacade implements ILogicFacade {
     @Override
     public void saveCitizen() {
       ICitizen c = handlerOfJournals.getActiveCitizen();
-      dataHandler.addCitizen(c);
+      dataHandler.saveCitizen(c);
+    }
+    @Override
+    public void addCitizen() {
+        ICitizen citizen = handlerOfJournals.getActiveCitizen();
+        dataHandler.addCitizen(citizen);
+    }
+    @Override
+    public ICitizen newCitizen() {
+        return handlerOfJournals.newCitizen();
     }
     @Override
     public boolean findCitizen(int ssn) {
@@ -55,17 +64,14 @@ public class LogicFacade implements ILogicFacade {
         return dataHandler.getCitizens(new Citizen());
 
     }
-    @Override
-    public ICitizen newCitizen() {
-        return handlerOfJournals.newCitizen();
-    }
+
     @Override
     public void removeCitizen(ICitizen citizen) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }  
     @Override
     public ICitizen getActiveCitizen() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return handlerOfJournals.getActiveCitizen();
     }
     // -------------------- Journal --------------------------------------------
     @Override
@@ -186,4 +192,6 @@ public class LogicFacade implements ILogicFacade {
     public void setDataHandler(IDataFacede dataHandler) {
         this.dataHandler = dataHandler;
     }    
+
+
 }

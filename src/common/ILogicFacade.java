@@ -22,6 +22,7 @@ public interface ILogicFacade {
     public Collection<ICitizen> getCitizens();
     public void removeCitizen(ICitizen citizen); 
     public void saveCitizen();
+    public void addCitizen();
 
     public IJournal getJournal(int jno);
     public IJournal getActiveJournal();

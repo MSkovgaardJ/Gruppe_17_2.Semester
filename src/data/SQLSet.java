@@ -1,5 +1,6 @@
 package data;
 
+import common.ICitizen;
 import java.sql.Date;
 
 /**
@@ -9,10 +10,20 @@ import java.sql.Date;
 
 public class SQLSet {
 
-    public static  String addCitizen(int ssn, String firstname, String lastname, String address, int postalnumber, String city, int phonenumber, String contactperson) {
+    public static  String addCitizen(ICitizen c) {
 
-        return "Insert into citizen (ssn, firstname,lastname, address, postalnumber, city, phonenumber, contactperson)\n"
-                + "values('" + ssn + "','" + firstname + "','" + lastname + "','" + address + "','" + postalnumber + "','" + city + "','" + phonenumber + "','" + contactperson + "');";
+        return "Insert into Citizen (ssn, firstname, lastname, address, postalnumber, city, phonenumber, contactperson)\n"
+                + "values('" + c.getSSN() + "','" + c.getFirstName() + "','" + c.getLastName() + "','" 
+                + c.getAddress() + "','" + c.getPostalNumber() + "','" + c.getCity() + "','" 
+                + c.getPhoneNumber() + "','Mett From Accounting');";
+    }
+    public static  String saveCitizen(ICitizen c) {
+        return "update citizen "
+                + "set firstname = '"+c.getFirstName()+"', lastname= '"+c.getLastName()+"', "
+                + "address = '"+c.getAddress()+"', postalnumber= "+c.getPostalNumber()+", "
+                + "city = '"+c.getCity()+"', phonenumber= '"+c.getPhoneNumber()+"', "
+                + "contactperson = 'Mett From Accounting' " 
+                + "WHERE ssn = "+c.getSSN(); 
     }
 
     public static  String addJournal(int journalnumber, int status, String journallocation, Date date) {

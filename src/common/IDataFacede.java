@@ -20,6 +20,7 @@ public interface IDataFacede {
     public void removeJournal(IJournal journal);
     
     public void addCitizen(ICitizen citizen);
+    public void saveCitizen(ICitizen citizen);
     public void removeCitizen(ICitizen citizen);
     public void getCitizen(ICitizen citizen); 
     public Collection<ICitizen> getCitizens(ICitizen base);   

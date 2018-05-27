@@ -123,7 +123,7 @@ public class SQLHandler {
             if (rs.next()) {
                 String fname = rs.getString(2);
                 String lname = rs.getString(3);
-                String phonenumber = rs.getString(7);
+                int phonenumber = rs.getInt(7);
                 ssn = rs.getInt(1);
                 String address = rs.getString(4);
                 String city = rs.getString(6);
@@ -181,8 +181,15 @@ public class SQLHandler {
             st.executeQuery(q);
             System.out.println("added journal");
             ICitizen c = j.getCitizen();
-            st.executeQuery(SQLSet.addCitizen(c.getSSN(), c.getFirstName(), c.getLastName(), c.getAddress(), c.getPostalNumber(), c.getCity(), 00700, "Paula"));
-            System.out.println("added Citizen");
+            st.executeQuery(SQLSet.addCitizen(j.getCitizen()));
+            ResultSet rs = st.executeQuery(SQLGet.getCitizen(j.getCitizen().getSSN()));
+            if (rs.next()) {
+                saveCitizen(j.getCitizen());
+            }
+            else
+            {
+                addCitizen(j.getCitizen());
+            }            
             st.executeQuery(SQLSet.addCitizenJournalRelation(c.getSSN(), j.getID()));
             System.out.println("added relation.");
             st.close();
@@ -196,10 +203,6 @@ public class SQLHandler {
             Statement st = db.createStatement();
             String q = SQLSet.saveJournal(j.getID(), 0, j.getJournalLocation(), j.getDate());
             PreparedStatement preparedStmt = db.prepareStatement(q);
-            //preparedStmt.setInt   (1, 6000);
-            //preparedStmt.setString(2, "Fred");
-
-            // execute the java preparedstatement
             preparedStmt.executeUpdate();
             System.out.println("saved journal");
             st.close();
@@ -215,7 +218,7 @@ public class SQLHandler {
             if (rs.next()) {
                 String fname = rs.getString(2);
                 String lname = rs.getString(3);
-                String phonenumber = rs.getString(7);
+                int phonenumber = rs.getInt(7);
                 int ssn = rs.getInt(1);
                 String address = rs.getString(4);
                 String city = rs.getString(6);
@@ -248,7 +251,7 @@ public class SQLHandler {
                 ICitizen citizen = base.clone();
                 String fname = rs.getString(2);
                 String lname = rs.getString(3);
-                String phonenumber = rs.getString(7);
+                int phonenumber = rs.getInt(7);
                 int ssn = rs.getInt(1);
                 String address = rs.getString(4);
                 String city = rs.getString(6);
@@ -275,9 +278,30 @@ public class SQLHandler {
     }
 
     public void addCitizen(ICitizen citizen) {
-
+        try (Connection db = comhandler.Connect()) {
+            Statement st = db.createStatement();
+            String q = SQLSet.addCitizen(citizen);
+            PreparedStatement preparedStmt = db.prepareStatement(q);
+            preparedStmt.execute();
+            System.out.println("added Citizen");
+            st.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
+    void saveCitizen(ICitizen c) {
+        try (Connection db = comhandler.Connect()) {
+            Statement st = db.createStatement();
+            String q = SQLSet.saveCitizen(c);
+            PreparedStatement preparedStmt = db.prepareStatement(q);
+            preparedStmt.executeUpdate();
+            System.out.println("saved citizen");
+            st.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }  
+    }
     public void getAid(IAid aid) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
@@ -324,5 +348,6 @@ public class SQLHandler {
         }
         return list;
     }
+
 
 }

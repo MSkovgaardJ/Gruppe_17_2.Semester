@@ -11,7 +11,7 @@ public interface ICitizen
 {
     public ICitizen getContactPerson();
 
-    public String getPhoneNumber();
+    public int getPhoneNumber();
 
     public String getFirstName();
 
@@ -27,7 +27,7 @@ public interface ICitizen
 
     public void setContactPerson(ICitizen contactPerson);
 
-    public void setPhoneNumber(String phoneNumber);
+    public void setPhoneNumber(int phoneNumber);
 
     public void setFirstName(String firstName);
 
