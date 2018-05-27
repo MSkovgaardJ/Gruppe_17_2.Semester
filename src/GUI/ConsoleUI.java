@@ -19,7 +19,7 @@ import logic.Journal;
  */
 public class ConsoleUI implements IUI {
 
-    private final Scanner input = new Scanner(System.in);
+    private Scanner input = new Scanner(System.in);
     private ILogicFacade logicHandler;
     private final String HELP_START = "\nSENSUM UDRED\n"
             + "----------------------------------------------\n"
@@ -55,6 +55,10 @@ public class ConsoleUI implements IUI {
      *
      * @return -1 if faulty number.
      */
+    private void clearScanner()
+    {
+        input = input.reset();
+    }
     private int getNumberInput() {
         int i = -1;
         try {
@@ -66,15 +70,26 @@ public class ConsoleUI implements IUI {
         return i;
     }
     private String getStringInput() {
-        input.next(); // clears the scanner.
+        //clearScanner(); // clears the scanner.  
         String s = "";
-        try {
-            s = input.nextLine();
-        } catch (Exception e) {
-            input.next(); // cleares the scanner for wrongfull input / prevents loop
-        }
+        s = input.next();
         return s;
-
+    }
+    private boolean getBooleanInput() {
+        while(true)
+        {
+            System.out.print("input : ");
+            String s = "";  
+            s = input.next();         
+            switch(s.toLowerCase()){                
+                case "y":
+                    return true;
+                case "n":
+                    return false;
+                default:
+                    System.out.println("not valid input");
+            }
+        }        
     }
     private void cmdBreak() {
         System.out.println("----------------------------------------------");
@@ -181,12 +196,11 @@ public class ConsoleUI implements IUI {
 
                         System.out.println("ID : " + j.getID());
                     }
-                    System.out.println("Do you want to make a new journal for the citizan ? y/n");
-                    System.out.print("input : ");
-                    String respons = getStringInput();
-                    if (respons.contains("y")) {
-
-                    } else {
+                    System.out.println("Do you want to open a journal ? y/n");                    
+//                    String respons = getStringInput();
+//                    
+//                    if (respons.contains("y")) {
+                    if(getBooleanInput()){                    
                         System.out.print("Type ID of journal you want to work on: ");
                         int IDrespons = getNumberInput();
                         for (IJournal jj : journals) {
