@@ -55,10 +55,6 @@ public class ConsoleUI implements IUI {
      *
      * @return -1 if faulty number.
      */
-    private void clearScanner()
-    {
-        input = input.reset();
-    }
     private int getNumberInput() {
         int i = -1;
         try {
