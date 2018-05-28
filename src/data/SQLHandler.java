@@ -33,7 +33,7 @@ public class SQLHandler {
         boolean fund = false;
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
-            ResultSet rs = st.executeQuery(SQLGet.checklogin(username, password));
+            ResultSet rs = st.executeQuery(SQLGet.checkLogin(username, password));
             if (rs.next()) {
                 if ((rs.getString(1).equalsIgnoreCase(username))
                         && (rs.getString(2).equalsIgnoreCase(password))) {
@@ -53,7 +53,7 @@ public class SQLHandler {
     public void getCredentials(ISystemUser user) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
-            ResultSet rs = st.executeQuery(SQLGet.getlogincredentials(user.getUserName(), user.getPassword()));
+            ResultSet rs = st.executeQuery(SQLGet.getLoginCredentials(user.getUserName(), user.getPassword()));
             if (rs.next()) {
                 boolean isAdmin = rs.getBoolean(1);
                 boolean isCaseHandler = rs.getBoolean(2);
