@@ -4,6 +4,7 @@ import common.IAid;
 import common.IJournal;
 import java.sql.Date;
 import common.ICitizen;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 /**
@@ -24,6 +25,7 @@ public class Journal implements IJournal, Comparable<Journal> {
 
     public Journal() {
         this.citizen = new Citizen();
+        this.date = new Date(System.currentTimeMillis());
     }       
 
     @Override
@@ -91,6 +93,19 @@ public class Journal implements IJournal, Comparable<Journal> {
     public void setSSN(int ssn)
     {
         this.ssn = ssn;
+    }
+    @Override
+    public String toString()
+    {
+        String s ="JNO : " +this.ID+"\n";
+        if(this.citizen!= null){
+            s+="SSN : "+ this.citizen.getSSN()+"\n";
+            s+="Name: "+this.citizen.getFirstName()+"\n";
+        }
+        else
+            s+="SSN : NULL";
+        return s;     
+        
     }
 }
  

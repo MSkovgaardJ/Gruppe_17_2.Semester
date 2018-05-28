@@ -22,6 +22,10 @@ public class JournalHandler {
     public IJournal newJournal() {
         IJournal j = new Journal();
         this.activeJournal = j;
+        if(this.activeCitizen != null)
+        {
+            activeJournal.setCitizen(activeCitizen);
+        }
         return j;
     }
 

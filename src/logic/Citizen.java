@@ -109,4 +109,12 @@ public class Citizen implements ICitizen {
         clone.setSSN(SSN);
         return clone;
     }
+    @Override
+    public String toString()
+    {
+        String s = "SSN     : " + this.SSN +"\n";
+        s+=        "Firsname: " +this.firstName+"\n";
+        s+=        "Lastname: "+this.lastName+"\n";
+        return s;
+    }
 }

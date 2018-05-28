@@ -131,7 +131,7 @@ public class LogicFacade implements ILogicFacade {
     }
     @Override
     public IJournal getActiveJournal() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return handlerOfJournals.getActiveJournal();
     }
     @Override
     public void openJournalDiscription() {
@@ -192,6 +192,11 @@ public class LogicFacade implements ILogicFacade {
     public void setDataHandler(IDataFacede dataHandler) {
         this.dataHandler = dataHandler;
     }    
+
+    @Override
+    public void addJournal() {
+        dataHandler.addJournal(handlerOfJournals.getActiveJournal());
+    }
 
 
 }

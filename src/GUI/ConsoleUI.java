@@ -313,7 +313,7 @@ public class ConsoleUI implements IUI {
             System.out.println("ID : " + j.getID());
         }
         cmdBreak();
-        System.out.println("Conferm Citicen, " + citizen.getLastName() + ", " + citizen.getFirstName() + ""
+        System.out.println("Conferm Citicen, " + citizen.getFirstName()+ " " + citizen.getLastName()+ " "
                 + "with SSN : " + citizen.getSSN() + "? y/n");
         if (getBooleanInput()) {
             System.out.println("Do you want to open a journal ? y/n");
@@ -328,6 +328,16 @@ public class ConsoleUI implements IUI {
                 if (journal != null) {
                     System.out.println("Loaded journal");
                     logicHandler.openJournalDiscription();
+                }
+            }
+            else {
+                System.out.println("creating new journal for :"+citizen.getSSN());                
+                journal = logicHandler.newJournal();                
+                if (journal != null) {
+                    System.out.println("ACT J :\n"+logicHandler.getActiveJournal());
+                    System.out.println("ACT C :\n"+logicHandler.getActiveCitizen());
+                    logicHandler.openJournalDiscription();
+                    logicHandler.addJournal();
                 }
             }
         }
