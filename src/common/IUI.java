@@ -7,9 +7,9 @@ package common;
 
 /**
  *
- * @author magnusm
+ * @author Stephanie
  */
-public interface IData {
-    
-    
+public interface IUI {  
+    public void addLogic(ILogicFacade logic);
+    public void Start();
 }
