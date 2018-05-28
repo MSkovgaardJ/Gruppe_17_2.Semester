@@ -12,9 +12,9 @@ import java.util.Collection;
  * @author magnusm
  */
 public interface IDataFacede {
-    public void getJournal(IJournal journal, ICitizen citizen);
+    public void getJournal(IJournal jBase, ICitizen cBase);
     public Collection<IJournal> getJournals(IJournal base);
-    public Collection<IJournal> getAllJournalsFor(IJournal base, int ssn);
+    public Collection<Integer> getAllJournalsFor(int ssn);
     public void addJournal(IJournal base);
     public void saveJournal(IJournal journal);
     public void removeJournal(IJournal journal);
@@ -22,7 +22,9 @@ public interface IDataFacede {
     public void addCitizen(ICitizen citizen);
     public void saveCitizen(ICitizen citizen);
     public void removeCitizen(ICitizen citizen);
+
     public void getCitizen(ICitizen citizen); 
+    public boolean citizenExist(int snn);
     public Collection<ICitizen> getCitizens(ICitizen base);   
         
     public void getAid(IAid aidNo);

@@ -16,18 +16,11 @@ import logic.Aid;
 public interface IAid
 {
     
-    int getAidNo();
-
-    String getAidDescribsion();
-
-    String getAidName();
-
+    public int getAidNo();
+    public String getAidDescribsion();
+    public String getAidName();
     public void setAidNo(int aidNo);
-
     public void setAidName(String aName);
-
-    public void setAidDescribsion(String describsion);
-    
-    public IAid clone();
-    
+    public void setAidDescribsion(String describsion);    
+    public IAid clone();    
 }

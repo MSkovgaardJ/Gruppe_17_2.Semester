@@ -9,8 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 /**
  *
@@ -18,10 +16,14 @@ import java.nio.file.Path;
  */
 public class JournalHandler {
 
+    private static JournalHandler instance;
     private IJournal activeJournal;
     private ICitizen activeCitizen;
-
-    public IJournal newJournal() {
+    private JournalHandler()
+    {
+        
+    }
+    public IJournal createJournal() {
         IJournal j = new Journal();
         this.activeJournal = j;
         if (this.activeCitizen != null) {
@@ -29,39 +31,44 @@ public class JournalHandler {
         }
         return j;
     }
-
-    public ICitizen newCitizen() {
+    public static JournalHandler getInstance(){
+        if(instance == null)
+        {
+            instance = new JournalHandler();
+        }
+        return instance;
+    }
+    public ICitizen createCitizen() {
         ICitizen c = new Citizen();
         this.activeCitizen = c;
+        if(this.activeJournal != null)
+        {
+            activeJournal.setCitizen(c);
+        }
         return c;
     }
-
     public IJournal getActiveJournal() {
         return activeJournal;
     }
-
     public ICitizen getActiveCitizen() {
         return activeCitizen;
     }
-
     public void setActiveJournal(IJournal activeJournal) {
         this.activeJournal = activeJournal;
     }
-
-    public void setActiveCitizen(ICitizen activeCitizen) {
+    public void setActiveCitizen(ICitizen activeCitizen)  {
         this.activeCitizen = activeCitizen;
-    }
-
+    }    
     public void openJournalDiscription() {
         if (activeJournal != null && activeCitizen != null) {
-            System.out.println("active journal : " + activeJournal.getID());
+            System.out.println("active journal : " + activeJournal.getJNO());
             try {
                 File f = new File(activeJournal.getJournalLocation());
                 if (!f.exists()) {
                     System.out.println("no file found, making new. ");
 
                     String temppath = "journals/JournalTemp.dot";
-                    String path = "journals/" + activeCitizen.getSSN() + "-" + activeJournal.getID() + ".doc";
+                    String path = "journals/" + activeCitizen.getSSN() + "-" + activeJournal.getJNO() + ".doc";
                     InputStream is;
                     OutputStream os;
 

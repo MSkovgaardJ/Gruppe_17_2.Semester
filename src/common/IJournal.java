@@ -12,14 +12,14 @@ public interface IJournal
 {
     public IJournal clone();
 
-    public void setID(int ID);
+    public void setJNO(int JNO);
     public void setStatus(String status);
     public void setDate(Date date);
     public void setJournalLocation(String Location);
     public void setCitizen(ICitizen citizen);
     public void setSSN(int ssn);
     
-    public int getID();
+    public int getJNO();
     public String getStatus();
     public Date getDate();
     public String getJournalLocation();

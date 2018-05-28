@@ -9,7 +9,6 @@ import common.ILoginToken;
 import common.ISystemUser;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -21,41 +20,37 @@ public class LogicFacade implements ILogicFacade {
 
     private IDataFacede dataHandler;
     private SystemUser User;
-    private JournalHandler handlerOfJournals;
     public LogicFacade()
     {
-        handlerOfJournals = new JournalHandler();
+        
     }
     // -------------------- Citizen --------------------------------------------
     @Override
     public void saveCitizen() {
-      ICitizen c = handlerOfJournals.getActiveCitizen();
+      ICitizen c = JournalHandler.getInstance().getActiveCitizen();
       dataHandler.saveCitizen(c);
     }
     @Override
     public void addCitizen() {
-        ICitizen citizen = handlerOfJournals.getActiveCitizen();
+        ICitizen citizen = JournalHandler.getInstance().getActiveCitizen();
         dataHandler.addCitizen(citizen);
     }
     @Override
     public ICitizen newCitizen() {
-        return handlerOfJournals.newCitizen();
+        return JournalHandler.getInstance().createCitizen();
     }
     @Override
-    public boolean findCitizen(int ssn) {
-        ICitizen c = new Citizen();
-        c.setSSN(ssn);
-        dataHandler.getCitizen(c);
-        return c.getSSN() != -1; // found a citizen.    
+    public boolean citizenExist(int snn) {        
+        return dataHandler.citizenExist(snn);   
     }
     @Override
     public ICitizen getCitizen(int ssn) {
-        ICitizen citizen = new Citizen();
-        citizen.setSSN(ssn);
-        if(citizen.getSSN() !=-1){
-        dataHandler.getCitizen(citizen);
-        handlerOfJournals.setActiveCitizen(citizen);
-        return citizen;
+        if(citizenExist(ssn))
+        {
+            ICitizen citizen = JournalHandler.getInstance().createCitizen();
+            citizen.setSSN(ssn);
+            dataHandler.getCitizen(citizen);
+            return citizen;
         }
         return null;
     }
@@ -71,7 +66,7 @@ public class LogicFacade implements ILogicFacade {
     }  
     @Override
     public ICitizen getActiveCitizen() {
-        return handlerOfJournals.getActiveCitizen();
+        return JournalHandler.getInstance().getActiveCitizen();
     }
     // -------------------- Journal --------------------------------------------
     @Override
@@ -81,46 +76,50 @@ public class LogicFacade implements ILogicFacade {
     @Override
     public IJournal newJournal() {
         // a list of all journals
-        List<IJournal> list = (ArrayList<IJournal>) dataHandler.getJournals(new Journal());
+        List<IJournal> list = (ArrayList<IJournal>)getJournals();
         //sorts the list on ID number 
         list.sort(new Comparator<IJournal>() {
             @Override
             public int compare(IJournal o1, IJournal o2) {
-                return Integer.compare(o1.getID(), o2.getID());
+                return Integer.compare(o1.getJNO(), o2.getJNO());
             }
         });
         // get the id of the last journal
         int jno = -1;
         if (!list.isEmpty()) {
-            jno = list.get(list.size() - 1).getID();
+            jno = list.get(list.size() - 1).getJNO();
         }
         // add 1 to it
         jno++;
         // makes a new jouranl
-        IJournal journal = handlerOfJournals.newJournal();
+        IJournal journal = JournalHandler.getInstance().createJournal();
         // sets new id 
-        journal.setID(jno);
+        journal.setJNO(jno);
         // returns new journal.
         return journal;
     }
     @Override
     public void saveJournal() {
-        System.out.println("Saving journal ID : " +handlerOfJournals.getActiveJournal().getID());
-        dataHandler.saveJournal(handlerOfJournals.getActiveJournal());
+        System.out.println("Saving journal ID : " +JournalHandler.getInstance().getActiveJournal().getJNO());
+        dataHandler.saveJournal(JournalHandler.getInstance().getActiveJournal());
     }
     @Override
-    public Collection<IJournal> getAllJournalsFor(int ssn) {
-        return dataHandler.getAllJournalsFor(new Journal(), ssn);
+    public void addJournal() {
+        dataHandler.addJournal(JournalHandler.getInstance().getActiveJournal());
+    }
+
+    @Override
+    public Collection<Integer> getAllJournalsFor(int ssn) {
+        return dataHandler.getAllJournalsFor(ssn);
     }
     @Override
     public IJournal getJournal(int jno) {
-        IJournal j = new Journal();
-        j.setID(jno);
+        IJournal j = JournalHandler.getInstance().createJournal();
+        j.setJNO(jno);
         dataHandler.getJournal(j,j.getCitizen());
-        if(j.getID()!=-1)
+        if(j.getJNO()!=-1)
         {
-            handlerOfJournals.setActiveJournal(j);
-            handlerOfJournals.setActiveCitizen(j.getCitizen());
+            JournalHandler.getInstance().setActiveCitizen(j.getCitizen());
             return j;        
         }
         return null;
@@ -131,11 +130,11 @@ public class LogicFacade implements ILogicFacade {
     }
     @Override
     public IJournal getActiveJournal() {
-        return handlerOfJournals.getActiveJournal();
+        return JournalHandler.getInstance().getActiveJournal();
     }
     @Override
     public void openJournalDiscription() {
-        handlerOfJournals.openJournalDiscription();
+        JournalHandler.getInstance().openJournalDiscription();
         saveJournal();
     }
     // -------------------- AID ------------------------------------------------
@@ -192,11 +191,6 @@ public class LogicFacade implements ILogicFacade {
     public void setDataHandler(IDataFacede dataHandler) {
         this.dataHandler = dataHandler;
     }    
-
-    @Override
-    public void addJournal() {
-        dataHandler.addJournal(handlerOfJournals.getActiveJournal());
-    }
 
 
 }

@@ -8,10 +8,7 @@ import common.IUI;
 import java.util.Collection;
 import java.util.Scanner;
 import common.ILogicFacade;
-import common.IDataFacede;
 import common.ISystemUser;
-import java.util.InputMismatchException;
-import logic.Journal;
 
 /**
  *
@@ -52,7 +49,6 @@ public class ConsoleUI implements IUI {
 
     public ConsoleUI() {
         this.input = new Scanner(System.in);
-
     }
 
     /*--------------------------------------------------------------------------
@@ -84,11 +80,6 @@ public class ConsoleUI implements IUI {
 //        }
 //        input.nextLine();
 //        return i;
-    }
-
-    private String getStringInput() {
-        input.nextLine();
-        return input.nextLine();
     }
 
     private boolean getBooleanInput() {
@@ -210,20 +201,20 @@ public class ConsoleUI implements IUI {
                     cmdBreak();
                     listJournals();
                     cmdBreak();
-                    
+
                     System.out.print("Type ID of journal you want to view: ");
                     id = getNumberInput();
                     IJournal j = logicHandler.getJournal(id);
-                    System.out.println("Journal No           : " + j.getID());
+                    System.out.println("Journal No           : " + j.getJNO());
                     System.out.println("Journal Location     : " + j.getJournalLocation());
                 case 6:
                     cmdBreak();
                     listCitizens();
                     cmdBreak();
-                    
+
                     System.out.print("please enter SSN of Citizen : ");
                     ssn = getNumberInput();
-                    if (logicHandler.findCitizen(ssn)) {
+                    if (logicHandler.citizenExist(ssn)) {
                         ICitizen c = getCitizen(ssn);
                         System.out.println("(USE THE THE SAME AS BEFORE LEAVE FIELD BLANK)");
                         System.out.println("SSN : " + c.getSSN() + " cant be changed: ");
@@ -273,7 +264,7 @@ public class ConsoleUI implements IUI {
                     cmdBreak();
                     System.out.print("please enter SSN of Citizen : ");
                     ssn = getNumberInput();
-                    if (logicHandler.findCitizen(ssn)) {
+                    if (logicHandler.citizenExist(ssn)) {
                         getCitizen(ssn);
                         listinfo(logicHandler.getActiveCitizen());
                     }
@@ -297,7 +288,7 @@ public class ConsoleUI implements IUI {
         if (ssn == -1) {
             return;
         }
-        if (!logicHandler.findCitizen(ssn)) {
+        if (!logicHandler.citizenExist(ssn)) {
             cmdBreak();
             System.out.println("no citizen found, wanna add a new citizen? y/n");
             if (getBooleanInput()) {
@@ -310,23 +301,23 @@ public class ConsoleUI implements IUI {
         }
         citizen = getCitizen(ssn);
 
-        Collection<IJournal> journals = logicHandler.getAllJournalsFor(ssn);
+        Collection<Integer> journals = logicHandler.getAllJournalsFor(ssn);
         cmdBreak();
         System.out.println("Listing journals for: " + ssn);
-        for (IJournal j : journals) {
+        for (int ID : journals) {
 
-            System.out.println("ID : " + j.getID());
+            System.out.println("ID : " + ID);
         }
         cmdBreak();
-        System.out.println("Conferm Citicen, " + citizen.getFirstName()+ " " + citizen.getLastName()+ " "
+        System.out.println("Conferm Citicen, " + citizen.getFirstName() + " " + citizen.getLastName() + " "
                 + "with SSN : " + citizen.getSSN() + "? y/n");
         if (getBooleanInput()) {
             System.out.println("Do you want to open a journal ? y/n");
             if (getBooleanInput()) {
                 System.out.print("Type ID of journal you want to work on: ");
                 int IDrespons = getNumberInput();
-                for (IJournal jj : journals) {
-                    if (jj.getID() == IDrespons) {
+                for (int ID : journals) {
+                    if (ID == IDrespons) {
                         journal = logicHandler.getJournal(IDrespons);
                     }
                 }
@@ -334,15 +325,18 @@ public class ConsoleUI implements IUI {
                     System.out.println("Loaded journal");
                     logicHandler.openJournalDiscription();
                 }
-            }
-            else {
-                System.out.println("creating new journal for :"+citizen.getSSN());                
-                journal = logicHandler.newJournal();                
-                if (journal != null) {
-                    System.out.println("ACT J :\n"+logicHandler.getActiveJournal());
-                    System.out.println("ACT C :\n"+logicHandler.getActiveCitizen());
-                    logicHandler.openJournalDiscription();
-                    logicHandler.addJournal();
+            } else {
+                System.out.println("Do you want to add a new journal ? y/n");
+                if (getBooleanInput()) {
+
+                    System.out.println("creating new journal for :" + citizen.getSSN());
+                    journal = logicHandler.newJournal();
+                    if (journal != null) {
+                        //System.out.println("ACT J :\n"+logicHandler.getActiveJournal());
+                        //System.out.println("ACT C :\n"+logicHandler.getActiveCitizen());
+                        logicHandler.openJournalDiscription();
+                        logicHandler.addJournal();
+                    }
                 }
             }
         }
@@ -375,7 +369,7 @@ public class ConsoleUI implements IUI {
         System.out.println("got : " + list.size() + " journals's");
         System.out.println("-------------------------------------------");
         for (IJournal c : list) {
-            System.out.println("ID :" + c.getID());
+            System.out.println("ID :" + c.getJNO());
         }
     }
 
@@ -391,11 +385,11 @@ public class ConsoleUI implements IUI {
     private void listinfo(ICitizen c) {
         System.out.println("SSN : " + c.getSSN());
         System.out.println("First name : " + c.getFirstName());
-        System.out.println("Type last name : " + c.getLastName());
-        System.out.println("Type phone number : " + c.getPhoneNumber());
-        System.out.println("Type address : " + c.getAddress());
-        System.out.println("Type city : " + c.getCity());
-        System.out.println("Type postal address : " + c.getPostalNumber());
+        System.out.println("Last name : " + c.getLastName());
+        System.out.println("Phone number : " + c.getPhoneNumber());
+        System.out.println("Address : " + c.getAddress());
+        System.out.println("City : " + c.getCity());
+        System.out.println("postal address : " + c.getPostalNumber());
     }
 
     /*--------------------------------------------------------------------------
@@ -407,15 +401,15 @@ public class ConsoleUI implements IUI {
         input.nextLine();
         System.out.print("First name : ");
         String fname = input.nextLine();
-        System.out.print("Type last name : ");
+        System.out.print("Last name : ");
         String lname = input.nextLine();
-        System.out.print("Type phone number : ");
+        System.out.print("Phone number : ");
         int phonenumber = getNumberInput();
-        System.out.print("Type address : ");
+        System.out.print("Address : ");
         String address = input.nextLine();
-        System.out.print("Type city : ");
+        System.out.print("City : ");
         String city = input.nextLine();
-        System.out.print("Type postal address : ");
+        System.out.print("Postal address : ");
         int postalNumber = getNumberInput();
 
         citizen.setAddress(address);
@@ -461,5 +455,4 @@ public class ConsoleUI implements IUI {
     public void Start() {
         this.startMenu();
     }
-
 }

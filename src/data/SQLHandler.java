@@ -28,7 +28,7 @@ public class SQLHandler {
     public SQLHandler() {
         comhandler = new postgreSQLCom();
     }
-
+    //--------------------  System User-----------------------------------------
     public boolean checkLogin(String username, String password) {
         boolean fund = false;
         try (Connection db = comhandler.Connect()) {
@@ -49,7 +49,6 @@ public class SQLHandler {
             return fund;
         }
     }
-
     public void getCredentials(ISystemUser user) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
@@ -67,28 +66,19 @@ public class SQLHandler {
             System.out.println(e);
         }
     }
-
     public void changeSystemUser(ISystemUser isu) {
 
     }
-
-    public Collection<IJournal> getAllJournalsFor(IJournal base, int ssn) {
-        Collection<IJournal> list = new ArrayList<>();
+    //-------------------- journals --------------------------------------------
+    public Collection<Integer> getAllJournalsFor(int ssn) {
+        Collection<Integer> list = new ArrayList<>();
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.getJournalsForCitizen(ssn));
             while (rs.next()) {
-                IJournal journal = base.clone();
-                int journalNo = rs.getInt(2);
-                int SSN = rs.getInt(1);
-
-                journal.setID(journalNo);
-                journal.setSSN(SSN);
-
-                list.add(journal);
-
-                System.out.println("Got citizen' journal's");
-
+                int journalNo = rs.getInt(2); 
+                list.add(journalNo);
+                System.out.println("Got citizen' journal JNO's");
             }
             rs.close();
             st.close();
@@ -97,24 +87,23 @@ public class SQLHandler {
         }
         return list;
     }
-
     public void getJournal(IJournal journal, ICitizen citizen) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
-            ResultSet rs = st.executeQuery(SQLGet.getJournal(journal.getID()));
+            ResultSet rs = st.executeQuery(SQLGet.getJournal(journal.getJNO()));
             if (rs.next()) {
                 int ID = rs.getInt(1);
                 //boolean status = rs.getBoolean(2);
                 String journallocation = rs.getString(3);
                 Date date = rs.getDate(4);
 
-                journal.setID(ID);
+                journal.setJNO(ID);
                 journal.setDate(date);
                 journal.setJournalLocation(journallocation);
                 //journal.setStatus(status);
                 System.out.println("found journal");
             }
-            rs = st.executeQuery(SQLGet.getCitizenForJournal(journal.getID()));
+            rs = st.executeQuery(SQLGet.getCitizenForJournal(journal.getJNO()));
             int ssn = -1;
             if (rs.next()) {
                 ssn = rs.getInt(1);
@@ -145,7 +134,6 @@ public class SQLHandler {
 
         }
     }
-
     public Collection<IJournal> getJournals(IJournal base) {
         Collection<IJournal> list = new ArrayList();
         try (Connection db = comhandler.Connect()) {
@@ -159,7 +147,7 @@ public class SQLHandler {
                 Date date = rs.getDate(4);
 
                 journal.setStatus(Status);
-                journal.setID(id);
+                journal.setJNO(id);
                 journal.setDate(date);
                 journal.setJournalLocation(journallocation);
 
@@ -173,17 +161,16 @@ public class SQLHandler {
         }
         return list;
     }
-
     public void addJournal(IJournal j) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
-            String qj = SQLSet.addJournal(j.getID(), 0, j.getJournalLocation(), j.getDate());
+            String qj = SQLSet.addJournal(j.getJNO(), 0, j.getJournalLocation(), j.getDate());
             String qgc = SQLGet.getCitizen(j.getCitizen().getSSN());
-            String qr = SQLSet.addCitizenJournalRelation(j.getCitizen().getSSN(), j.getID());
-            
-            PreparedStatement preparedStmt = db.prepareStatement(qj);            
-            
-            System.out.println("adding journal to Database");            
+            String qr = SQLSet.addCitizenJournalRelation(j.getCitizen().getSSN(), j.getJNO());
+
+            PreparedStatement preparedStmt = db.prepareStatement(qj);
+
+            System.out.println("adding journal to Database");
             preparedStmt.execute();
             System.out.println("Successful");
             ICitizen c = j.getCitizen();
@@ -191,12 +178,10 @@ public class SQLHandler {
             if (rs.next()) {
                 System.out.println("Citizen exists, Updatas info");
                 saveCitizen(j.getCitizen());
-            }
-            else
-            {
+            } else {
                 System.out.println("No Citizen");
                 addCitizen(j.getCitizen());
-            }      
+            }
             System.out.println("adding relation");
             preparedStmt = db.prepareStatement(qr);
             preparedStmt.execute();
@@ -206,11 +191,10 @@ public class SQLHandler {
             System.out.println(e);
         }
     }
-
     public void saveJournal(IJournal j) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
-            String q = SQLSet.saveJournal(j.getID(), 0, j.getJournalLocation(), j.getDate());
+            String q = SQLSet.saveJournal(j.getJNO(), 0, j.getJournalLocation(), j.getDate());
             PreparedStatement preparedStmt = db.prepareStatement(q);
             preparedStmt.executeUpdate();
             System.out.println("saved journal");
@@ -219,7 +203,7 @@ public class SQLHandler {
             System.out.println(e);
         }
     }
-
+    //-------------------- citizen ---------------------------------------------
     public void getCitizen(ICitizen citizen) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
@@ -250,7 +234,6 @@ public class SQLHandler {
             System.out.println(e);
         }
     }
-
     public Collection<ICitizen> getCitizens(ICitizen base) {
         Collection<ICitizen> list = new ArrayList<>();
         try (Connection db = comhandler.Connect()) {
@@ -285,7 +268,6 @@ public class SQLHandler {
         }
         return list;
     }
-
     public void addCitizen(ICitizen citizen) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
@@ -298,7 +280,6 @@ public class SQLHandler {
             System.out.println(e);
         }
     }
-
     void saveCitizen(ICitizen c) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
@@ -309,8 +290,25 @@ public class SQLHandler {
             st.close();
         } catch (SQLException e) {
             System.out.println(e);
-        }  
+        }
     }
+    public boolean citizenExist(int ssn) {
+        boolean found = false;
+        try (Connection db = comhandler.Connect()) {
+            Statement st = db.createStatement();
+            ResultSet rs = st.executeQuery(SQLGet.getCitizen(ssn));
+            if (rs.next()) {
+                found = true;
+                System.out.println("Found Citizen");
+            }
+            st.close();
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return found;
+    }
+    //-------------------- Aid ---------------------------------------------
     public void getAid(IAid aid) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
@@ -332,7 +330,6 @@ public class SQLHandler {
             System.out.println(e);
         }
     }
-
     public Collection<IAid> getAids(IAid base) {
         Collection<IAid> list = new ArrayList();
         try (Connection db = comhandler.Connect()) {
@@ -357,6 +354,4 @@ public class SQLHandler {
         }
         return list;
     }
-
-
 }

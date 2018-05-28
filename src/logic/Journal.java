@@ -32,7 +32,7 @@ public class Journal implements IJournal, Comparable<Journal> {
     public IJournal clone() {
         IJournal j = new Journal();
         j.setDate(date);
-        j.setID(ID);
+        j.setJNO(ID);
         j.setJournalLocation(JLocation);
         j.setStatus(status);
         j.setCitizen(citizen);
@@ -41,7 +41,7 @@ public class Journal implements IJournal, Comparable<Journal> {
     }
 
     @Override
-    public void setID(int ID) {this.ID = ID; }
+    public void setJNO(int ID) {this.ID = ID; }
 
     @Override
     public void setStatus(String status) { this.status = status;}
@@ -53,7 +53,7 @@ public class Journal implements IJournal, Comparable<Journal> {
     public void setJournalLocation(String Location) { this.JLocation = Location;}
 
     @Override
-    public int getID() {return this.ID;}
+    public int getJNO() {return this.ID;}
 
     @Override
     public String getStatus() {return this.status;}
@@ -111,7 +111,7 @@ public class Journal implements IJournal, Comparable<Journal> {
  
 //OLD IMPLIMENTATION
     
-//    public int getID() {
+//    public int getJNO() {
 //        return ID;
 //    }
 //
@@ -129,7 +129,7 @@ public class Journal implements IJournal, Comparable<Journal> {
 //    }
 //
 //    @Override
-//    public void setID(int journalNo) {
+//    public void setJNO(int journalNo) {
 //        this.ID = journalNo;
 //    }
 //

@@ -18,7 +18,7 @@ public interface ILogicFacade {
     public ICitizen newCitizen();
     public ICitizen getActiveCitizen();
     public ICitizen getCitizen(int ssn);
-    public boolean findCitizen(int ssn);
+    public boolean citizenExist(int snn);
     public Collection<ICitizen> getCitizens();
     public void removeCitizen(ICitizen citizen); 
     public void saveCitizen();
@@ -28,7 +28,7 @@ public interface ILogicFacade {
     public IJournal getActiveJournal();
     public IJournal newJournal();
     public Collection<IJournal> getJournals();
-    public Collection<IJournal> getAllJournalsFor(int ssn);    
+    public Collection<Integer> getAllJournalsFor(int ssn);    
     public void saveJournal();
     public void addJournal();
     public void removeJournal(IJournal journal);
