@@ -207,6 +207,10 @@ public class ConsoleUI implements IUI {
                     logicHandler.openJournalDiscription();
                     break;
                 case 4:
+                    cmdBreak();
+                    listJournals();
+                    cmdBreak();
+                    
                     System.out.print("Type ID of journal you want to view: ");
                     id = getNumberInput();
                     IJournal j = logicHandler.getJournal(id);
@@ -216,6 +220,7 @@ public class ConsoleUI implements IUI {
                     cmdBreak();
                     listCitizens();
                     cmdBreak();
+                    
                     System.out.print("please enter SSN of Citizen : ");
                     ssn = getNumberInput();
                     if (logicHandler.findCitizen(ssn)) {

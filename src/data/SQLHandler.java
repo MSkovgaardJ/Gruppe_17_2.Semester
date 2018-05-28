@@ -177,21 +177,30 @@ public class SQLHandler {
     public void addJournal(IJournal j) {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
-            String q = SQLSet.addJournal(j.getID(), 0, j.getJournalLocation(), j.getDate());
-            st.executeQuery(q);
-            System.out.println("added journal");
+            String qj = SQLSet.addJournal(j.getID(), 0, j.getJournalLocation(), j.getDate());
+            String qgc = SQLGet.getCitizen(j.getCitizen().getSSN());
+            String qr = SQLSet.addCitizenJournalRelation(j.getCitizen().getSSN(), j.getID());
+            
+            PreparedStatement preparedStmt = db.prepareStatement(qj);            
+            
+            System.out.println("adding journal to Database");            
+            preparedStmt.execute();
+            System.out.println("Successful");
             ICitizen c = j.getCitizen();
-            st.executeQuery(SQLSet.addCitizen(j.getCitizen()));
-            ResultSet rs = st.executeQuery(SQLGet.getCitizen(j.getCitizen().getSSN()));
+            ResultSet rs = st.executeQuery(qgc);
             if (rs.next()) {
+                System.out.println("Citizen exists, Updatas info");
                 saveCitizen(j.getCitizen());
             }
             else
             {
+                System.out.println("No Citizen");
                 addCitizen(j.getCitizen());
-            }            
-            st.executeQuery(SQLSet.addCitizenJournalRelation(c.getSSN(), j.getID()));
-            System.out.println("added relation.");
+            }      
+            System.out.println("adding relation");
+            preparedStmt = db.prepareStatement(qr);
+            preparedStmt.execute();
+            System.out.println("succesful");
             st.close();
         } catch (SQLException e) {
             System.out.println(e);
