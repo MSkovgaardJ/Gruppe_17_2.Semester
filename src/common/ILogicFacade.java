@@ -30,6 +30,7 @@ public interface ILogicFacade {
     public Collection<IJournal> getJournals();
     public Collection<IJournal> getAllJournalsFor(int ssn);    
     public void saveJournal();
+    public void addJournal();
     public void removeJournal(IJournal journal);
     public void openJournalDiscription();
     
