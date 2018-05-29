@@ -13,7 +13,7 @@ import java.util.Collection;
  */
 public class Journal implements IJournal, Comparable<Journal> {
 
-    private int ID;
+    private int JNO;
     private Date date;
     private String status;
     private String JLocation;
@@ -32,7 +32,7 @@ public class Journal implements IJournal, Comparable<Journal> {
     public IJournal clone() {
         IJournal j = new Journal();
         j.setDate(date);
-        j.setJNO(ID);
+        j.setJNO(JNO);
         j.setJournalLocation(JLocation);
         j.setStatus(status);
         j.setCitizen(citizen);
@@ -41,7 +41,7 @@ public class Journal implements IJournal, Comparable<Journal> {
     }
 
     @Override
-    public void setJNO(int ID) {this.ID = ID; }
+    public void setJNO(int ID) {this.JNO = ID; }
 
     @Override
     public void setStatus(String status) { this.status = status;}
@@ -53,7 +53,7 @@ public class Journal implements IJournal, Comparable<Journal> {
     public void setJournalLocation(String Location) { this.JLocation = Location;}
 
     @Override
-    public int getJNO() {return this.ID;}
+    public int getJNO() {return this.JNO;}
 
     @Override
     public String getStatus() {return this.status;}
@@ -86,7 +86,7 @@ public class Journal implements IJournal, Comparable<Journal> {
 
     @Override
     public int compareTo(Journal o) {
-        return Integer.compare(this.ID,o.ID);
+        return Integer.compare(this.JNO,o.JNO);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class Journal implements IJournal, Comparable<Journal> {
     @Override
     public String toString()
     {
-        String s ="Journal ID : " +this.ID+"\n";
+        String s ="Journal ID : " +this.JNO+"\n";
         if(this.citizen!= null){
             s+="CPR : "+ this.citizen.getSSN()+"\n";
             s+="Navn: "+this.citizen.getFirstName()+"\n";
