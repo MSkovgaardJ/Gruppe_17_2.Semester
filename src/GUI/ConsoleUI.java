@@ -20,32 +20,32 @@ public class ConsoleUI implements IUI {
     private ILogicFacade logicHandler;
     private final String HELP_START = "\nSENSUM UDRED\n"
             + "----------------------------------------------\n"
-            + "Type 1 to login. you have to have a valid username and password\n"
-            + "Type 0 to quit. closes the application" + "\n";
+            + "Tast 1 for at logge ind. Du skal indtaste et valid brugernavn og adgangskode\n"
+            + "Tast 0 for at lukke programmet.\n";
     private final String HELP_LOGIN = "\nSENSUM UDRED LOGIN\n"
             + "----------------------------------------------";
     private final String HELP_SYSTEM = "\nSENSUM UDRED SYSTEM MENU\n"
             + "----------------------------------------------\n"
-            + "Type 1 to enter a Journal menu   DONE\n"
+            + "Tast 1 for at tilgå sags menuen \n"
             + "\n"
-            + "type 2 to list all Citizens      DONE\n"
-            + "Type 3 to list all Journals      DONE\n"
+            + "Tast 2 for at liste alle Borger \n"
+            + "Tast 3 for at liste alle journaler \n"
             + "\n"
-            + "Type 4 to list all Aid           DONE\n"
-            + "Type 5 to add a new Aid          Not Implamentet\n"
-            + "Type 6 to edit a Aid             Not Implamentet\n"
+            + "Tast 4 for at liste alle ydelser \n"
+            + "Tast 5 for at tilføje en ny ydelse          Not Implamentet\n"
+            + "Tast 6 for at redigerer en ydelse             Not Implamentet\n"
             + "\n"
-            + "Type 7 to add a new System User  Not Implamentet\n"
-            + "Type 8 to edit a System User     Not Implamentet\n"
-            + "Type 0 to Logout                 DONE\n";
+            + "Tast 7 for at tilføje en ny system bruger  Not Implamentet\n"
+            + "Tast 8 for at redigerer en system bruger   Not Implamentet\n"
+            + "Tast 0 for at logge ud \n";
     private final String HELP_JOURNAL = "\nJOURNALS MENU\n"
             + "----------------------------------------------\n"
-            + "Type 1 to enter Citizen flow     DONE\n"
-            + "Type 3 to edit a Journal         DONE\n"
-            + "Type 4 to view a Journals info   DONE\n"
-            + "Type 6 to edit a Citizen         DONE\n"
-            + "Type 7 to view a Citizen         DONE\n"
-            + "Type 0 to return to system       DONE\n";
+            + "Tast 1 for at tilgå en borger \n"
+            + "Tast 3 for at redigerer en sag \n"
+            + "Tast 4 for at se informationer om en sag\n"
+            + "Tast 6 for at redigerer en borgers oplysninger \n"
+            + "Tast 7 for at se en borgers oplysninger \n"
+            + "Tast 0 for at komme tilbage til hoved menuen \n";
 
     public ConsoleUI() {
         this.input = new Scanner(System.in);
@@ -74,7 +74,7 @@ public class ConsoleUI implements IUI {
     }
     private boolean getBooleanInput() {
         while (true) {
-            System.out.print("Input : ");
+            System.out.print("Bruger input: ");
             String s = "";
             s = input.nextLine();
             switch (s.toLowerCase().charAt(0)) {
@@ -83,7 +83,7 @@ public class ConsoleUI implements IUI {
                 case 'n':
                     return false;
                 default:
-                    System.out.println("Not valid input");
+                    System.out.println("Ikke et rigtig input");
             }
         }
     }
@@ -96,7 +96,7 @@ public class ConsoleUI implements IUI {
         int i = -1;
         while (i != 0) {   // while user imput is not 3 continue loop
             System.out.println(HELP_START);
-            System.out.print("Input : ");
+            System.out.print("Bruger input: ");
             i = getNumberInput();
             switch (i) {
                 case 1:
@@ -105,23 +105,23 @@ public class ConsoleUI implements IUI {
                     }
                     break;
                 case 0:
-                    System.out.println("Quitting application.");
+                    System.out.println("Lukker programmet.");
                     //System.exit(1);
                     break;
                 default:
-                    System.out.println("Entered selection invalid. Select an option by entering a number 1 or 3.");
+                    System.out.println("Det intastet input er ikke valid. Brug enten 1 eller 0");
                     break;
             }
 
         }
-        System.out.println("Return line."); //Tron Ref.
+        //System.out.println("Retur line."); //Tron Ref.
     }
 
     private void systemMenu() {
         int i = -1;
         while (i != 0) {
             System.out.println(HELP_SYSTEM);
-            System.out.print("Input : ");
+            System.out.print("Bruger input: ");
             i = getNumberInput();
             switch (i) {
                 case 1:
@@ -154,13 +154,13 @@ public class ConsoleUI implements IUI {
                     break;
                 case 0:
                     logicHandler.logout();
-                    System.out.println("loging out");
+                    System.out.println("logger ud");
                     break;
                 default:
-                    System.out.println("Entered selection invalid. Select an option by entering a number");
+                    System.out.println("Det intastet input er ikke valid. Indtast et af de viste numre");
                     break;
             }
-            System.out.println("Return line.");
+            //System.out.println("Return line.");
         }
     }
 
@@ -170,7 +170,7 @@ public class ConsoleUI implements IUI {
         int ssn = -1;
         while (i != 0) {
             System.out.println(HELP_JOURNAL);
-            System.out.print("Input : ");
+            System.out.print("Bruger input : ");
             i = getNumberInput();
             switch (i) {
                 case 1:
@@ -181,11 +181,11 @@ public class ConsoleUI implements IUI {
                     listJournals();
                     cmdBreak();
 
-                    System.out.print("Type ID of journal you want to work on: ");
+                    System.out.print("Indtast ID på den journal som du ønsker at arbejde med: ");
                     id = getNumberInput();
                     logicHandler.getJournal(id);
                     if(logicHandler.getActiveJournal()!= null))
-                    System.out.println("Loaded journal");
+                    System.out.println("Journal hentet");
                     logicHandler.openJournalDiscription();
                     break;
                 case 4:
@@ -193,33 +193,33 @@ public class ConsoleUI implements IUI {
                     listJournals();
                     cmdBreak();
 
-                    System.out.print("Type ID of journal you want to view: ");
+                    System.out.print("Indtast ID på den journal som du ønsker at se: ");
                     id = getNumberInput();
                     IJournal j = logicHandler.getJournal(id);
-                    System.out.println("Journal No           : " + j.getJNO());
-                    System.out.println("Journal Location     : " + j.getJournalLocation());
+                    System.out.println("Journal nr           : " + j.getJNO());
+                    System.out.println("Journal plads     : " + j.getJournalLocation());
                 case 6:
                     cmdBreak();
                     listCitizens();
                     cmdBreak();
 
-                    System.out.print("Please enter SSN of Citizen : ");
+                    System.out.print("Indtast et CPR nr på en borger: ");
                     ssn = getNumberInput();
                     if (logicHandler.citizenExist(ssn)) {
                         ICitizen c = getCitizen(ssn);
-                        System.out.println("(USE THE THE SAME AS BEFORE LEAVE FIELD BLANK)");
-                        System.out.println("SSN : " + c.getSSN() + " cant be changed: ");
-                        System.out.print("First name : " + c.getFirstName() + " \nChange to : ");
+                        System.out.println("(Brug det samme som før, så lad feltet være blank)");
+                        System.out.println("CPR : " + c.getSSN() + " kan ikke ændres: ");
+                        System.out.print("Fornavn : " + c.getFirstName() + " \nÆndres til : ");
                         String fname = input.nextLine();
-                        System.out.print("last name : " + c.getLastName() + "\nChange to : ");
+                        System.out.print("Efternavn : " + c.getLastName() + "\nÆndres til : ");
                         String lname = input.nextLine();
-                        System.out.print("phone number : " + c.getPhoneNumber() + "\nChange to : ");
+                        System.out.print("Telefon nummer : " + c.getPhoneNumber() + "\nÆndres til : ");
                         int phonenumber = getNumberInput();
-                        System.out.print("address : " + c.getAddress() + "\nChange to : ");
+                        System.out.print("Addresse : " + c.getAddress() + "\nÆndres til : ");
                         String address = input.nextLine();
-                        System.out.print("city : " + c.getCity() + "\nChange to : ");
+                        System.out.print("By : " + c.getCity() + "\nÆndres til : ");
                         String city = input.nextLine();
-                        System.out.print("postal address : " + c.getPostalNumber() + "\nChange to : ");
+                        System.out.print("Post nummer : " + c.getPostalNumber() + "\nÆndres til : ");
                         int postalNumber = getNumberInput();
 
                         if (!fname.isEmpty()) {
@@ -243,7 +243,7 @@ public class ConsoleUI implements IUI {
                         cmdBreak();
                         listinfo(c);
                         cmdBreak();
-                        System.out.println("Save Citizen info? y/n");
+                        System.out.println("Gem borger information? y/n");
                         if (getBooleanInput()) {
                             logicHandler.saveCitizen();
                         }
@@ -253,7 +253,7 @@ public class ConsoleUI implements IUI {
                     cmdBreak();
                     listCitizens();
                     cmdBreak();
-                    System.out.print("Please enter SSN of Citizen : ");
+                    System.out.print("Indtast venligtest et CPR nummer for en borger : ");
                     ssn = getNumberInput();
                     if (logicHandler.citizenExist(ssn)) {
                         getCitizen(ssn);
@@ -263,10 +263,10 @@ public class ConsoleUI implements IUI {
                     // does nothing.
                     break;
                 default:
-                    System.out.println("Entered selection invalid. Select an option by entering a number");
+                    System.out.println("Det intastet input er ikke valid. Indtast et af de viste numre");
                     break;
             }
-            System.out.println("Return line.");
+           // System.out.println("Return line.");
         }
     }
 
@@ -274,14 +274,14 @@ public class ConsoleUI implements IUI {
         ICitizen citizen = null;
         IJournal journal = null;
         cmdBreak();
-        System.out.print("Please enter SSN of Citizen : ");
+        System.out.print("Indtast venligtest et CPR nummer for en borger : ");
         int ssn = getNumberInput();
         if (ssn == -1) {
             return;
         }
         if (!logicHandler.citizenExist(ssn)) {
             cmdBreak();
-            System.out.println("No citizen found, do you want to add a new citizen? y/n");
+            System.out.println("Ingen borger fundet. Vil du oprette en ny borger i systemet ? y/n");
             if (getBooleanInput()) {
                 cmdBreak();
                 addCitizen(ssn);
@@ -298,18 +298,18 @@ public class ConsoleUI implements IUI {
             logicHandler.openJournalDiscription();
         } else {
             cmdBreak();
-            System.out.println("Listing journals for: " + ssn);
+            System.out.println("Lister journaler for borgeren med CPR nr: " + ssn);
             for (int ID : journals) {
 
                 System.out.println("ID : " + ID);
             }
             cmdBreak();
-            System.out.println("Conferm Citicen, " + citizen.getFirstName() + " " + citizen.getLastName() + " "
-                    + "with SSN : " + citizen.getSSN() + "? y/n");
+            System.out.println("Bekraft borger, " + citizen.getFirstName() + " " + citizen.getLastName() + " "
+                    + "med CPR nr : " + citizen.getSSN() + "? y/n");
             if (getBooleanInput()) {
-                System.out.println("Do you wan't to open a journal ? y/n");
+                System.out.println("Vil du åbne borgerens journal ? y/n");
                 if (getBooleanInput()) {
-                    System.out.print("Type ID of journal you want to work on: ");
+                    System.out.print("Indtast ID på den journal du ønsker at arbejde på: ");
                     int IDrespons = getNumberInput();
                     for (int ID : journals) {
                         if (ID == IDrespons) {
@@ -317,14 +317,14 @@ public class ConsoleUI implements IUI {
                         }
                     }
                     if (journal != null) {
-                        System.out.println("Loaded journal");
+                        System.out.println("Journal hentet");
                         logicHandler.openJournalDiscription();
                     }
                 } else {
-                    System.out.println("Do you wan't to add a new journal ? y/n");
+                    System.out.println("Vil du tilføje en ny journal ? y/n");
                     if (getBooleanInput()) {
 
-                        System.out.println("Creating new journal for :" + citizen.getSSN());
+                        System.out.println("Oprette ny journal for:" + citizen.getSSN());
                         journal = logicHandler.newJournal();
                         if (journal != null) {
                             //System.out.println("ACT J :\n"+logicHandler.getActiveJournal());
@@ -340,29 +340,29 @@ public class ConsoleUI implements IUI {
 
     private boolean tryLogin() {
         System.out.println(HELP_LOGIN);
-        System.out.print("Type Username: ");
+        System.out.print("Indtast brugernavn: ");
         String username = input.nextLine();
-        System.out.print("Type password: ");
+        System.out.print("Indtast password: ");
         String password = input.nextLine();
         if (logicHandler.login(username, password)) {
             return true;
         }
-        System.out.println("Incorrect username. Returning to menu.");
+        System.out.println("Forkert burgernavn. Retunerer til menuen");
         return false;
     }
 
     private void listCitizens() {
         Collection<ICitizen> listCitizens = getCitizens();
-        System.out.println("Got : " + listCitizens.size() + " Citizen's");
+        System.out.println("Fandt : " + listCitizens.size() + " borgere");
         System.out.println("-------------------------------------------");
         for (ICitizen c : listCitizens) {
-            System.out.println(c.getFirstName() + " : SSN " + c.getSSN());
+            System.out.println(c.getFirstName() + " : CPR " + c.getSSN());
         }
     }
 
     private void listJournals() {
         Collection<IJournal> list = getJournals();
-        System.out.println("Got : " + list.size() + " journals's");
+        System.out.println("Fandt : " + list.size() + " journaler");
         System.out.println("-------------------------------------------");
         for (IJournal c : list) {
             System.out.println("ID :" + c.getJNO());
@@ -371,21 +371,21 @@ public class ConsoleUI implements IUI {
 
     private void listAids() {
         Collection<IAid> list = getAids();
-        System.out.println("Got : " + list.size() + " Aid's");
+        System.out.println("Fandt : " + list.size() + " ydelser");
         System.out.println("-------------------------------------------");
         for (IAid c : list) {
-            System.out.println("Name: \t" + c.getAidName() + "\t Decription: " + c.getAidDescribsion() + "\t ID: " + c.getAidNo());
+            System.out.println("Navn: \t" + c.getAidName() + "\t Beskrivelse: " + c.getAidDescribsion() + "\t ID: " + c.getAidNo());
         }
     }
 
     private void listinfo(ICitizen c) {
-        System.out.println("SSN : " + c.getSSN());
-        System.out.println("First name : " + c.getFirstName());
-        System.out.println("Last name : " + c.getLastName());
-        System.out.println("Phone number : " + c.getPhoneNumber());
-        System.out.println("Address : " + c.getAddress());
-        System.out.println("City : " + c.getCity());
-        System.out.println("postal address : " + c.getPostalNumber());
+        System.out.println("CPR : " + c.getSSN());
+        System.out.println("Fornavn : " + c.getFirstName());
+        System.out.println("Efternavn : " + c.getLastName());
+        System.out.println("Telefon nummer : " + c.getPhoneNumber());
+        System.out.println("Addresse : " + c.getAddress());
+        System.out.println("By : " + c.getCity());
+        System.out.println("Post nummer : " + c.getPostalNumber());
     }
 
     /*--------------------------------------------------------------------------
@@ -393,18 +393,18 @@ public class ConsoleUI implements IUI {
     --------------------------------------------------------------------------*/
     private void addCitizen(int ssn) {
         ICitizen citizen = logicHandler.newCitizen();
-        System.out.println("SSN : " + ssn);
-        System.out.print("First name : ");
+        System.out.println("CPR : " + ssn);
+        System.out.print("Fornavn : ");
         String fname = input.nextLine();
-        System.out.print("Last name : ");
+        System.out.print("Efternavn: ");
         String lname = input.nextLine();
-        System.out.print("Phone number : ");
+        System.out.print("Telefon nummer : ");
         int phonenumber = getNumberInput();
-        System.out.print("Address : ");
+        System.out.print("Addresse : ");
         String address = input.nextLine();
-        System.out.print("City : ");
+        System.out.print("By : ");
         String city = input.nextLine();
-        System.out.print("Postal address : ");
+        System.out.print("Post nummer : ");
         int postalNumber = getNumberInput();
 
         citizen.setAddress(address);
