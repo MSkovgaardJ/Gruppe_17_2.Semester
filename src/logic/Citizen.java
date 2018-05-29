@@ -112,9 +112,9 @@ public class Citizen implements ICitizen {
     @Override
     public String toString()
     {
-        String s = "SSN     : " + this.SSN +"\n";
-        s+=        "Firsname: " +this.firstName+"\n";
-        s+=        "Lastname: "+this.lastName+"\n";
+        String s = "CPR     : " + this.SSN +"\n";
+        s+=        "Fornavn: " +this.firstName+"\n";
+        s+=        "Efternavn: "+this.lastName+"\n";
         return s;
     }
 }

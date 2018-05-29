@@ -97,13 +97,13 @@ public class Journal implements IJournal, Comparable<Journal> {
     @Override
     public String toString()
     {
-        String s ="JNO : " +this.ID+"\n";
+        String s ="Journal ID : " +this.ID+"\n";
         if(this.citizen!= null){
-            s+="SSN : "+ this.citizen.getSSN()+"\n";
-            s+="Name: "+this.citizen.getFirstName()+"\n";
+            s+="CPR : "+ this.citizen.getSSN()+"\n";
+            s+="Navn: "+this.citizen.getFirstName()+"\n";
         }
         else
-            s+="SSN : NULL";
+            s+="CPR = NULL";
         return s;     
         
     }

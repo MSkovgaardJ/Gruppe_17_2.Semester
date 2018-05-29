@@ -65,7 +65,7 @@ public class JournalHandler {
             try {
                 File f = new File(activeJournal.getJournalLocation());
                 if (!f.exists()) {
-                    System.out.println("no file found, making new. ");
+                    //System.out.println("no file found, making new. ");
 
                     String temppath = "journals/JournalTemp.dot";
                     String path = "journals/" + activeCitizen.getSSN() + "-" + activeJournal.getJNO() + ".doc";
@@ -84,7 +84,7 @@ public class JournalHandler {
 
                     activeJournal.setJournalLocation(path);
                     f = new File(path);
-                    System.out.println("success");
+                  //  System.out.println("success");
                 }
                 Desktop.getDesktop().open(f);
             } catch (IOException e) {
