@@ -34,7 +34,7 @@ public class SQLHandler {
             if (rs.next()) {
                 if ((rs.getString(1).equalsIgnoreCase(username))
                         && (rs.getString(2).equalsIgnoreCase(password))) {
-                    System.out.println("Found user");
+                    //System.out.println("Found user");
                     fund = true;
                 }
             }
@@ -54,7 +54,7 @@ public class SQLHandler {
                 boolean isAdmin = rs.getBoolean(1);
                 boolean isCaseHandler = rs.getBoolean(2);
                 user.getClearance().setClearance(isAdmin, isCaseHandler);
-                System.out.println("Got credentials");
+              //  System.out.println("Got credentials");
                 //System.out.println("is Admin "+ isAdmin +"\nis Casehandler "+ isCaseHandler);
             }
             rs.close();
@@ -75,7 +75,7 @@ public class SQLHandler {
             while (rs.next()) {
                 int journalNo = rs.getInt(2); 
                 list.add(journalNo);
-                System.out.println("Got citizen' journal JNO's");
+              //  System.out.println("Got citizen' journal JNO's");
             }
             rs.close();
             st.close();
@@ -99,7 +99,7 @@ public class SQLHandler {
                 journal.setDate(date);
                 journal.setJournalLocation(journallocation);
                 //journal.setStatus(status);
-                System.out.println("Found journal");
+              //  System.out.println("Found journal");
             }
             rs = st.executeQuery(SQLGet.getCitizenForJournal(journal.getJNO()));
             int ssn = -1;
@@ -123,7 +123,7 @@ public class SQLHandler {
                 citizen.setSSN(ssn);
                 citizen.setPhoneNumber(phonenumber);
                 citizen.setPostalNumber(postalNumber);
-                System.out.println("Found citizen");
+               // System.out.println("Found citizen");
             }
             rs.close();
             st.close();
@@ -151,7 +151,7 @@ public class SQLHandler {
 
                 list.add(journal);
             }
-            System.out.println("Got journals");
+           // System.out.println("Got journals");
             rs.close();
             st.close();
         } catch (SQLException e) {
@@ -168,22 +168,22 @@ public class SQLHandler {
 
             PreparedStatement preparedStmt = db.prepareStatement(qj);
 
-            System.out.println("Adding journal to Database");
+           // System.out.println("Adding journal to Database");
             preparedStmt.execute();
-            System.out.println("Successful");
+           // System.out.println("Successful");
             ICitizen c = j.getCitizen();
             ResultSet rs = st.executeQuery(qgc);
             if (rs.next()) {
-                System.out.println("Citizen exists, Updatas info");
+             //   System.out.println("Citizen exists, Updatas info");
                 saveCitizen(j.getCitizen());
             } else {
-                System.out.println("No Citizen");
+               // System.out.println("No Citizen");
                 addCitizen(j.getCitizen());
             }
-            System.out.println("Adding relation");
+            //System.out.println("Adding relation");
             preparedStmt = db.prepareStatement(qr);
             preparedStmt.execute();
-            System.out.println("Succesful");
+            //System.out.println("Succesful");
             st.close();
         } catch (SQLException e) {
             System.out.println(e);
@@ -195,7 +195,7 @@ public class SQLHandler {
             String q = SQLSet.saveJournal(j.getJNO(), 0, j.getJournalLocation(), j.getDate());
             PreparedStatement preparedStmt = db.prepareStatement(q);
             preparedStmt.executeUpdate();
-            System.out.println("Saved journal");
+           // System.out.println("Saved journal");
             st.close();
         } catch (SQLException e) {
             System.out.println(e);
@@ -222,7 +222,7 @@ public class SQLHandler {
                 citizen.setSSN(ssn);
                 citizen.setPhoneNumber(phonenumber);
                 citizen.setPostalNumber(postalNumber);
-                System.out.println("Got citizen");
+             //   System.out.println("Got citizen");
             } else {
                 citizen.setSSN(-1);
             }
@@ -258,7 +258,7 @@ public class SQLHandler {
                 list.add(citizen);
                 //System.out.println("is Admin "+ isAdmin +"\nis Casehandler "+ isCaseHandler);
             }
-            System.out.println("Got Citizens");
+            //System.out.println("Got Citizens");
             rs.close();
             st.close();
         } catch (SQLException e) {
@@ -272,7 +272,7 @@ public class SQLHandler {
             String q = SQLSet.addCitizen(citizen);
             PreparedStatement preparedStmt = db.prepareStatement(q);
             preparedStmt.execute();
-            System.out.println("Added Citizen");
+            //System.out.println("Added Citizen");
             st.close();
         } catch (SQLException e) {
             System.out.println(e);
@@ -284,7 +284,7 @@ public class SQLHandler {
             String q = SQLSet.saveCitizen(c);
             PreparedStatement preparedStmt = db.prepareStatement(q);
             preparedStmt.executeUpdate();
-            System.out.println("Saved citizen");
+            //System.out.println("Saved citizen");
             st.close();
         } catch (SQLException e) {
             System.out.println(e);
@@ -297,7 +297,7 @@ public class SQLHandler {
             ResultSet rs = st.executeQuery(SQLGet.getCitizen(ssn));
             if (rs.next()) {
                 found = true;
-                System.out.println("Citizen exists");
+              //  System.out.println("Citizen exists");
             }
             st.close();
             rs.close();
@@ -320,7 +320,7 @@ public class SQLHandler {
                 aid.setAidName(aname);
                 aid.setAidDescribsion(describsion);
 
-                System.out.println("Got aid");
+                //System.out.println("Got aid");
             }
             rs.close();
             st.close();
@@ -344,7 +344,7 @@ public class SQLHandler {
                 aid.setAidDescribsion(description);
                 list.add(aid);
             }
-            System.out.println("Got aids");
+            //System.out.println("Got aids");
             rs.close();
             st.close();
         } catch (SQLException e) {
