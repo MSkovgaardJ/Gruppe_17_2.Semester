@@ -72,6 +72,7 @@ public class ConsoleUI implements IUI {
         }
         return i;
     }
+
     private boolean getBooleanInput() {
         while (true) {
             System.out.print("Bruger input: ");
@@ -180,13 +181,15 @@ public class ConsoleUI implements IUI {
                     cmdBreak();
                     listJournals();
                     cmdBreak();
-
                     System.out.print("Indtast ID på den journal som du ønsker at arbejde med: ");
                     id = getNumberInput();
                     logicHandler.getJournal(id);
-                    if(logicHandler.getActiveJournal()!= null))
-                    System.out.println("Journal hentet");
-                    logicHandler.openJournalDiscription();
+                    if (logicHandler.getActiveJournal() != null) {
+                        System.out.println("Journal hentet");
+                        logicHandler.openJournalDiscription();
+                    } else {
+                        System.out.println("Fandt ikke den ønskede journal");
+                    }
                     break;
                 case 4:
                     cmdBreak();
@@ -195,9 +198,15 @@ public class ConsoleUI implements IUI {
 
                     System.out.print("Indtast ID på den journal som du ønsker at se: ");
                     id = getNumberInput();
-                    IJournal j = logicHandler.getJournal(id);
-                    System.out.println("Journal nr           : " + j.getJNO());
-                    System.out.println("Journal plads     : " + j.getJournalLocation());
+                    logicHandler.getJournal(id);
+                    IJournal j = logicHandler.getActiveJournal();
+                    if (j != null) {
+                        System.out.println("Journal nr           : " + j.getJNO());
+                        System.out.println("Journal lokation     : " + j.getJournalLocation());
+                        System.out.println("Tilknyttet borger    : " + j.getCitizen());
+                    } else {
+                        System.out.println("Fandt ikke den ønskede journal");
+                    }
                 case 6:
                     cmdBreak();
                     listCitizens();
@@ -206,7 +215,8 @@ public class ConsoleUI implements IUI {
                     System.out.print("Indtast et CPR nr på en borger: ");
                     ssn = getNumberInput();
                     if (logicHandler.citizenExist(ssn)) {
-                        ICitizen c = getCitizen(ssn);
+                        logicHandler.getCitizen(ssn);
+                        ICitizen c = logicHandler.getActiveCitizen();
                         System.out.println("(Brug det samme som før, så lad feltet være blank)");
                         System.out.println("CPR : " + c.getSSN() + " kan ikke ændres: ");
                         System.out.print("Fornavn : " + c.getFirstName() + " \nÆndres til : ");
@@ -247,6 +257,8 @@ public class ConsoleUI implements IUI {
                         if (getBooleanInput()) {
                             logicHandler.saveCitizen();
                         }
+                    } else {
+                        System.out.println("Fandt ikke den ønskede borger");
                     }
                     break;
                 case 7:
@@ -256,9 +268,12 @@ public class ConsoleUI implements IUI {
                     System.out.print("Indtast venligtest et CPR nummer for en borger : ");
                     ssn = getNumberInput();
                     if (logicHandler.citizenExist(ssn)) {
-                        getCitizen(ssn);
+                        logicHandler.getCitizen(ssn);
                         listinfo(logicHandler.getActiveCitizen());
+                    } else {
+                        System.out.println("Fandt ikke den ønskede borger");
                     }
+
                 case 0:
                     // does nothing.
                     break;
@@ -266,13 +281,11 @@ public class ConsoleUI implements IUI {
                     System.out.println("Det intastet input er ikke valid. Indtast et af de viste numre");
                     break;
             }
-           // System.out.println("Return line.");
+            // System.out.println("Return line.");
         }
     }
 
     private void citizenFlow() {
-        ICitizen citizen = null;
-        IJournal journal = null;
         cmdBreak();
         System.out.print("Indtast venligtest et CPR nummer for en borger : ");
         int ssn = getNumberInput();
@@ -290,49 +303,48 @@ public class ConsoleUI implements IUI {
                 return;
             }
         }
-        citizen = getCitizen(ssn);
+        logicHandler.getCitizen(ssn);
+        ICitizen citizen = logicHandler.getActiveCitizen();
 
-        Collection<Integer> journals = logicHandler.getAllJournalsFor(ssn);
-        if (journals.isEmpty()) {
-            logicHandler.newJournal();
-            logicHandler.openJournalDiscription();
-        } else {
-            cmdBreak();
-            System.out.println("Lister journaler for borgeren med CPR nr: " + ssn);
-            for (int ID : journals) {
+        System.out.println("Bekraft borger, " + citizen.getFirstName() + " " + citizen.getLastName() + " "
+                + "med CPR nr : " + citizen.getSSN() + "? y/n");
+        if (getBooleanInput()) {
+            Collection<Integer> journals = logicHandler.getAllJournalsFor(ssn);
+            if (journals.isEmpty()) {
+                System.out.println("Ingen journaller fundet, opretter en ny.");
+                logicHandler.newJournal();
+                logicHandler.openJournalDiscription();
+            } else {
+                cmdBreak();
+                System.out.println("Lister journaler for borgeren med CPR nr: " + ssn);
+                for (int ID : journals) {
 
-                System.out.println("ID : " + ID);
-            }
-            cmdBreak();
-            System.out.println("Bekraft borger, " + citizen.getFirstName() + " " + citizen.getLastName() + " "
-                    + "med CPR nr : " + citizen.getSSN() + "? y/n");
-            if (getBooleanInput()) {
+                    System.out.println("ID : " + ID);
+                }
+                cmdBreak();
+
                 System.out.println("Vil du åbne borgerens journal ? y/n");
                 if (getBooleanInput()) {
                     System.out.print("Indtast ID på den journal du ønsker at arbejde på: ");
                     int IDrespons = getNumberInput();
                     for (int ID : journals) {
                         if (ID == IDrespons) {
-                            journal = logicHandler.getJournal(IDrespons);
+                            System.out.println("Henter journal");
+                            logicHandler.getJournal(IDrespons);
                         }
-                    }
-                    if (journal != null) {
-                        System.out.println("Journal hentet");
-                        logicHandler.openJournalDiscription();
                     }
                 } else {
                     System.out.println("Vil du tilføje en ny journal ? y/n");
                     if (getBooleanInput()) {
-
                         System.out.println("Oprette ny journal for:" + citizen.getSSN());
-                        journal = logicHandler.newJournal();
-                        if (journal != null) {
-                            //System.out.println("ACT J :\n"+logicHandler.getActiveJournal());
-                            //System.out.println("ACT C :\n"+logicHandler.getActiveCitizen());
-                            logicHandler.openJournalDiscription();
-                            logicHandler.addJournal();
-                        }
+                        logicHandler.newJournal();
+                        logicHandler.addJournal();
                     }
+                }
+                if (logicHandler.getActiveJournal() != null) {
+                    logicHandler.openJournalDiscription();
+                } else {
+                    System.out.println("Kan ikke lokalisere journal");
                 }
             }
         }
@@ -340,9 +352,9 @@ public class ConsoleUI implements IUI {
 
     private boolean tryLogin() {
         System.out.println(HELP_LOGIN);
-        System.out.print("Indtast brugernavn: ");
+        System.out.print("Indtast brugernavn : ");
         String username = input.nextLine();
-        System.out.print("Indtast password: ");
+        System.out.print("Indtast password   : ");
         String password = input.nextLine();
         if (logicHandler.login(username, password)) {
             return true;
@@ -392,7 +404,8 @@ public class ConsoleUI implements IUI {
     Data Related
     --------------------------------------------------------------------------*/
     private void addCitizen(int ssn) {
-        ICitizen citizen = logicHandler.newCitizen();
+        logicHandler.newCitizen();
+        ICitizen citizen = logicHandler.getActiveCitizen();
         System.out.println("CPR : " + ssn);
         System.out.print("Fornavn : ");
         String fname = input.nextLine();
@@ -415,10 +428,6 @@ public class ConsoleUI implements IUI {
         citizen.setPhoneNumber(phonenumber);
         citizen.setPostalNumber(postalNumber);
         logicHandler.addCitizen();
-    }
-
-    private ICitizen getCitizen(int ssn) {
-        return logicHandler.getCitizen(ssn);
     }
 
     private IAid getAid(int aidNo) {

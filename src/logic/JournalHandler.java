@@ -19,9 +19,16 @@ public class JournalHandler {
     private static JournalHandler instance;
     private IJournal activeJournal;
     private ICitizen activeCitizen;
-    private JournalHandler()
-    {
-        
+    private JournalHandler(){
+        this.activeCitizen = null;
+        this.activeJournal = null;        
+    }
+    public static JournalHandler getInstance(){
+        if(instance == null)
+        {
+            instance = new JournalHandler();
+        }
+        return instance;
     }
     public IJournal createJournal() {
         IJournal j = new Journal();
@@ -30,13 +37,6 @@ public class JournalHandler {
             activeJournal.setCitizen(activeCitizen);
         }
         return j;
-    }
-    public static JournalHandler getInstance(){
-        if(instance == null)
-        {
-            instance = new JournalHandler();
-        }
-        return instance;
     }
     public ICitizen createCitizen() {
         ICitizen c = new Citizen();
@@ -61,7 +61,7 @@ public class JournalHandler {
     }    
     public void openJournalDiscription() {
         if (activeJournal != null && activeCitizen != null) {
-            System.out.println("active journal : " + activeJournal.getJNO());
+            //System.out.println("active journal : " + activeJournal.getJNO());
             try {
                 File f = new File(activeJournal.getJournalLocation());
                 if (!f.exists()) {
@@ -91,5 +91,10 @@ public class JournalHandler {
                 System.out.println(e.getMessage());
             }
         }
+    }
+    public void Clear()
+    {
+        activeCitizen = null;
+        activeJournal = null;
     }
 }

@@ -15,18 +15,18 @@ public interface ILogicFacade {
 
     public void setDataHandler(IDataFacede dataHandler);
     
-    public ICitizen newCitizen();
+    public void newCitizen();
     public ICitizen getActiveCitizen();
-    public ICitizen getCitizen(int ssn);
+    public void getCitizen(int ssn);
     public boolean citizenExist(int snn);
     public Collection<ICitizen> getCitizens();
     public void removeCitizen(ICitizen citizen); 
     public void saveCitizen();
     public void addCitizen();
 
-    public IJournal getJournal(int jno);
+    public void getJournal(int jno);
     public IJournal getActiveJournal();
-    public IJournal newJournal();
+    public void newJournal();
     public Collection<IJournal> getJournals();
     public Collection<Integer> getAllJournalsFor(int ssn);    
     public void saveJournal();

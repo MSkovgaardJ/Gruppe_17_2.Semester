@@ -36,26 +36,25 @@ public class LogicFacade implements ILogicFacade {
         dataHandler.addCitizen(citizen);
     }
     @Override
-    public ICitizen newCitizen() {
-        return JournalHandler.getInstance().createCitizen();
+    public void newCitizen() {
+        JournalHandler.getInstance().createCitizen();
     }
     @Override
     public boolean citizenExist(int snn) {        
         return dataHandler.citizenExist(snn);   
     }
     @Override
-    public ICitizen getCitizen(int ssn) {
+    public void getCitizen(int ssn) {
         ICitizen citizen = JournalHandler.getInstance().createCitizen();
         citizen.setSSN(ssn);
-        dataHandler.getCitizen(citizen);
-        return citizen;
+        // loads Citizen
+        dataHandler.getCitizen(citizen);        
     }
     @Override
     public Collection<ICitizen> getCitizens() {
         return dataHandler.getCitizens(new Citizen());
 
     }
-
     @Override
     public void removeCitizen(ICitizen citizen) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -70,7 +69,7 @@ public class LogicFacade implements ILogicFacade {
         return dataHandler.getJournals(new Journal());
     }
     @Override
-    public IJournal newJournal() {
+    public void newJournal() {
         // a list of all journals
         List<IJournal> list = (ArrayList<IJournal>)getJournals();
         //sorts the list on ID number 
@@ -91,12 +90,10 @@ public class LogicFacade implements ILogicFacade {
         IJournal journal = JournalHandler.getInstance().createJournal();
         // sets new id 
         journal.setJNO(jno);
-        // returns new journal.
-        return journal;
     }
     @Override
     public void saveJournal() {
-        System.out.println("Saving journal ID : " +JournalHandler.getInstance().getActiveJournal().getJNO());
+        //System.out.println("Saving journal ID : " +JournalHandler.getInstance().getActiveJournal().getJNO());
         dataHandler.saveJournal(JournalHandler.getInstance().getActiveJournal());
     }
     @Override
@@ -109,16 +106,19 @@ public class LogicFacade implements ILogicFacade {
         return dataHandler.getAllJournalsFor(ssn);
     }
     @Override
-    public IJournal getJournal(int jno) {
+    public void getJournal(int jno) {
         IJournal j = JournalHandler.getInstance().createJournal();
         j.setJNO(jno);
         dataHandler.getJournal(j,j.getCitizen());
         if(j.getJNO()!=-1)
         {
             JournalHandler.getInstance().setActiveCitizen(j.getCitizen());
-            return j;        
         }
-        return null;
+        else
+        {
+            //System.out.println("Clearing Journal Handler");
+            JournalHandler.getInstance().Clear();
+        }
     }
     @Override
     public void removeJournal(IJournal journal) {
