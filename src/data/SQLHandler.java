@@ -88,6 +88,7 @@ public class SQLHandler {
         try (Connection db = comhandler.Connect()) {
             Statement st = db.createStatement();
             ResultSet rs = st.executeQuery(SQLGet.getJournal(journal.getJNO()));
+            journal.setJNO(-1);
             if (rs.next()) {
                 int ID = rs.getInt(1);
                 //boolean status = rs.getBoolean(2);

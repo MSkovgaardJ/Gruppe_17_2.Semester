@@ -184,6 +184,7 @@ public class ConsoleUI implements IUI {
                     System.out.print("Type ID of journal you want to work on: ");
                     id = getNumberInput();
                     logicHandler.getJournal(id);
+                    if(logicHandler.getActiveJournal()!= null))
                     System.out.println("Loaded journal");
                     logicHandler.openJournalDiscription();
                     break;
