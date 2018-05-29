@@ -45,14 +45,10 @@ public class LogicFacade implements ILogicFacade {
     }
     @Override
     public ICitizen getCitizen(int ssn) {
-        if(citizenExist(ssn))
-        {
-            ICitizen citizen = JournalHandler.getInstance().createCitizen();
-            citizen.setSSN(ssn);
-            dataHandler.getCitizen(citizen);
-            return citizen;
-        }
-        return null;
+        ICitizen citizen = JournalHandler.getInstance().createCitizen();
+        citizen.setSSN(ssn);
+        dataHandler.getCitizen(citizen);
+        return citizen;
     }
     @Override
     public Collection<ICitizen> getCitizens() {
