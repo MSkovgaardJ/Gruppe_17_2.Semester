@@ -86,6 +86,7 @@ public class Citizen implements ICitizen {
         this.address = address;
     }
 
+    @Override
     public void setCity(String city) {
         this.city = city;
     }
@@ -94,7 +95,6 @@ public class Citizen implements ICitizen {
     public void setPostalNumber(int postalNumber) {
         this.postalNumber = postalNumber;
     }
-
 
     @Override
     public ICitizen clone() {
@@ -109,6 +109,7 @@ public class Citizen implements ICitizen {
         clone.setSSN(SSN);
         return clone;
     }
+    
     @Override
     public String toString()
     {

@@ -41,7 +41,7 @@ public class Journal implements IJournal, Comparable<Journal> {
     }
 
     @Override
-    public void setJNO(int ID) {this.JNO = ID; }
+    public void setJNO(int JNO) {this.JNO = JNO; }
 
     @Override
     public void setStatus(String status) { this.status = status;}
